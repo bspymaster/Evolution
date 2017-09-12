@@ -8,4 +8,4 @@
 
 5) Click "Commit to <Branch-name>" button on the bottom left.
 
-6) Commit simply saves the changes to your PC's local branch. To push to a remote branch (like Github.com), go to the top bar and click "Publish branch" if it's a new branch.
+6) Commit simply saves the changes to your PC's local branch. To push to a remote branch (like Github.com), go to the top bar and click "Publish branch" if it's a new branch, or "Push Origin" to push to an already existing remote branch.
