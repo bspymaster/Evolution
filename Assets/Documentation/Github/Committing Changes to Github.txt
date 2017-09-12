@@ -1,0 +1,9 @@
+1) Fetch from the origin to make sure your files are up to date by clicking "Fetch origin" on the top bar
+
+2) Make sure you are pushing to the correct branch with the dropdown on the top bar. (By default, it's "Master", which isn't good. New branches can be made by going to "Branch">"New Branch" and typing in a name for the branch.) New branches should have an overarching name related to the type of commits it's going to be receiving.
+
+3) Select the files you want to upload on the left side (by default they're all checked for upload). If you want to see exactly what has changed, Github provides a visual summary on the right side when a file on the left is highlighted.
+
+4) On the bottom left corner, type in a title for the commit (usually a short summary of what you did) and a description of what you changed (this helps keep track of what was changed when with a quick glance)
+
+5) Click "Commit to <Branch-name>" button on the bottom left.
