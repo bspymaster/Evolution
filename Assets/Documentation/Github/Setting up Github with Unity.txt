@@ -1,0 +1,19 @@
+1) Download github desktop: https://desktop.github.com/
+
+2) Run the .exe file
+
+3) Sign in to github
+
+4) Click "Clone a Repository"
+
+5) Select the correct repo (usually "username/Evolution"), and select a local path to drop the repo folder and its files
+
+6) The files on your "master" branch will automatically be cloned to your local directory.
+
+7) Launch Unity
+
+8) Click "Open" to open an existing project
+
+9) Navigate to the Github Directory you made before and select that folder as your project folder to open
+
+10) Unity should open the project
