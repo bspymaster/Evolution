@@ -9,8 +9,6 @@ public class createNewSpecies : MonoBehaviour {
         Species newSpecies = new Species();
         count++;
         newSpecies.setName(count.ToString());
-        newSpecies.setLocation(new int[]);
-        newSpecies.setGenes(new int[]);
         newSpecies.spawn(false);
 	}
 	
