@@ -5,6 +5,7 @@ using UnityEngine;
 public class generate : MonoBehaviour
 {
 
+
     public GameObject Ice;
     public GameObject Plains;
     public GameObject Forest;
@@ -12,12 +13,40 @@ public class generate : MonoBehaviour
     // public GameObject Lake;
     public GameObject Ocean;
    PerlinNoise noise;
-    void Start()
-    {
-        noise = new PerlinNoise(Random.Range(0,1000000));
-        Regen();
 
+//    public static GameControl control;
+//
+//  void Awake()
+  //  {
+    //    if(control == null)
+      //  {
+     //       DontDestroyOnLoad(gameObject);
+     //       control = this;
+     //   }
+     //   else if(control != this)
+     //   {
+     //       Destroy(gameObject);
+//        }
+//    }
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
     }
+
+    public void GenerateWorld()
+    {
+        noise = new PerlinNoise(Random.Range(0, 1000000));
+        Regen();
+    }
+
+    //   void Start()
+    //    {
+    //        noise = new PerlinNoise(Random.Range(0,1000000));
+    //       Regen();
+    //
+    //    }
+
     private void Regen()
     {
         int minY = -100;
