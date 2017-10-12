@@ -31,19 +31,23 @@ public class generate : MonoBehaviour
             {
                  
  int rand= noise.getNoise(i,j, maxY-minY);
-                if (rand % 7 == 0)
+                if (rand % 9 == 0)
                     Instantiate(Ocean, new Vector2(i * width, j * height), Quaternion.identity);
-                else if (rand % 7 == 1)
+                else if (rand % 9 == 1)
                     Instantiate(Desert, new Vector2(i * width, j * height), Quaternion.identity);
-                else if (rand % 7==2 )
+                else if (rand % 9==2 )
                     Instantiate(Plains, new Vector2(i * width, j * height), Quaternion.identity);
-                else if (rand % 7 == 3)
+                else if (rand % 9 == 3)
                     Instantiate(Forest, new Vector2(i * width, j * height), Quaternion.identity);
-                else if (rand % 7== 4)
+                else if (rand % 9== 4)
                     Instantiate(Ice, new Vector2(i * width, j * height), Quaternion.identity);
-                else if (rand % 7 == 5)
+                else if (rand % 9 ==5)
                     Instantiate(Forest, new Vector2(i * width, j * height), Quaternion.identity);
-                else
+                else if (rand % 9 == 6)
+                    Instantiate(Plains, new Vector2(i * width, j * height), Quaternion.identity);
+                else if (rand % 9 == 7)
+                    Instantiate(Desert, new Vector2(i * width, j * height), Quaternion.identity);        
+               else
                     Instantiate(Ocean, new Vector2(i * width, j * height), Quaternion.identity);
             }
 
