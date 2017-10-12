@@ -37,6 +37,19 @@ public class Web {
         return edges;
     }
 
+    // Gets the node at a given index
+    public Node getNode(int index)
+    {
+        try
+        {
+            return nodes[index];
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     // Debug function to print out the web in the console
     public void printWeb()
     {
