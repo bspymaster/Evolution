@@ -24,20 +24,28 @@ public class Species : MonoBehaviour
      */
     public void evolve(bool addNode, int nodeIndex)
     {
-        Node node = WebInstance.GetComponent<Web>().getNode(nodeIndex);
-        // Added a node
-        if (addNode)
-        {
-            for(int i=0; i < herbivoreFoodSource.Length; i++)
-            {
-
-            }
+        int op;
+        if(addNode) {
+            op = 1;
         }
-        // Removed a node
         else
         {
-
+            op = -1;
         }
+        Node node = WebInstance.GetComponent<Web>().getNode(nodeIndex);
+        // Added a node
+        for(int i=0; i < herbivoreFoodSource.Length; i++)
+        {
+            herbivoreFoodSource[i] += op * node.getHerbivoreFoodSource()[i];
+        }
+        carnivoreFoodSource += op * node.getCarnivoreFoodSource();
+        amntCalories += op * node.getAmntCalories();
+        creatureSize += op * node.getCreatureSize();
+        maxPerTile += op * node.getMaxPerTile();
+        litterSize += op * node.getLitterSize();
+        matingFrequency += op * node.getMatingFrequency();
+        mateAttachment += op * node.getMateAttachment();
+        peckingOrder += op * node.getPeckingOrder();
     }
 
     /*
