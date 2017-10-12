@@ -14,25 +14,6 @@ public class generate : MonoBehaviour
     public GameObject Ocean;
    PerlinNoise noise;
 
-//    public static GameControl control;
-//
-//  void Awake()
-  //  {
-    //    if(control == null)
-      //  {
-     //       DontDestroyOnLoad(gameObject);
-     //       control = this;
-     //   }
-     //   else if(control != this)
-     //   {
-     //       Destroy(gameObject);
-//        }
-//    }
-
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 
     public void GenerateWorld()
     {
