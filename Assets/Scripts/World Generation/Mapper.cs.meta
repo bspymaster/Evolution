@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6864f3c9af411cd419680bf53fd13559
+timeCreated: 1507070899
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - DesertTilePrefab: {fileID: 1326543556485550, guid: ba02751d52fa0db468b86ed54e2cd17e,
+      type: 2}
+  - ForestTilePrefab: {fileID: 1861741382404224, guid: 83f81d2d487b41549af89fdebc646403,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
