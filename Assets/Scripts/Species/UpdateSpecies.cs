@@ -8,7 +8,7 @@ public class UpdateSpecies : MonoBehaviour {
     public GameObject Ice;
 
     // Use this for initialization
-    void Start()
+    public void GenerateSpecies()
     {
         Spawn();
         InvokeRepeating("Interact", 10f, 20f);
