@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Species : MonoBehaviour
 {
-    public GameObject species;  // The asset to use to represent the species
     public GameObject WebInstance;  // The web to use as a reference when evolving
     private string speciesName;  // name of species - for stretch goal, we will want this to be a string that appears like formal latin names, by D3, number will suffice
     private List<int> location; // in which tiles this species exists.  Assuming tiles can be simplified to their numerical value
