@@ -54,10 +54,53 @@ public class UpdateSpecies : MonoBehaviour {
     }
 
     /*
-     *  Have the species in each tile evolve
+     *  Parent Species will be copied into new speciesObject (mutatingSpecies) that will evolve once
      */
-    private void Mutation()
+    private void Mutation(Species parentSpecies, bool isPlayer)
     {
+        int newName = int.Parse(parentSpecies.getSpeciesName()) + 100;  //  100 should be replaced by number of existing speciesObjects
+        Species mutatingSpecies = new Species(newName.ToString());
+        mutatingSpecies.clone(parentSpecies);
+        bool addNode;
+        int nodeIndex;
+        if (!isPlayer)
+        {
+            addNode = true; //  may change this later on to allow bots to change both ways
+            //  nodeIndex set to random node
+        }
+        else
+        {
+            //  have player set addNode to true/false
+            //  have player choose node
+        }
+        //  mutatingSpecies.evolve(addNode, nodeIndex);
+        //  mutatingSpecies = speciesObject.GetComponent<Species>();
+        //  Instantiate(speciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
+    }
+
+    /*
+     *  Have the species in a given tile migrate to adjacent tile
+     */
+    private void Overpopulation(Species migratingSpecies, bool isPlayer, int tileIndex)
+    {
+        //  overPopulatedTile = Tile @ tileIndex
+        //  Tile[] adjacentTiles;
+        //  add all adjacent tiles to adjacentTiles[]
+        //  Tile selectedTile;
+        //  int movingPopulation = 0;
+        /*  if (!isPlayer)
+         *  {
+         *      selectedTile = randomly choose adjacent tile
+         *  }
+         *  else
+         *  {
+         *      selectedTile = player chooses adjacent tile
+         *  }
+         *      movingPopulation = 0.3 * overPopulatedTile.getPopulation(migratingSpecies);
+         *      overPopulatedTile.setPopulation(migratingSpecies) = 0.7 * overPopulatedTile.getPopulation(migratingSpecies);
+         *      selectedTile.addSpecies(migratingSpecies);
+         *      selectedTile.setPopulation(migratingSpecies) = movingPopulation;
+         */
     }
 
     /*
@@ -74,8 +117,14 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Reproduce()
     {
-        print("reproduce");
-        // have species mate
+        //  int[] validTiles = 'tiles who have species in them'
+        //  int[] localSpecies = 'species in valid tile';
+        //  for each species in valid tile, species.getMaxPerTile()
+        //  for each species in valid tile, species.getLitterSize()
+        //  for each species in valid tile, species.getMatingFrequency()
+        //  for each species in valid tile, species.getMateAttachment()
+        //  call mutation based on mutation chance * number of offspring
+        //  if population of local species > maxPerTile, Overpopulation()
     }
 
     /*
@@ -83,10 +132,19 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void HerbivoreMove()
     {
-        // get list of tiles who have herbivores in them
-        // for each valid tile, get herbivore food sources (tile gets)
-        // for each species in valid tile, species.getHFS()
-        // for (int i = 0; i < amountSpecies; i++)
+        //  int[] validTiles = 'tiles who have herbivores in them'
+        //  for each valid tile, get herbivore food sources (tile gets)
+        //  for each species in valid tile, species.getHFS()
+        //  int[] localSpecies = 'species in valid tile';
+        /*  for (int i = 0; i < localSpecies.Length; i++) {
+         *      for (int j = 0; j < 4; j++) {
+         *          berriesInTile - ( localSpecies[i].getHFS(j) * localSpecies[i].getAmntCalories() );
+         *          nutsInTile - ( localSpecies[i].getHFS(j) * localSpecies[i].getAmntCalories() );
+         *          grassInTile - ( localSpecies[i].getHFS(j) * localSpecies[i].getAmntCalories() );
+         *          leavesInTile - ( localSpecies[i].getHFS(j) * localSpecies[i].getAmntCalories() );
+         *      }
+         *  }
+         */
     }
 
     /*
@@ -94,6 +152,19 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void CarnivoreMove()
     {
-        print("carnivore");
+        //  int[] validTiles = 'tiles who have carnivores in them'
+        //  for each valid tile, get carnivore food sources (tile gets)
+        //  for each species in valid tile, species.getCFS()
+        //  int[] localSpecies = 'species in valid tile';
+        /*  for (int i = 0; i < localSpecies.Length; i++) {
+         *      for (int j = 0; j < 5; j++) {
+         *          ambientInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
+         *          smallInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
+         *          mediumInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
+         *          largeInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
+         *          humongousInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
+         *      }
+         *  }
+         */
     }
 }
