@@ -44,6 +44,7 @@ public class Species : MonoBehaviour
         mateAttachment = mA;
         peckingOrder = pO;
     }
+
     /*
      *  Take boolean to determine if adding/subtracting node in evolutionary web, and takes index of that node to modify species instance accordingly
      */
@@ -60,7 +61,7 @@ public class Species : MonoBehaviour
         }
         Node node = WebInstance.GetComponent<Web>().getNode(nodeIndex);
         // Added a node
-        for (int i = 0; i < herbivoreFoodSource.Length; i++)
+        for (int i = 0; i < herbivoreFoodSource.Count; i++)
         {
             herbivoreFoodSource[i] += op * node.getHerbivoreFoodSource()[i];
         }
