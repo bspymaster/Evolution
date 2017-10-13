@@ -10,12 +10,15 @@ public class generate : MonoBehaviour
     public GameObject Forest;
     public GameObject Desert;
     public GameObject Ocean;
+    public GameObject species;
    PerlinNoise noise;
-    void Start()
+    public Species speciesVariable;
+
+    public void MakeMap()
     {
         noise = new PerlinNoise(Random.Range(0,1000000));
         Regen();
-
+        Spawn();
     }
     private void Regen()
     {
@@ -53,6 +56,25 @@ public class generate : MonoBehaviour
 
         }
 
+    }
+    /*
+     * Spawn() generates 10 game objects as species on tiles other than ocean tiles on game creation
+     */
+    private void Spawn()
+    {
+        var rnd = new System.Random();
+        for (int i = 0; i < 10; i++)
+        {
+            int locX = rnd.Next(-100, 100);
+            int locY = rnd.Next(-100, 100);
+            //  while tile @ locX, locY == Ocean {
+                    //locX = rnd.Next(-100, 100);
+                    //locY = rnd.Next(-100, 100);
+            //  }
+            float width = species.transform.lossyScale.x;
+            float height = species.transform.lossyScale.y;
+            Instantiate(species, new Vector2(width * locX, height * locY), Quaternion.identity);
+        }
     }
 }
 
