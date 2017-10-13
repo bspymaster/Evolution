@@ -13,7 +13,6 @@ public class generate : MonoBehaviour
     public GameObject species;
    PerlinNoise noise;
     public Species speciesVariable;
-
     public void MakeMap()
     {
         noise = new PerlinNoise(Random.Range(0,1000000));
@@ -22,10 +21,11 @@ public class generate : MonoBehaviour
     }
     private void Regen()
     {
-        int minY = -100;
-        int minX = -100;
-        int maxY = 100;
-        int maxX = 100;
+        int minY = -50;
+        int minX = -50;
+        int maxY = 50;
+        int maxX = 50;
+
         float width = Ice.transform.lossyScale.x;
         float height = Ice.transform.lossyScale.y;
         for (int i = minX; i < maxX; i++) //columns (x values)
@@ -65,8 +65,8 @@ public class generate : MonoBehaviour
         var rnd = new System.Random();
         for (int i = 0; i < 10; i++)
         {
-            int locX = rnd.Next(-100, 100);
-            int locY = rnd.Next(-100, 100);
+            int locX = rnd.Next(-50, 50);
+            int locY = rnd.Next(-50, 50);
             //  while tile @ locX, locY == Ocean {
                     //locX = rnd.Next(-100, 100);
                     //locY = rnd.Next(-100, 100);
