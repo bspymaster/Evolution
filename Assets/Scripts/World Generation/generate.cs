@@ -12,7 +12,7 @@ public class generate : MonoBehaviour
     // public GameObject Lake;
     public GameObject Ocean;
     PerlinNoise noise;
-    void Start()
+    public void MakeWorld()
     {
         noise = new PerlinNoise(Random.Range(0,1000000));
         Regen();

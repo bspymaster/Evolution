@@ -17,9 +17,6 @@ public class buildWeb : MonoBehaviour {
 
         // Create an edges graph linking the nodes
         web.setEdges(generateEdges());
-
-        // Print the web in the console
-        web.printWeb();
 	}
 
     // Generates an empty edges graph with a given number of nodes
