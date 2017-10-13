@@ -5,7 +5,7 @@ using UnityEngine;
 public class UpdateSpecies : MonoBehaviour {
 
     public GameObject speciesObject;
-    public GameObject Ice;
+    private static int DIMENSION = 10;
 
     // Use this for initialization
     public void GenerateSpecies()
@@ -22,16 +22,34 @@ public class UpdateSpecies : MonoBehaviour {
     private void Spawn()
     {
         var rnd = new System.Random();
+        int locX = 0;
+        int locY = 0;
+        Species speciesScript = speciesObject.GetComponent<Species>();
+        List<Vector2Int> lctn = new List<Vector2Int>();
+        Web speciesWeb = speciesObject.GetComponent<Web>();
         for (int i = 0; i < 10; i++)
         {
-            int locX = rnd.Next(-100, 100);
-            int locY = rnd.Next(-100, 100);
-            float width = Ice.transform.lossyScale.x;
-            float height = Ice.transform.lossyScale.y;
-            Instantiate(speciesObject, new Vector2(width * locX, height * locY), Quaternion.identity);
-            Species speciesScript = speciesObject.GetComponent<Species>();
+            locX = rnd.Next(0, 100);
+            locY = rnd.Next(0, 100);
+            Instantiate(speciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
             // set parameters
-            speciesScript.Init(i.ToString(), new List<Vector2Int>(), new List<int>(), new List<int>(), 0, 0, 0, 0, 0, 0, 0, 0);
+            lctn.Add( new Vector2Int((DIMENSION * locX), DIMENSION * locY) );
+            List<int> gns = new List<int>();
+            for (int j = 0; j < 11; j++)
+            {
+                gns.Add(j);
+                speciesScript.evolve(true, j);
+            }
+            // get herbivore food source (web function)
+            // get carnivore food source (web function)
+            // get amount calories (web function)
+            // get creature size (web function)
+            // get max per tile (web function)
+            // get litter size (web function)
+            // get mate frequency (web function)
+            // get mate attachment (web function)
+            // get pecking order (web function)
+            speciesScript.Init(i.ToString(), lctn, gns, new int[0], 0, 0, 0, 0, 0, 0, 0, 0);
         }
     }
 
