@@ -2,48 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node {
-    private string name;
-    private int food_meat;
-    private int food_leaves;
-    private int food_fruit;
-    private int climate;
-    
+public class Node
+{
+    private string name;                // The name of the node
+    private int[] herbivoreFoodSource;  // i == 0 berries, i == 1 nuts, i == 2 grass, i == 3 leaves, 0 (default) means speceis cannot eat food type at given index
+    private int carnivoreFoodSource;    // integer between 1 and 500 that limits what size prey you can eat, -1 (default) means species cannot eat meat
+    private int amntCalories;           // amount of food to survive
+    private int creatureSize;           // 1 is tiny, 2 - 100 is small, 101 - 200 is medium, 201 - 300 is large, 301 - 400 is humongous
+    private int maxPerTile;             // max number of individuals of a species in a given tile, -1 is unlimited
+    private int litterSize;             // population growth per reproduction
+    private int matingFrequency;        // reproduction speed
+    private int mateAttachment;         // mutation chance v offspring survivability
+    private int peckingOrder;           // determines when the species eats in the eating algorithm
+
     public Node(string name)
     {
         this.name = name;
-        this.food_meat = 0;
-        this.food_leaves = 0;
-        this.food_fruit = 0;
-        this.climate = 0;
-    }
-    public Node(string name,int food_meat, int food_leaves,  int food_fruit, int climate)
-    {
-        this.name = name;
-        this.food_meat = food_meat;
-        this.food_leaves = food_leaves;
-        this.food_fruit = food_fruit;
-        this.climate = climate;
     }
 
     public string getName()
     {
         return name;
     }
-    public int getMeat()
+    public int[] getHerbivoreFoodSource()
     {
-        return food_meat;
+        return herbivoreFoodSource;
     }
-    public int getLeaves()
+    public int getCarnivoreFoodSource()
     {
-        return food_leaves;
+        return carnivoreFoodSource;
     }
-    public int getFruit()
+    public int getAmntCalories()
     {
-        return food_fruit;
+        return amntCalories;
     }
-    public int getClimate()
+    public int getCreatureSize()
     {
-        return climate;
+        return creatureSize;
+    }
+    public int getMaxPerTile()
+    {
+        return maxPerTile;
+    }
+    public int getLitterSize()
+    {
+        return litterSize;
+    }
+    public int getMatingFrequency()
+    {
+        return matingFrequency;
+    }
+    public int getMateAttachment()
+    {
+        return mateAttachment;
+    }
+    public int getPeckingOrder()
+    {
+        return peckingOrder;
     }
 }

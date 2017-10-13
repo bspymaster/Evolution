@@ -2,57 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Web {
-    private static int NUMNODES = 3;  // the number of total nodes
+public class Web
+{
+    private int numNodes;
     private Node[] nodes;  // an array containing all possible nodes
     private int[,] edges;  // a 2D array of integers, where the row index is the staring node and the column index is the destination node, and the value contained is 0 of there is no edge, or 1 if there is an edge
 
     // Constructor
-    public Web()
+    public Web(int _numNodes)
     {
-        edges = new int[NUMNODES, NUMNODES];
-        // Assume no connection
-        for (int row=0; row < NUMNODES; row++)
-        {
-            for (int col = 0; col < NUMNODES; col++)
-            {
-                edges[row, col] = 0;
-            }
-        }
-
-        nodes = new Node[NUMNODES];
-        makeNodes();
+        numNodes = _numNodes;
     }
 
-    // Helper function to make all the nodes and join their edges
-    private void makeNodes()
+    // Sets the nodes of the web
+    public void setNodes(Node[] _nodes)
     {
-        for (int i = 0; i < NUMNODES; i++)
-        {
-            string nodeName = "node#" + i + ", ";
-            nodes[i] = new Node(nodeName, i, i, i, i);
-        }
-
-        edges[0, 1] = 1;
-        edges[1, 2] = 1;
-        edges[2, 0] = 1;
-        edges[0, 2] = 1;
+        nodes = _nodes;
     }
 
+    // Sets the directed edge of the web
+    public void setEdges(int[,] _edges)
+    {
+        edges = _edges;
+    }
+
+    // Gets the nodes of the web
+    public Node[] getNodes()
+    {
+        return nodes;
+    }
+
+    // Gets the edges of the web
+    public int[,] getEdges()
+    {
+        return edges;
+    }
+
+    public Node getNode(int index)
+    {
+        return nodes[index];
+    }
+
+    // Debug function to print out the web in the console
     public void printWeb()
     {
         string nodeNames = "";
-        for (int i = 0; i < NUMNODES; i++)
+        for (int i = 0; i < numNodes; i++)
         {
-            nodeNames += nodes[i].getName();
+            nodeNames += nodes[i].getName() + ", ";
         }
         Debug.Log(nodeNames + "\n");
 
         string rowString;
-        for (int i = 0; i < NUMNODES; i++)
+        for (int i = 0; i < numNodes; i++)
         {
             rowString = "";
-            for (int j = 0; j < NUMNODES; j++)
+            for (int j = 0; j < numNodes; j++)
             {
                 rowString += (edges[i, j] + " ");
             }
