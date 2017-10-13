@@ -5,12 +5,11 @@ using UnityEngine;
 public class buildWeb : MonoBehaviour {
 
     private static int NUMNODES = 31;
-    private Web web;
 
 	// Initialize on startup
 	void Start () {
         // Create an empty web
-        web = new Web(NUMNODES);
+        Web web = new Web(NUMNODES);
 
         // Create a list of Nodes
         web.setNodes(generateNodes());
@@ -135,10 +134,5 @@ public class buildWeb : MonoBehaviour {
         edges[29,30] = 1;
 
         return edges;
-    }
-
-    public Web getWeb()
-    {
-        return web;
     }
 }
