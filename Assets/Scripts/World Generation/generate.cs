@@ -14,7 +14,8 @@ public class generate : MonoBehaviour
     public GameObject species;
    PerlinNoise noise;
     public Species speciesVariable;
-    void Start()
+
+    public void MakeMap()
     {
         noise = new PerlinNoise(Random.Range(0,1000000));
         Regen();
