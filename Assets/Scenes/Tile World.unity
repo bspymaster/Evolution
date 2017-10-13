@@ -263,12 +263,23 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1817323290}
-        m_MethodName: MakeMap
+        m_MethodName: MakeWorld
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1401073266}
+        m_MethodName: GenerateSpecies
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -458,6 +469,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1401073264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1401073265}
+  - component: {fileID: 1401073266}
+  m_Layer: 0
+  m_Name: Species Updater
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1401073265
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1401073264}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40.88433, y: 16.041407, z: -3.4519534}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1401073266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1401073264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02a4df86c6ea2c943a50bd26ae000835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speciesObject: {fileID: 1898494184074992, guid: 958ad671cbd90d1498b9bd1e3866d72c,
+    type: 2}
+  Ice: {fileID: 1991241885556352, guid: 88a040179f6a9b746bd84e5c0a1fc3cc, type: 2}
 --- !u!1 &1419481649
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,8 +741,6 @@ MonoBehaviour:
   Forest: {fileID: 1630792826420318, guid: 922bd9875bf57144fa3f558a9ee9c4f9, type: 2}
   Desert: {fileID: 1124684758664900, guid: 61c52a1386335ab4aa3f9e875f5de536, type: 2}
   Ocean: {fileID: 1102497029950266, guid: 87a4041e1de91ff4790790279a259138, type: 2}
-  species: {fileID: 1898494184074992, guid: fed0247fffdcac249af237023160bf19, type: 2}
-  speciesVariable: {fileID: 0}
 --- !u!4 &1817323291
 Transform:
   m_ObjectHideFlags: 0
@@ -795,7 +847,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2065124683}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 194.5, y: 493.5, z: 0}
+  m_LocalPosition: {x: 636.5, y: 331, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1419481650}
