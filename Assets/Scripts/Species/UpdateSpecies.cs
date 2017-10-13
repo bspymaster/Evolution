@@ -31,7 +31,7 @@ public class UpdateSpecies : MonoBehaviour {
             Instantiate(speciesObject, new Vector2(width * locX, height * locY), Quaternion.identity);
             Species speciesScript = speciesObject.GetComponent<Species>();
             // set parameters
-            speciesScript.Init(i.ToString(), new List<int>(), new List<int>(), new List<int>(), 0, 0, 0, 0, 0, 0, 0, 0);
+            speciesScript.Init(i.ToString(), new List<Vector2Int>(), new List<int>(), new List<int>(), 0, 0, 0, 0, 0, 0, 0, 0);
         }
     }
 
