@@ -28,11 +28,9 @@ public class generate : MonoBehaviour
         float height = Ice.transform.lossyScale.y;
         for (int i = minX; i < maxX; i++) //columns (x values)
         {
-            int hrand = noise.getNoise(i, maxX - minX);
             for (int j = minY; j < maxY; j++)//rows (y values)
             {
-                int lrand = noise.getNoise(j, maxY-minY);
-                int rand = (hrand + lrand) /6;
+                int rand = noise.getNoise(i,j,maxX-minX);
                 if (rand % 7 == 0)
                     Instantiate(Ocean, new Vector2(i * width, j * height), Quaternion.identity);
                 else if (rand % 7 == 1)
