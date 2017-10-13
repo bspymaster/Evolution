@@ -26,7 +26,7 @@ public class UpdateSpecies : MonoBehaviour {
         int locY = 0;
         Species speciesScript = speciesObject.GetComponent<Species>();
         List<Vector2Int> lctn = new List<Vector2Int>();
-        Web speciesWeb = speciesObject.GetComponent<Web>();
+        // Web speciesWeb = speciesObject.GetComponent<Web>();
         for (int i = 0; i < 10; i++)
         {
             locX = rnd.Next(0, 100);
@@ -35,11 +35,11 @@ public class UpdateSpecies : MonoBehaviour {
             // set parameters
             lctn.Add( new Vector2Int((DIMENSION * locX), DIMENSION * locY) );
             List<int> gns = new List<int>();
-            for (int j = 0; j < 11; j++)
-            {
-                gns.Add(j);
-                speciesScript.evolve(true, j);
-            }
+            //for (int j = 0; j < 11; j++)
+            //{
+            //    gns.Add(j);
+            //    speciesScript.evolve(true, j);
+            //}
             // get herbivore food source (web function)
             // get carnivore food source (web function)
             // get amount calories (web function)
@@ -56,14 +56,14 @@ public class UpdateSpecies : MonoBehaviour {
     /*
      *  Have the species in each tile evolve
      */
-    public void Mutation()
+    private void Mutation()
     {
     }
 
     /*
      *  Have the species in each tile containing species eat
      */
-    public void Interact()
+    private void Interact()
     {
         HerbivoreMove();
         CarnivoreMove();
@@ -72,7 +72,7 @@ public class UpdateSpecies : MonoBehaviour {
     /*
      *  Have the species in each tile reproduce
      */
-    public void Reproduce()
+    private void Reproduce()
     {
         print("reproduce");
         // have species mate
@@ -81,15 +81,18 @@ public class UpdateSpecies : MonoBehaviour {
     /*
      *  Have the herbivore species in each tile containing species eat tile resources
      */
-    public void HerbivoreMove()
+    private void HerbivoreMove()
     {
-        print("herbivore");
+        // get list of tiles who have herbivores in them
+        // for each valid tile, get herbivore food sources (tile gets)
+        // for each species in valid tile, species.getHFS()
+        // for (int i = 0; i < amountSpecies; i++)
     }
 
     /*
      *  Have the carnivore species in each tile containing species eat other species and tiny species (tile resource)
      */
-    public void CarnivoreMove()
+    private void CarnivoreMove()
     {
         print("carnivore");
     }
