@@ -18,29 +18,6 @@ public class Node
     public Node(string name)
     {
         this.name = name;
-        this.herbivoreFoodSource = new int[4];
-        this.carnivoreFoodSource = 0;
-        this.amntCalories = 0;
-        this.creatureSize = 0;
-        this.maxPerTile = 0;
-        this.litterSize = 0;
-        this.matingFrequency = 0;
-        this.mateAttachment = 0;
-        this.peckingOrder = 0;
-    }
-
-    public Node(string name, int[] herbivoreFoodSource, int carnivoreFoodSource, int amntCalories, int creatureSize, int maxPerTile, int litterSize, int matingFrequency, int mateAttachment, int peckingOrder)
-    {
-        this.name = name;
-        this.herbivoreFoodSource = herbivoreFoodSource;
-        this.carnivoreFoodSource = carnivoreFoodSource;
-        this.amntCalories = amntCalories;
-        this.creatureSize = creatureSize;
-        this.maxPerTile = maxPerTile;
-        this.litterSize = litterSize;
-        this.matingFrequency = matingFrequency;
-        this.mateAttachment = mateAttachment;
-        this.peckingOrder = peckingOrder;
     }
 
     public string getName()

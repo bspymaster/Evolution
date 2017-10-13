@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Web {
+public class Web
+{
     private int numNodes;
     private Node[] nodes;  // an array containing all possible nodes
     private int[,] edges;  // a 2D array of integers, where the row index is the staring node and the column index is the destination node, and the value contained is 0 of there is no edge, or 1 if there is an edge
@@ -37,17 +38,9 @@ public class Web {
         return edges;
     }
 
-    // Gets the node at a given index
     public Node getNode(int index)
     {
-        try
-        {
-            return nodes[index];
-        }
-        catch
-        {
-            return null;
-        }
+        return nodes[index];
     }
 
     // Debug function to print out the web in the console
