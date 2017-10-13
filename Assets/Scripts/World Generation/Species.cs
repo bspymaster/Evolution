@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Species : MonoBehaviour
 {
-    public GameObject species;
+    public GameObject species;  // The asset to use to represent the species
+    public GameObject WebInstance;  // The web to use as a reference when evolving
     private string speciesName;  // name of species - for stretch goal, we will want this to be a string that appears like formal latin names, by D3, number will suffice
     private int[] location; // in which tiles this species exists.  Assuming tiles can be simplified to their numerical value
     private int[] genes;  // what genes this species has.  Assuming genes can be simplified to their numerical value
@@ -18,12 +19,39 @@ public class Species : MonoBehaviour
     private int mateAttachment; // mutation chance v offspring survivability
     private int peckingOrder; // determines when the species eats in the eating algorithm
 
+    public Species()
+    {
+        evolve(true, 0);
+    }
+
     /*
      *  Take boolean to determine if adding/subtracting node in evolutionary web, and takes index of that node to modify species instance accordingly
      */
     public void evolve(bool addNode, int nodeIndex)
     {
-
+        int op;
+        if(addNode) {
+            op = 1;
+        }
+        else
+        {
+            op = -1;
+        }
+        Node node = WebInstance.GetComponent<buildWeb>().getWeb().getNode(nodeIndex);
+        print(speciesName + "evolved: " + node.getName());
+        // Added a node
+        for(int i=0; i < herbivoreFoodSource.Length; i++)
+        {
+            herbivoreFoodSource[i] += op * node.getHerbivoreFoodSource()[i];
+        }
+        carnivoreFoodSource += op * node.getCarnivoreFoodSource();
+        amntCalories += op * node.getAmntCalories();
+        creatureSize += op * node.getCreatureSize();
+        maxPerTile += op * node.getMaxPerTile();
+        litterSize += op * node.getLitterSize();
+        matingFrequency += op * node.getMatingFrequency();
+        mateAttachment += op * node.getMateAttachment();
+        peckingOrder += op * node.getPeckingOrder();
     }
 
     /*
