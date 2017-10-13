@@ -19,6 +19,11 @@ public class Species : MonoBehaviour
     private int mateAttachment; // mutation chance v offspring survivability
     private int peckingOrder; // determines when the species eats in the eating algorithm
 
+    public Species()
+    {
+        evolve(true, 0);
+    }
+
     /*
      *  Take boolean to determine if adding/subtracting node in evolutionary web, and takes index of that node to modify species instance accordingly
      */
@@ -32,7 +37,8 @@ public class Species : MonoBehaviour
         {
             op = -1;
         }
-        Node node = WebInstance.GetComponent<Web>().getNode(nodeIndex);
+        Node node = WebInstance.GetComponent<buildWeb>().getWeb().getNode(nodeIndex);
+        print(speciesName + "evolved: " + node.getName());
         // Added a node
         for(int i=0; i < herbivoreFoodSource.Length; i++)
         {
