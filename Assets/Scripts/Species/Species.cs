@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Species : MonoBehaviour
 {
-    public GameObject species;
     private string speciesName;  // name of species - for stretch goal, we will want this to be a string that appears like formal latin names, by D3, number will suffice
-    private int[] location; // in which tiles this species exists.  Assuming tiles can be simplified to their numerical value
-    private int[] genes;  // what genes this species has.  Assuming genes can be simplified to their numerical value
-    private int[] herbivoreFoodSource; // i == 0 berries, i == 1 nuts, i == 2 grass, i == 3 leaves, 0 (default) means speceis cannot eat food type at given index
+    private List<int> location; // in which tiles this species exists.  Assuming tiles can be simplified to their numerical value
+    private List<int> genes;  // what genes this species has.  Assuming genes can be simplified to their numerical value
+    private List<int> herbivoreFoodSource; // i == 0 berries, i == 1 nuts, i == 2 grass, i == 3 leaves, 0 (default) means speceis cannot eat food type at given index
     private int carnivoreFoodSource; // integer between 1 and 500 that limits what size prey you can eat, -1 (default) means species cannot eat meat
     private int amntCalories; // amount of food to survive
     private int creatureSize; // 1 is tiny, 2 - 100 is small, 101 - 200 is medium, 201 - 300 is large, 301 - 400 is humongous
@@ -19,6 +18,31 @@ public class Species : MonoBehaviour
     private int peckingOrder; // determines when the species eats in the eating algorithm
 
     /*
+    *   Constructor
+    */
+    public Species()
+    {
+    }
+
+    /*
+    *   Initializer
+    */
+    public void Init(string sN, List<int> lctn, List<int> gns, List<int> hFS, int cFS, int aC, int cS, int mPT, int lS, int mF, int mA, int pO)
+    {
+        speciesName = sN;
+        location = lctn;
+        genes = gns;
+        herbivoreFoodSource = hFS;
+        carnivoreFoodSource = cFS;
+        amntCalories = aC;
+        creatureSize = cS;
+        maxPerTile = mPT;
+        litterSize = lS;
+        matingFrequency = mF;
+        mateAttachment = mA;
+        peckingOrder = pO;
+    }
+    /*
      *  Take boolean to determine if adding/subtracting node in evolutionary web, and takes index of that node to modify species instance accordingly
      */
     public void evolve(bool addNode, int nodeIndex)
@@ -27,26 +51,31 @@ public class Species : MonoBehaviour
     }
 
     /*
-     *  Deep copy of species instance of passed species, takes a Species object
+     *  Deep copy of species instance of passed species.  Randomly adds/subtractes node for bot, lets player choose node, and sends other to evolve()
      */
-    public void clone(Species other)
+    public void clone(Species other, bool isPlayer) // other will be evolved, clone will be parent species
     {
-
+        Species clone = new Species();
+        clone.Init(other.getSpeciesName(), other.getLocation(), other.getGenes(), other.getHFS(), other.getCFS(), other.getAmntCalories(), 
+            other.getCreatureSize(), other.getMaxPerTile(), other.getLitterSize(), other.getMatingFrequency(), getMateAttachment(), other.getPeckingOrder());
     }
- 
-    public string getName()
+
+    /*
+     *  Get methods for attributes of Species
+     */
+    public string getSpeciesName()
     {
         return speciesName;
     }
-    public int[] getLocation()
+    public List<int> getLocation()
     {
         return location;
     }
-    public int[] getGenes()
+    public List<int> getGenes()
     {
         return genes;
     }
-    public int[] getHFS()
+    public List<int> getHFS()
     {
         return herbivoreFoodSource;
     }
