@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node {
+public class Node
+{
     private string name;                // The name of the node
     private int[] herbivoreFoodSource;  // i == 0 berries, i == 1 nuts, i == 2 grass, i == 3 leaves, 0 (default) means speceis cannot eat food type at given index
     private int carnivoreFoodSource;    // integer between 1 and 500 that limits what size prey you can eat, -1 (default) means species cannot eat meat
