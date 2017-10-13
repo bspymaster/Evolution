@@ -38,6 +38,11 @@ public class Web
         return edges;
     }
 
+    public Node getNode(int index)
+    {
+        return nodes[index];
+    }
+
     // Debug function to print out the web in the console
     public void printWeb()
     {
