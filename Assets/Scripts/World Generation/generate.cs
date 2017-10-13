@@ -5,12 +5,12 @@ using UnityEngine;
 public class generate : MonoBehaviour
 {
 
-    public GameObject Ice;
-    public GameObject Plains;
-    public GameObject Forest;
-    public GameObject Desert;
-    // public GameObject Lake;
-    public GameObject Ocean;
+    //public GameObject Ice;
+    //public GameObject Plains;
+    //public GameObject Forest;
+    //public GameObject Desert;
+    //public GameObject Ocean;
+    public GameObject BaseWorldTile;
     PerlinNoise noise;
 
     public void MakeWorld()
@@ -20,35 +20,95 @@ public class generate : MonoBehaviour
     }
     private void Regen()
     {
-        int minY = -100;
-        int minX = -100;
-        int maxY = 100;
-        int maxX = 100;
-        float width = Ice.transform.lossyScale.x;
-        float height = Ice.transform.lossyScale.y;
+        int mapSize = GameObject.Find("TileList").GetComponent<TileListData>().getMapSize();
+        int minY = 0;
+        int minX = 0;
+        int maxY = mapSize;
+        int maxX = mapSize;
+        float width = BaseWorldTile.transform.lossyScale.x;
+        float height = BaseWorldTile.transform.lossyScale.y;
+
+        string[] tileType = { "Ocean", "Desert", "Plains", "Forest", "Tundra" };
+        Color[] tileColors = { new Color(18f / 255f, 15f / 255f, 62f / 255f, 255f / 255f), new Color(197f / 255f, 183f / 255f, 68f / 255f, 255f / 255f),
+                               new Color(60f/255f,242f/255f,2f/255f,255f/255f), new Color(20f/255f,96f/255f,130f/255f,255f/255f), new Color(67f/255f,186f/255f,203f/255f,255f/255f) };
+        int numBerries = 0;
+        int numNuts = 0;
+        int numGrass = 0;
+        int numLeaves = 0;
+        int numAmbientMeat = 0;
+        int rand = 0;
+        TileListData tileList = GameObject.Find("TileList").GetComponent<TileListData>();
+
         for (int i = minX; i < maxX; i++) //columns (x values)
         {
-            int hrand = noise.getNoise(i, maxX - minX);
             for (int j = minY; j < maxY; j++)//rows (y values)
             {
-                int lrand = noise.getNoise(j, maxY-minY);
-                int rand = (hrand + lrand) /6;
-                if (rand % 7 == 0)
-                    Instantiate(Ocean, new Vector2(i * width, j * height), Quaternion.identity);
-                else if (rand % 7 == 1)
-                    Instantiate(Ice, new Vector2(i * width, j * height), Quaternion.identity);
-                else if (rand % 7 ==2 )
-                    Instantiate(Forest, new Vector2(i * width, j * height), Quaternion.identity);
-                else if (rand % 7 == 3)
-                    Instantiate(Plains, new Vector2(i * width, j * height), Quaternion.identity);
-                else if (rand % 7 == 4)
-                    Instantiate(Desert, new Vector2(i * width, j * height), Quaternion.identity);
-                else if (rand % 7 == 5)
-                    Instantiate(Plains, new Vector2(i * width, j * height), Quaternion.identity);
-               // else if (rand % 8== 6)
-                   // Instantiate(Lake, new Vector2(i * width, j * height), Quaternion.identity);
-                else
-                    Instantiate(Ocean, new Vector2(i * width, j * height), Quaternion.identity);
+                numBerries = 0;
+                numNuts = 0;
+                numGrass = 0;
+                numLeaves = 0;
+                numAmbientMeat = 0;
+
+                rand = noise.getNoise(i,j,maxX-minX);
+                rand = rand % 7;
+
+                if(rand == 5)
+                {
+                    rand = 3;
+                }
+                else if(rand == 6)
+                {
+                    rand = 0;
+                }
+
+                GameObject tileInstance = Instantiate(BaseWorldTile, new Vector2(i * width, j * height), Quaternion.identity);
+                TileData instanceData = tileInstance.GetComponent<TileData>();
+                instanceData.setTileType(tileType[rand]);
+
+                if (rand == 0)  // Ocean
+                {
+                    numAmbientMeat = 100;
+                }
+                else if (rand == 1)  // Desert
+                {
+                    numBerries = 10;
+                    numGrass = 50;
+                    numLeaves = 10;
+                    numAmbientMeat = 200;
+                }
+                else if (rand == 2)  // Plains
+                {
+                    numBerries = 50;
+                    numNuts = 50;
+                    numGrass = 1000;
+                    numLeaves = 100;
+                    numAmbientMeat = 150;
+                }
+                else if (rand == 3)  // Forest
+                {
+                    numBerries = 1000;
+                    numNuts = 1000;
+                    numGrass = 500;
+                    numLeaves = 2000;
+                    numAmbientMeat = 500;
+                }
+                else if (rand == 4)  // Tundra
+                {
+                    numBerries = 50;
+                    numNuts = 150;
+                    numGrass = 50;
+                    numLeaves = 10;
+                    numAmbientMeat = 200;
+                }
+                
+                instanceData.setNumBerries(numBerries);
+                instanceData.setNumNuts(numNuts);
+                instanceData.setNumGrass(numGrass);
+                instanceData.setNumLeaves(numLeaves);
+                instanceData.setNumAmbientMeat(numAmbientMeat);
+                tileInstance.GetComponent<SpriteRenderer>().color = tileColors[rand];
+
+                tileList.setTileAtLocation(new Vector2Int(i,j),tileInstance);
             }
 
         }

@@ -6,7 +6,7 @@ public class Species : MonoBehaviour
 {
     public GameObject WebInstance;  // The web to use as a reference when evolving
     private string speciesName;  // name of species - for stretch goal, we will want this to be a string that appears like formal latin names, by D3, number will suffice
-    private List<int> location; // in which tiles this species exists.  Assuming tiles can be simplified to their numerical value
+    private List<Vector2Int> location; // in which tiles this species exists.  Assuming tiles can be simplified to their numerical value
     private List<int> genes;  // what genes this species has.  Assuming genes can be simplified to their numerical value
     private List<int> herbivoreFoodSource; // i == 0 berries, i == 1 nuts, i == 2 grass, i == 3 leaves, 0 (default) means speceis cannot eat food type at given index
     private int carnivoreFoodSource; // integer between 1 and 500 that limits what size prey you can eat, -1 (default) means species cannot eat meat
@@ -28,7 +28,7 @@ public class Species : MonoBehaviour
     /*
     *   Initializer
     */
-    public void Init(string sN, List<int> lctn, List<int> gns, List<int> hFS, int cFS, int aC, int cS, int mPT, int lS, int mF, int mA, int pO)
+    public void Init(string sN, List<Vector2Int> lctn, List<int> gns, List<int> hFS, int cFS, int aC, int cS, int mPT, int lS, int mF, int mA, int pO)
     {
         speciesName = sN;
         location = lctn;
@@ -79,8 +79,7 @@ public class Species : MonoBehaviour
      */
     public void clone(Species other, bool isPlayer) // other will be evolved, clone will be parent species
     {
-        Species clone = new Species();
-        clone.Init(other.getSpeciesName(), other.getLocation(), other.getGenes(), other.getHFS(), other.getCFS(), other.getAmntCalories(), 
+        Init(other.getSpeciesName(), other.getLocation(), other.getGenes(), other.getHFS(), other.getCFS(), other.getAmntCalories(), 
             other.getCreatureSize(), other.getMaxPerTile(), other.getLitterSize(), other.getMatingFrequency(), getMateAttachment(), other.getPeckingOrder());
     }
 
@@ -91,7 +90,7 @@ public class Species : MonoBehaviour
     {
         return speciesName;
     }
-    public List<int> getLocation()
+    public List<Vector2Int> getLocation()
     {
         return location;
     }
