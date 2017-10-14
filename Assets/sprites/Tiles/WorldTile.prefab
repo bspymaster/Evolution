@@ -126,7 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numBerries: 0
-  tileContentsPrefab: {fileID: 0}
+  windowManagerPrefab: {fileID: 1086105163294284, guid: 84c208c8f253e66459bb2a79fda9a138,
+    type: 2}
   infoPanelPrefab: {fileID: 1710603878542482, guid: 935c30a104e693643a247eb6bb25ba14,
     type: 2}
   berryFoodPrefab: {fileID: 114570798446475714, guid: d7996ab59a87167438b3016096665144,
