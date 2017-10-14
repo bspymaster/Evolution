@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class GameControl : MonoBehaviour {
 
-    void Awake()
+    private void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
-
 }

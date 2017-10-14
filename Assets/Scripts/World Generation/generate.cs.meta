@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 505d8f9eeb75e86418f8060dc145b6cd
+timeCreated: 1507869143
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - Ice: {fileID: 1991241885556352, guid: c5c9b2326ae5df64081622c79d6bb20e, type: 2}
+  - Plains: {fileID: 1327870130760744, guid: 7fa2531b49622854b9e3fef7f2874c04, type: 2}
+  - Forest: {fileID: 1630792826420318, guid: 922bd9875bf57144fa3f558a9ee9c4f9, type: 2}
+  - Desert: {fileID: 1124684758664900, guid: 61c52a1386335ab4aa3f9e875f5de536, type: 2}
+  - Ocean: {fileID: 1102497029950266, guid: 87a4041e1de91ff4790790279a259138, type: 2}
+  - species: {fileID: 1898494184074992, guid: fed0247fffdcac249af237023160bf19, type: 2}
+  - speciesVariable: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
