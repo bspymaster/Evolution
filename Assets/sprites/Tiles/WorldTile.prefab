@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55d359fa9505f143a2f57c515e59115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numBerries: 0
 --- !u!114 &114886905199093068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,6 +125,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e282970fa16cc74788b324c7a5a8a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numBerries: 0
+  windowManagerPrefab: {fileID: 1086105163294284, guid: 84c208c8f253e66459bb2a79fda9a138,
+    type: 2}
+  infoPanelPrefab: {fileID: 1710603878542482, guid: 935c30a104e693643a247eb6bb25ba14,
+    type: 2}
+  berryFoodPrefab: {fileID: 114570798446475714, guid: d7996ab59a87167438b3016096665144,
+    type: 2}
+  biomePrefab: {fileID: 114570798446475714, guid: 5bfb81fbb20c91447b30bc72c55631c3,
+    type: 2}
+  noClickPrefab: {fileID: 1601072822311834, guid: 9cb12a5cd261d9442b1a8822d3b8be8d,
+    type: 2}
+  exitButtonPrefab: {fileID: 1889557421693892, guid: 46a9abe3a1a389d4fbdb6137b5b16814,
+    type: 2}
 --- !u!212 &212965424681683920
 SpriteRenderer:
   m_ObjectHideFlags: 1
