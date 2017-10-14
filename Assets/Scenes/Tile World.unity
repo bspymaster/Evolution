@@ -213,8 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a4df86c6ea2c943a50bd26ae000835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speciesObject: {fileID: 1898494184074992, guid: 958ad671cbd90d1498b9bd1e3866d72c,
-    type: 2}
+  speciesObject: {fileID: 0}
 --- !u!4 &363441477
 Transform:
   m_ObjectHideFlags: 0
@@ -869,6 +868,10 @@ Prefab:
     - target: {fileID: 4472119362386898, guid: 43944ea185894854ab76a738d97920b1, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010053404371570, guid: 43944ea185894854ab76a738d97920b1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43944ea185894854ab76a738d97920b1, type: 2}
