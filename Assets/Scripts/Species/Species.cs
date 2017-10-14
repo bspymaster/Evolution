@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Species : MonoBehaviour
 {
-    public GameObject WebInstance;  // The web to use as a reference when evolving
     private string speciesName;  // name of species - for stretch goal, we will want this to be a string that appears like formal latin names, by D3, number will suffice
     private List<Vector2Int> location; // in which tiles this species exists.  Assuming tiles can be simplified to their numerical value
     private List<int> genes;  // what genes this species has.  Assuming genes can be simplified to their numerical value
@@ -59,7 +58,7 @@ public class Species : MonoBehaviour
         {
             op = -1;
         }
-        Node node = WebInstance.GetComponent<Web>().getNode(nodeIndex);
+        Node node = GameObject.Find("Web Builder").GetComponent<buildWeb>().getWeb().getNode(nodeIndex);
         // Added a node
         for (int i = 0; i < herbivoreFoodSource.Length; i++)
         {

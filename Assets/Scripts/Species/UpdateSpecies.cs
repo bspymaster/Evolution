@@ -6,10 +6,12 @@ public class UpdateSpecies : MonoBehaviour {
 
     public GameObject speciesObject;
     private static int DIMENSION = 10;
+    private int mapSize;
 
     // Use this for initialization
     public void GenerateSpecies()
     {
+        mapSize = GameObject.Find("TileList").GetComponent<TileListData>().getMapSize();
         Spawn();
         InvokeRepeating("Interact", 10f, 20f);
         InvokeRepeating("Reproduce", 5f, 20f);
@@ -26,30 +28,21 @@ public class UpdateSpecies : MonoBehaviour {
         int locY = 0;
         Species speciesScript = speciesObject.GetComponent<Species>();
         List<Vector2Int> lctn = new List<Vector2Int>();
-        // Web speciesWeb = speciesObject.GetComponent<Web>();
+        Web speciesWeb = speciesObject.GetComponent<Web>();
         for (int i = 0; i < 10; i++)
         {
             locX = rnd.Next(0, 100);
             locY = rnd.Next(0, 100);
             Instantiate(speciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
+            List<int> gns = new List<int>();
+            speciesScript.Init(i.ToString(), lctn, gns, new int[4], 0, 0, 0, 0, 0, 0, 0, 0);
             // set parameters
             lctn.Add( new Vector2Int((DIMENSION * locX), DIMENSION * locY) );
-            List<int> gns = new List<int>();
-            //for (int j = 0; j < 11; j++)
-            //{
-            //    gns.Add(j);
-            //    speciesScript.evolve(true, j);
-            //}
-            // get herbivore food source (web function)
-            // get carnivore food source (web function)
-            // get amount calories (web function)
-            // get creature size (web function)
-            // get max per tile (web function)
-            // get litter size (web function)
-            // get mate frequency (web function)
-            // get mate attachment (web function)
-            // get pecking order (web function)
-            speciesScript.Init(i.ToString(), lctn, gns, new int[0], 0, 0, 0, 0, 0, 0, 0, 0);
+            for (int j = 0; j < 11; j++)
+            {
+                gns.Add(j);
+                speciesScript.evolve(true, j);
+            }
         }
     }
 
@@ -61,46 +54,89 @@ public class UpdateSpecies : MonoBehaviour {
         int newName = int.Parse(parentSpecies.getSpeciesName()) + 100;  //  100 should be replaced by number of existing speciesObjects
         Species mutatingSpecies = new Species(newName.ToString());
         mutatingSpecies.clone(parentSpecies);
-        bool addNode;
-        int nodeIndex;
+        bool addNode = false;
+        int nodeIndex = 0;
         if (!isPlayer)
         {
             addNode = true; //  may change this later on to allow bots to change both ways
-            //  nodeIndex set to random node
+            int geneIndex = mutatingSpecies.getGenes().Count - 1;
+            int newGene = mutatingSpecies.getGenes()[geneIndex] + 1;
+            if (newGene > 30)
+            {
+                return;
+            }
+            mutatingSpecies.evolve(addNode, newGene);
         }
         else
         {
             //  have player set addNode to true/false
             //  have player choose node
         }
-        //  mutatingSpecies.evolve(addNode, nodeIndex);
-        //  mutatingSpecies = speciesObject.GetComponent<Species>();
-        //  Instantiate(speciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
+        mutatingSpecies.evolve(addNode, nodeIndex);
+        Instantiate(speciesObject, new Vector2(-1, -1), Quaternion.identity);
     }
 
     /*
      *  Have the species in a given tile migrate to adjacent tile
      */
-    private void Overpopulation(Species migratingSpecies, bool isPlayer, int tileIndex)
+    private void Overpopulation(Species migratingSpecies, bool isPlayer, Vector2 tileLocation)
     {
-        //  overPopulatedTile = Tile @ tileIndex
-        //  Tile[] adjacentTiles;
-        //  add all adjacent tiles to adjacentTiles[]
-        //  Tile selectedTile;
-        //  int movingPopulation = 0;
-        /*  if (!isPlayer)
-         *  {
-         *      selectedTile = randomly choose adjacent tile
-         *  }
-         *  else
-         *  {
-         *      selectedTile = player chooses adjacent tile
-         *  }
-         *      movingPopulation = 0.3 * overPopulatedTile.getPopulation(migratingSpecies);
-         *      overPopulatedTile.setPopulation(migratingSpecies) = 0.7 * overPopulatedTile.getPopulation(migratingSpecies);
-         *      selectedTile.addSpecies(migratingSpecies);
-         *      selectedTile.setPopulation(migratingSpecies) = movingPopulation;
-         */
+        var rnd = new System.Random();
+        int receivingTile = rnd.Next(0, 3); //  0 is left tile, 1 is bottom tile, 2 is right tile, 3 is above tile
+        switch (receivingTile)
+        {
+            case 0:
+                {
+                    Vector2 target = new Vector2(tileLocation.x - 1, tileLocation.y);
+                    if (target.x < 0)
+                    {
+                        target.x += 2;
+                    }
+                    Migrate(target);
+                    break;
+                }
+            case 1:
+                {
+                    Vector2 target = new Vector2(tileLocation.x, tileLocation.y + 1);
+                    if (target.y > mapSize)
+                    {
+                        target.y -= 2;
+                    }
+                    Migrate(target);
+                    break;
+                }
+            case 2:
+                {
+                    Vector2 target = new Vector2(tileLocation.x + 1, tileLocation.y);
+                    if (target.x > mapSize)
+                    {
+                        target.x -= 2;
+                    }
+                    Migrate(target);
+                    break;
+                }
+            case 3:
+                {
+                    Vector2 target = new Vector2(tileLocation.x, tileLocation.y - 1);
+                    if (target.y < 0)
+                    {
+                        target.y += 2;
+                    }
+                    Migrate(target);
+                    break;
+                }
+        }
+    }
+
+    /*
+     *  Migrates the population for OverPopulation()
+     */
+    private void Migrate(Vector2 recievingTile)
+    {
+        // movingPopulation = 0.3 * overPopulatedTile.getPopulation(migratingSpecies);
+        // overPopulatedTile.setPopulation(migratingSpecies) = 0.7 * overPopulatedTile.getPopulation(migratingSpecies);
+        // selectedTile.addSpecies(migratingSpecies);
+        // selectedTile.setPopulation(migratingSpecies) = movingPopulation;
     }
 
     /*

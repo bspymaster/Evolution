@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4472119362386898}
-  - component: {fileID: 114004425137152470}
+  - component: {fileID: 114794469267049832}
   m_Layer: 0
-  m_Name: Web
+  m_Name: webObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114004425137152470
+--- !u!114 &114794469267049832
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,6 +48,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1010053404371570}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7f3c424a1050924ba51ec97d3ab4a19, type: 3}
+  m_Script: {fileID: 11500000, guid: c60f350ac0ddbf14da03b2c7e754d692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
