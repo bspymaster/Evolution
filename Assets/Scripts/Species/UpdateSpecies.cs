@@ -87,42 +87,42 @@ public class UpdateSpecies : MonoBehaviour {
         {
             case 0:
                 {
-                    Vector2 target = new Vector2(tileLocation.x - 1, tileLocation.y);
+                    Vector2Int target = new Vector2Int(tileLocation.x - 1, tileLocation.y);
                     if (target.x < 0)
                     {
                         target.x += 2;
                     }
-                    Migrate(target);
+                    Migrate(target, isPlayer, migratingSpecies.getSpeciesName(), tileLocation);
                     break;
                 }
             case 1:
                 {
-                    Vector2 target = new Vector2(tileLocation.x, tileLocation.y + 1);
+                    Vector2Int target = new Vector2Int(tileLocation.x, tileLocation.y + 1);
                     if (target.y > mapSize)
                     {
                         target.y -= 2;
                     }
-                    Migrate(target);
+                    Migrate(target, isPlayer, migratingSpecies.getSpeciesName(), tileLocation);
                     break;
                 }
             case 2:
                 {
-                    Vector2 target = new Vector2(tileLocation.x + 1, tileLocation.y);
+                    Vector2Int target = new Vector2Int(tileLocation.x + 1, tileLocation.y);
                     if (target.x > mapSize)
                     {
                         target.x -= 2;
                     }
-                    Migrate(target);
+                    Migrate(target, isPlayer, migratingSpecies.getSpeciesName(), tileLocation);
                     break;
                 }
             case 3:
                 {
-                    Vector2 target = new Vector2(tileLocation.x, tileLocation.y - 1);
+                    Vector2Int target = new Vector2Int(tileLocation.x, tileLocation.y - 1);
                     if (target.y < 0)
                     {
                         target.y += 2;
                     }
-                    Migrate(target);
+                    Migrate(target, isPlayer, migratingSpecies.getSpeciesName(), tileLocation);
                     break;
                 }
         }
