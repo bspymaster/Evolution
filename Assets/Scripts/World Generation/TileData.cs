@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TileData:MonoBehaviour {
-    public int numBerries;
+    private int numBerries;
     private int numNuts;
     private int numGrass;
     private int numLeaves;
