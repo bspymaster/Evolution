@@ -79,7 +79,7 @@ public class UpdateSpecies : MonoBehaviour {
     /*
      *  Have the species in a given tile migrate to adjacent tile
      */
-    private void Overpopulation(Species migratingSpecies, bool isPlayer, Vector2 tileLocation)
+    private void Overpopulation(Species migratingSpecies, bool isPlayer, Vector2Int tileLocation)
     {
         var rnd = new System.Random();
         int receivingTile = rnd.Next(0, 3); //  0 is left tile, 1 is bottom tile, 2 is right tile, 3 is above tile
@@ -131,12 +131,13 @@ public class UpdateSpecies : MonoBehaviour {
     /*
      *  Migrates the population for OverPopulation()
      */
-    private void Migrate(Vector2 recievingTile)
+    private void Migrate(Vector2Int recievingTile, bool isPlayer, string speciesKey, Vector2Int givingTile)
     {
-        // movingPopulation = 0.3 * overPopulatedTile.getPopulation(migratingSpecies);
-        // overPopulatedTile.setPopulation(migratingSpecies) = 0.7 * overPopulatedTile.getPopulation(migratingSpecies);
-        // selectedTile.addSpecies(migratingSpecies);
-        // selectedTile.setPopulation(migratingSpecies) = movingPopulation;
+        int x = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(givingTile).GetComponent<TileData>().getSpeciesPopulation(speciesKey);
+        int movingPopulation = (int)(0.3 * x);
+        int stayingPopulation = (int)(0.7 * x);
+        GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(recievingTile).GetComponent<TileData>().setSpeciesPopulation(speciesKey, movingPopulation);
+        GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(givingTile).GetComponent<TileData>().setSpeciesPopulation(speciesKey, stayingPopulation);
     }
 
     /*
