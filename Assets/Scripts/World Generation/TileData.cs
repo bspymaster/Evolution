@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class TileData:MonoBehaviour {
-    private int numBerries;
+public class TileData : MonoBehaviour {
+    public int numBerries;
     private int numNuts;
     private int numGrass;
     private int numLeaves;
@@ -69,4 +70,15 @@ public class TileData:MonoBehaviour {
     {
         this.numAmbientMeat = numAmbientMeat;
     }
+
+    
 }
+
+
+    
+    
+
+
+
+
+
