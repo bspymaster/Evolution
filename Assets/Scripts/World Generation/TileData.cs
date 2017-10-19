@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class TileData : MonoBehaviour {
-    public int numBerries;
+public class TileData:MonoBehaviour {
+    private int numBerries;
     private int numNuts;
     private int numGrass;
     private int numLeaves;
     private int numAmbientMeat;
     private string tileType;
+    private Dictionary<string, int> localSpecies;
 
     public TileData()
     {
@@ -19,8 +19,13 @@ public class TileData : MonoBehaviour {
         numGrass = 0;
         numLeaves = 0;
         numAmbientMeat = 0;
+        localSpecies = new Dictionary<string, int>();
     }
 
+    public int getSpeciesPopulation(string key)
+    {
+        return localSpecies[key];
+    }
     public string getTileType()
     {
         return tileType;
@@ -44,6 +49,10 @@ public class TileData : MonoBehaviour {
     public int getNumAmbientMeat()
     {
         return numAmbientMeat;
+    }
+    public Dictionary<string, int> getLocalSpecies()
+    {
+        return localSpecies;
     }
 
     public void setTileType(string tileType)
@@ -70,15 +79,12 @@ public class TileData : MonoBehaviour {
     {
         this.numAmbientMeat = numAmbientMeat;
     }
-
-    
+    public void setLocalSpecies(Dictionary<string, int> localSpecies)
+    {
+        this.localSpecies = localSpecies;
+    }
+    public void setSpeciesPopulation(string key, int population)
+    {
+        localSpecies[key] = population;
+    }
 }
-
-
-    
-    
-
-
-
-
-
