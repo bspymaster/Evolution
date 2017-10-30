@@ -231,6 +231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speciesObject: {fileID: 1898494184074992, guid: 958ad671cbd90d1498b9bd1e3866d72c,
     type: 2}
+  playerSpeciesObject: {fileID: 1336118692109156, guid: ec968b4d664b50a45b8143e550ea0683,
+    type: 2}
 --- !u!4 &363441477
 Transform:
   m_ObjectHideFlags: 0
