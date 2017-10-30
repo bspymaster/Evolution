@@ -5,8 +5,10 @@ using UnityEngine;
 public class UpdateSpecies : MonoBehaviour {
 
     public GameObject speciesObject;
+    public GameObject playerSpeciesObject;
     private static int DIMENSION = 10;
     private int mapSize;
+    private List<GameObject> speciesArray;
 
     // Use this for initialization
     public void GenerateSpecies()
@@ -29,12 +31,12 @@ public class UpdateSpecies : MonoBehaviour {
         Species speciesScript = speciesObject.GetComponent<Species>();
         List<Vector2Int> lctn = new List<Vector2Int>();
         Web speciesWeb = speciesObject.GetComponent<Web>();
-        for (int i = 0; i < 10; i++)
+        List<int> gns = new List<int>();
+        for (int i = 1; i < 11; i++)
         {
             locX = rnd.Next(0, 100);
             locY = rnd.Next(0, 100);
             Instantiate(speciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
-            List<int> gns = new List<int>();
             speciesScript.Init(i.ToString(), lctn, gns, new int[4], 0, 0, 0, 0, 0, 0, 0, 0);
             // set parameters
             lctn.Add( new Vector2Int((DIMENSION * locX), DIMENSION * locY) );
@@ -43,7 +45,14 @@ public class UpdateSpecies : MonoBehaviour {
                 gns.Add(j);
                 speciesScript.evolve(true, j);
             }
+            speciesArray.Add(speciesObject);
         }
+        locX = rnd.Next(0, 100);
+        locY = rnd.Next(0, 100);
+        Instantiate(playerSpeciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
+        speciesScript.Init("0", lctn, gns, new int[4], 0, 0, 0, 0, 0, 0, 0, 0);
+        //  Player Evolve goes here
+        speciesArray.Add(playerSpeciesObject);
     }
 
     /*
@@ -154,14 +163,25 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Reproduce()
     {
-        //  int[] validTiles = 'tiles who have species in them'
-        //  int[] localSpecies = 'species in valid tile';
-        //  for each species in valid tile, species.getMaxPerTile()
-        //  for each species in valid tile, species.getLitterSize()
-        //  for each species in valid tile, species.getMatingFrequency()
-        //  for each species in valid tile, species.getMateAttachment()
-        //  call mutation based on mutation chance * number of offspring
-        //  if population of local species > maxPerTile, Overpopulation()
+        List<Vector2Int> location = new List<Vector2Int>();
+        int population = 0;
+        for (int i = 0; i < speciesArray.Count; i++)    //  Iterates through all alive species, and increases their population in each tile
+        {
+            location = speciesArray[i].GetComponent<Species>().getLocation();
+            for (int j = 0; j < location.Count; j++)
+            {
+                population = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(location[j]).GetComponent<TileData>().getLocalSpecies()[i.ToString()];
+                population += population * speciesArray[i].GetComponent<Species>().getLitterSize();
+                if (population > speciesArray[i].GetComponent<Species>().getMaxPerTile())
+                {
+                    Overpopulation(speciesArray[i].GetComponent<Species>(), false, location[j]);
+                }
+                else
+                {
+                    GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(location[j]).GetComponent<TileData>().setSpeciesPopulation(i.ToString(), population);
+                }
+            }
+        }
     }
 
     /*
