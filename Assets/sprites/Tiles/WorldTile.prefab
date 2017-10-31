@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 212965424681683920}
   - component: {fileID: 114318200895683266}
   - component: {fileID: 114886905199093068}
-  - component: {fileID: 60393098271899206}
   - component: {fileID: 114374307316780850}
   - component: {fileID: 114734998414342428}
+  - component: {fileID: 60989586914771700}
   m_Layer: 0
   m_Name: WorldTile
   m_TagString: Untagged
@@ -45,7 +45,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &60393098271899206
+--- !u!60 &60989586914771700
 PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -69,11 +69,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 0.9510565, y: 0.30901712}
+    - - {x: 0.5, y: -0.5}
+      - {x: 0.5, y: 0.5}
+      - {x: -0.5, y: 0.5}
+      - {x: -0.5, y: -0.5}
 --- !u!114 &114318200895683266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55d359fa9505f143a2f57c515e59115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numBerries: 0
 --- !u!114 &114886905199093068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,7 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e282970fa16cc74788b324c7a5a8a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numBerries: 0
   windowManagerPrefab: {fileID: 1086105163294284, guid: 84c208c8f253e66459bb2a79fda9a138,
     type: 2}
   infoPanelPrefab: {fileID: 1710603878542482, guid: 935c30a104e693643a247eb6bb25ba14,
