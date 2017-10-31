@@ -28,6 +28,7 @@ public class UpdateSpecies : MonoBehaviour {
         var rnd = new System.Random();
         int locX = 0;
         int locY = 0;
+        speciesArray = new List<GameObject>();
         Species speciesScript = speciesObject.GetComponent<Species>();
         List<Vector2Int> lctn = new List<Vector2Int>();
         Web speciesWeb = speciesObject.GetComponent<Web>();
@@ -36,23 +37,23 @@ public class UpdateSpecies : MonoBehaviour {
         {
             locX = rnd.Next(0, 100);
             locY = rnd.Next(0, 100);
-            Instantiate(speciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
+            GameObject newSpeciesObject = Instantiate(speciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
             speciesScript.Init(i.ToString(), lctn, gns, new int[4], 0, 0, 0, 0, 0, 0, 0, 0);
             // set parameters
-            lctn.Add( new Vector2Int((DIMENSION * locX), DIMENSION * locY) );
+            lctn.Add(new Vector2Int((DIMENSION * locX), DIMENSION * locY));
             for (int j = 0; j < 11; j++)
             {
                 gns.Add(j);
                 speciesScript.evolve(true, j);
             }
-            speciesArray.Add(speciesObject);
+            speciesArray.Add(newSpeciesObject);
         }
         locX = rnd.Next(0, 100);
         locY = rnd.Next(0, 100);
-        Instantiate(playerSpeciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
+        GameObject newPlayerSpeciesObject = Instantiate(playerSpeciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
         speciesScript.Init("0", lctn, gns, new int[4], 0, 0, 0, 0, 0, 0, 0, 0);
         //  Player Evolve goes here
-        speciesArray.Add(playerSpeciesObject);
+        speciesArray.Add(newPlayerSpeciesObject);
     }
 
     /*
