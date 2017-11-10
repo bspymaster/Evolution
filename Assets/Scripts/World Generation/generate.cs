@@ -11,11 +11,17 @@ public class generate : MonoBehaviour
     //public GameObject Desert;
     //public GameObject Ocean;
     public GameObject BaseWorldTile;
+    public GameObject GeneWebButtonPrefab;
+    public GameObject ExitGameButtonPrefab;
     PerlinNoise noise;
 
     public void MakeWorld()
     {
         noise = new PerlinNoise(Random.Range(0,1000000));
+        GameObject geneButton = Instantiate(GeneWebButtonPrefab, new Vector3(650, 180, 0), Quaternion.identity) as GameObject;
+        geneButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+        GameObject exitButton = Instantiate(ExitGameButtonPrefab, new Vector3(650, 260, 0), Quaternion.identity) as GameObject;
+        exitButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
         Regen();
     }
     private void Regen()
