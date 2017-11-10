@@ -9,61 +9,49 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1216891991534576}
+  m_RootGameObject: {fileID: 1722589153344604}
   m_IsPrefabParent: 1
---- !u!1 &1216891991534576
+--- !u!1 &1722589153344604
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4357864653659406}
-  - component: {fileID: 114563602704703974}
-  - component: {fileID: 114443484945245774}
+  - component: {fileID: 4621294031678268}
+  - component: {fileID: 114396376387740400}
   m_Layer: 0
-  m_Name: Generator
+  m_Name: UI Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4357864653659406
+--- !u!4 &4621294031678268
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1216891991534576}
+  m_GameObject: {fileID: 1722589153344604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1195301, y: 0.17100862, z: 0}
+  m_LocalPosition: {x: 466.0202, y: 208.87929, z: -14.427712}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114443484945245774
+--- !u!114 &114396376387740400
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1216891991534576}
+  m_GameObject: {fileID: 1722589153344604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83fffa4c7ccd30642aa14a2f2d3c11b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b89819712a402f48957e5b46d24f7c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114563602704703974
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1216891991534576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 505d8f9eeb75e86418f8060dc145b6cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BaseWorldTile: {fileID: 1447847701695058, guid: 72ca66ebf80c00e48aa1c6f1b6b86a34,
+  WorldMakerPrefab: {fileID: 1735203947238912, guid: 61db07e3f62c4e245bfbbfad742f42dd,
     type: 2}
   GeneWebButtonPrefab: {fileID: 1735958985548340, guid: ef1cd7426699094478faca680d77a825,
     type: 2}
