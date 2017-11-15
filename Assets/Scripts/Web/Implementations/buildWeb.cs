@@ -5,7 +5,7 @@ using UnityEngine;
 public class buildWeb : MonoBehaviour
 {
 
-    private static int NUMNODES = 44;
+    private static int NUMNODES = 95;
     private Web web;
 
     // Initialize on startup
@@ -107,6 +107,64 @@ public class buildWeb : MonoBehaviour
         nodes[42] = new Node("Improved Speed");
         nodes[43] = new Node("Improved Speed");
 
+
+        //========MAMMILIAN TREES========\\
+        nodes[44] = new Node("Hair/Fur");
+        nodes[45] = new Node("live-born babies");
+        nodes[46] = new Node("Larger Size");  // smaller increase
+        nodes[47] = new Node("Thick Hide");
+        nodes[48] = new Node("Defensive Horn");
+        nodes[49] = new Node("Larger Size");  // larger increase
+        nodes[50] = new Node("Defensive Tusks");
+        nodes[51] = new Node("Elongated Mouth");
+        nodes[52] = new Node("Prehensile Trunk");
+        nodes[53] = new Node("Improved Appendage Muscles");
+        nodes[54] = new Node("Smaller Size");
+        nodes[55] = new Node("Improved Senses");
+        nodes[56] = new Node("Lighter Body");
+        nodes[57] = new Node("Larger Feet");
+        nodes[58] = new Node("Claws");
+        nodes[59] = new Node("Foot Padding");
+        nodes[60] = new Node("Improved Stealth");
+        nodes[61] = new Node("Retractable Claws");
+        nodes[62] = new Node("Opposable Thumbs");
+        nodes[63] = new Node("Prehensile Tail");
+        nodes[64] = new Node("Bipedal Walk");
+        nodes[65] = new Node("Removed Tail");  // Overrides Prehensile Tail
+        nodes[66] = new Node("Tool Usage");
+        nodes[67] = new Node("Creativity");
+        nodes[68] = new Node("Imagination");
+        nodes[69] = new Node("Self-Awareness");
+
+
+        //========REPTILIAN TREES=========\\
+        nodes[70] = new Node("Ectothermic");
+        nodes[71] = new Node("Improved Swimming");  // "Webbing" instead?
+        nodes[72] = new Node("Water Dependance");
+        nodes[73] = new Node("Improved Jumping Abilities");
+        nodes[74] = new Node("Smaller Size");
+        nodes[75] = new Node("Hardened Skin");
+        nodes[76] = new Node("Increased Lifespan");
+        nodes[77] = new Node("Shells");
+        nodes[78] = new Node("Scales");
+        nodes[79] = new Node("Claws");
+        nodes[80] = new Node("Armored Scales");
+        nodes[81] = new Node("Sturdy Teeth");
+        nodes[82] = new Node("Increased Size");  // Large increase
+        nodes[83] = new Node("Powerful Jaw Muscles");
+        nodes[84] = new Node("Flexible Skeleton");
+        nodes[85] = new Node("Loss of Legs");
+        nodes[86] = new Node("Threatening Colors/Patterns");
+        nodes[87] = new Node("Retractible Fangs");
+        nodes[88] = new Node("Strong Venom");
+        nodes[89] = new Node("Increased Size");  // Medium increase
+        nodes[90] = new Node("Improved Camoflague");
+        nodes[91] = new Node("Strengthened Body Muscles");
+        nodes[92] = new Node("Constricting Ability");
+        nodes[93] = new Node("Threatening Colors/Patterns");
+        nodes[94] = new Node("Poison-Secreting Skin");
+
+
         return nodes;
     }
 
@@ -176,6 +234,77 @@ public class buildWeb : MonoBehaviour
         edges[40, 41] = 1;
         edges[41, 42] = 1;
         edges[42, 43] = 1;
+
+        //========MAMMILIAN TREES========\\
+
+        edges[0, 44] = 1;
+        edges[44, 45] = 1;
+        edges[45, 46] = 1;
+        edges[45, 53] = 1;
+        edges[45, 49] = 1;
+
+        edges[46, 47] = 1;
+        edges[46, 48] = 1;
+        edges[47, 80] = 1;  // mammals -> reptiles
+
+        edges[49, 50] = 1;
+        edges[49, 51] = 1;
+        edges[51, 52] = 1;
+
+        edges[53, 54] = 1;
+        edges[53, 56] = 1;
+        edges[53, 62] = 1;
+        edges[54, 55] = 1;
+        edges[55, 26] = 1;  // mammals -> aviaries
+
+        edges[56, 57] = 1;
+        edges[56, 58] = 1;
+        edges[57, 59] = 1;
+        edges[59, 60] = 1;
+
+        edges[62, 63] = 1;
+        edges[62, 64] = 1;
+        edges[64, 65] = 1;
+        edges[64, 66] = 1;
+        edges[66, 67] = 1;
+        edges[67, 68] = 1;
+        edges[68, 69] = 1;
+
+        //========REPTILIAN TREES=========\\
+
+        edges[0, 70] = 1;
+        edges[70, 71] = 1;
+        edges[70, 75] = 1;
+
+        edges[71, 72] = 1;
+        edges[71, 73] = 1;
+        edges[73, 74] = 1;
+        edges[73, 93] = 1;
+        edges[93, 94] = 1;
+
+        edges[75, 76] = 1;
+        edges[75, 78] = 1;
+        edges[76, 77] = 1;
+        edges[77, 83] = 1;
+
+        edges[78, 79] = 1;
+        edges[78, 80] = 1;
+        edges[78, 81] = 1;
+        edges[78,84] = 1;
+        edges[81, 82] = 1;
+        edges[82, 83] = 1;
+
+        edges[84, 85] = 1;
+        edges[85, 83] = 1;
+        edges[85, 86] = 1;
+        edges[85, 89] = 1;
+
+        edges[86, 87] = 1;
+        edges[87, 88] = 1;
+
+        edges[89, 90] = 1;
+        edges[89, 91] = 1;
+        edges[91, 92] = 1;
 
         return edges;
     }
