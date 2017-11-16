@@ -38,12 +38,13 @@ public class StatsBox : TileData
         int numLeaves = getNumLeaves();
         int numMeat = getNumAmbientMeat();
         string biome = getTileType();
-
+        int altitude = getAltitude();
+        int temperature = getTemperature();
         GameObject windowManager = Instantiate(windowManagerPrefab, new Vector3(0, 0, 5), Quaternion.identity) as GameObject;
         windowManager.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
         windowManager.gameObject.tag = "WindowManager";
 
-        string foodTypes = "Berries: " + numBerries.ToString() + "\nGrass: " + numGrass.ToString() + "\nNuts: " + numNuts.ToString() + "\nLeaves: " + numLeaves.ToString() + "\nMeat: " + numMeat.ToString();
+        string foodTypes = "Berries: " + numBerries.ToString() + "\nGrass: " + numGrass.ToString() + "\nNuts: " + numNuts.ToString() + "\nLeaves: " + numLeaves.ToString() + "\nMeat: " + numMeat.ToString() + "\nAltitude: " + altitude.ToString() + "\nTemperature(F): " + temperature.ToString();
         string biomeType = biome;
 
         Text foods = Instantiate(berryFoodPrefab, new Vector3(-200, -50, -5), Quaternion.identity) as Text;
