@@ -25,7 +25,7 @@ public class generate : MonoBehaviour
         int minX = 0;
         int maxY = mapSize;
         int maxX = mapSize;
-        float width = BaseWorldTile.transform.lossyScale.x;
+        float width = BaseWorldTile.transform.lossyScale.x-1;
         float height = BaseWorldTile.transform.lossyScale.y;
 
         string[] tileType = { "Ocean", "Desert", "Plains", "Forest", "Tundra" };
@@ -60,8 +60,10 @@ public class generate : MonoBehaviour
                 {
                     rand = 0;
                 }
-
-                GameObject tileInstance = Instantiate(BaseWorldTile, new Vector2(i * width, j * height), Quaternion.identity);
+                float a = -1;
+                float b = j;
+                float x = Mathf.Pow(a, b); 
+                GameObject tileInstance = Instantiate(BaseWorldTile, new Vector2(x * (width), j * height), Quaternion.identity);
                 TileData instanceData = tileInstance.GetComponent<TileData>();
                 instanceData.setTileType(tileType[rand]);
 
