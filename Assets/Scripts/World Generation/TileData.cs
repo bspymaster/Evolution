@@ -9,6 +9,8 @@ public class TileData:MonoBehaviour {
     private int numLeaves;
     private int numAmbientMeat;
     private string tileType;
+    private int altitude;
+    private int temperature;
     private Dictionary<string, int> localSpecies;
 
     public TileData()
@@ -17,11 +19,13 @@ public class TileData:MonoBehaviour {
         numBerries = 0;
         numNuts = 0;
         numGrass = 0;
+        altitude = 0;
+        temperature = 0;
         numLeaves = 0;
         numAmbientMeat = 0;
         localSpecies = new Dictionary<string, int>();
     }
-
+    
     public int getSpeciesPopulation(string key)
     {
         return localSpecies[key];
@@ -54,7 +58,14 @@ public class TileData:MonoBehaviour {
     {
         return localSpecies;
     }
-
+    public int getTemperature()
+    {
+        return temperature;
+    }
+    public int getAltitude()
+    {
+        return altitude;
+    }
     public void setTileType(string tileType)
     {
         this.tileType = tileType;
@@ -86,5 +97,13 @@ public class TileData:MonoBehaviour {
     public void setSpeciesPopulation(string key, int population)
     {
         localSpecies[key] = population;
+    }
+    public void setTemperature(int temperature)
+    {
+        this.temperature = temperature;
+    }
+    public void setAltitude(int altitude)
+    {
+        this.altitude = altitude;
     }
 }
