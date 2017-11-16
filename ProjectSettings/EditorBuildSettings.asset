@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gene Web.unity
     guid: c87d4db1e5e75004ab6fc644d73f7a84
+  - enabled: 1
+    path: Assets/Scenes/Title Screen.unity
+    guid: 41e336de4a7731f4283247bef74f2dcb

@@ -9,45 +9,49 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1722589153344604}
+  m_RootGameObject: {fileID: 1784401405412918}
   m_IsPrefabParent: 1
---- !u!1 &1722589153344604
+--- !u!1 &1784401405412918
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4621294031678268}
-  - component: {fileID: 114396376387740400}
+  - component: {fileID: 4442371450923896}
+  - component: {fileID: 114530312100731616}
   m_Layer: 0
-  m_Name: UI Manager
+  m_Name: Species Updater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4621294031678268
+--- !u!4 &4442371450923896
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1722589153344604}
+  m_GameObject: {fileID: 1784401405412918}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 466.0202, y: 208.87929, z: -14.427712}
+  m_LocalPosition: {x: 556.65936, y: 472.19516, z: 1.0695237}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114396376387740400
+--- !u!114 &114530312100731616
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1722589153344604}
+  m_GameObject: {fileID: 1784401405412918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b89819712a402f48957e5b46d24f7c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 02a4df86c6ea2c943a50bd26ae000835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speciesObject: {fileID: 1898494184074992, guid: 958ad671cbd90d1498b9bd1e3866d72c,
+    type: 2}
+  playerSpeciesObject: {fileID: 1336118692109156, guid: ec968b4d664b50a45b8143e550ea0683,
+    type: 2}
