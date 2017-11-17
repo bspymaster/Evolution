@@ -26,6 +26,11 @@ public class GeneWebManager : MonoBehaviour {
     {
         print(Global.newGenes[0]);
     }
+
+    public void notifyChange()
+    {
+        Global.change = true;
+    }
 }
 
 

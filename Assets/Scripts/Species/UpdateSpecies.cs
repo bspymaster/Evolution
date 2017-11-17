@@ -31,7 +31,7 @@ public class UpdateSpecies : MonoBehaviour {
         int locY = 0;
         Species speciesScript = speciesObject.GetComponent<Species>();
         List<Vector2Int> lctn = new List<Vector2Int>();
-        Web speciesWeb = speciesObject.GetComponent<Web>();
+        //Web speciesWeb = speciesObject.GetComponent<Web>();
         List<int> gns = new List<int>();
         for (int i = 1; i < 11; i++)
         {
@@ -174,6 +174,7 @@ public class UpdateSpecies : MonoBehaviour {
             for (int i = 0; i < Global.newGenes.Count; i++)
             {
                 playerSpeciesObject.GetComponent<Species>().evolve(true, Global.newGenes[i]);
+                print(playerSpeciesObject.GetComponent<Species>().getGenes());
             }
         }
         List<Vector2Int> location = new List<Vector2Int>();
