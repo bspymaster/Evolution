@@ -24,7 +24,7 @@ public class GeneWebManager : MonoBehaviour {
 
     public void ReadStats()
     {
-        Debug.Log(Global.newGenes);
+        print(Global.newGenes[0]);
     }
 }
 
