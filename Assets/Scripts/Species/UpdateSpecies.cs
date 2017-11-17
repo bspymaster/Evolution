@@ -13,6 +13,7 @@ public class UpdateSpecies : MonoBehaviour {
     // Use this for initialization
     public void GenerateSpecies()
     {
+        speciesArray = new List<GameObject>();
         mapSize = GameObject.Find("TileList").GetComponent<TileListData>().getMapSize();
         Spawn();
         InvokeRepeating("Interact", 10f, 20f);
@@ -28,7 +29,6 @@ public class UpdateSpecies : MonoBehaviour {
         var rnd = new System.Random();
         int locX = 0;
         int locY = 0;
-        speciesArray = new List<GameObject>();
         Species speciesScript = speciesObject.GetComponent<Species>();
         List<Vector2Int> lctn = new List<Vector2Int>();
         Web speciesWeb = speciesObject.GetComponent<Web>();
@@ -47,6 +47,11 @@ public class UpdateSpecies : MonoBehaviour {
                 speciesScript.evolve(true, j);
             }
             speciesArray.Add(newSpeciesObject);
+
+            //  Prints null.  Why?
+            print(speciesArray[i - 1].GetComponent<Species>().getSpeciesName());
+            //  Prints null.  Why?
+
         }
         locX = rnd.Next(0, 100);
         locY = rnd.Next(0, 100);
@@ -75,12 +80,11 @@ public class UpdateSpecies : MonoBehaviour {
             {
                 return;
             }
-            mutatingSpecies.evolve(addNode, newGene);
         }
         else
         {
-            //  have player set addNode to true/false
-            //  have player choose node
+            parentSpecies.mutationPoints += 1;
+            return;
         }
         mutatingSpecies.evolve(addNode, nodeIndex);
         Instantiate(speciesObject, new Vector2(-1, -1), Quaternion.identity);
