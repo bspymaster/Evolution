@@ -5,6 +5,7 @@ using UnityEngine;
 public class Species : MonoBehaviour
 {
     private string speciesName;  // name of species - for stretch goal, we will want this to be a string that appears like formal latin names, by D3, number will suffice
+    //  species name is the sorted list of nodes, can be used to check if species already exists
     private List<Vector2Int> location; // in which tiles this species exists.  Assuming tiles can be simplified to their numerical value
     private List<int> genes;  // what genes this species has.  Assuming genes can be simplified to their numerical value
     private int[] herbivoreFoodSource; // i == 0 berries, i == 1 nuts, i == 2 grass, i == 3 leaves, value of 0 at any index (default) means speceis cannot eat food type at given index
