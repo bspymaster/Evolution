@@ -11,6 +11,15 @@ public class UpdateSpecies : MonoBehaviour {
     private List<GameObject> speciesArray;
 
     // Use this for initialization
+    public void AddGene(int geneNum)
+    {
+        playerSpeciesObject.GetComponent<Species>().evolve(true, geneNum);
+    }
+
+
+
+
+
     public void GenerateSpecies()
     {
         speciesArray = new List<GameObject>();
