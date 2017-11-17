@@ -31,6 +31,8 @@ public class generate : MonoBehaviour
         string[] tileType = { "Ocean", "Desert", "Plains", "Forest", "Tundra" };
         Color[] tileColors = { new Color(18f / 255f, 15f / 255f, 62f / 255f, 255f / 255f), new Color(197f / 255f, 183f / 255f, 68f / 255f, 255f / 255f),
                                new Color(60f/255f,242f/255f,2f/255f,255f/255f), new Color(0f/255f,143f/255f,48f/255f,255f/255f), new Color(67f/255f,186f/255f,203f/255f,255f/255f) };
+        Vector2Int[] altitude = { new Vector2Int(0,0), new Vector2Int(0, 30), new Vector2Int(30, 40), new Vector2Int(40, 80), new Vector2Int(10, 90) };
+        Vector2Int[] temperature = { new Vector2Int(25, 65), new Vector2Int(70, 90), new Vector2Int(60, 80), new Vector2Int(30, 70), new Vector2Int(-20, 30) };
         int numBerries = 0;
         int numNuts = 0;
         int numGrass = 0;
@@ -107,7 +109,8 @@ public class generate : MonoBehaviour
                 instanceData.setNumLeaves(numLeaves);
                 instanceData.setNumAmbientMeat(numAmbientMeat);
                 tileInstance.GetComponent<SpriteRenderer>().color = tileColors[rand];
-
+                instanceData.setAltitude(Random.Range(altitude[rand].x, altitude[rand].y));
+                instanceData.setTemperature(Random.Range(temperature[rand].x, temperature[rand].y));
                 tileList.setTileAtLocation(new Vector2Int(i,j),tileInstance);
             }
 
