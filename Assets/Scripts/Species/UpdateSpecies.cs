@@ -18,7 +18,7 @@ public class UpdateSpecies : MonoBehaviour {
         Spawn();
         InvokeRepeating("Interact", 10f, 20f);
         InvokeRepeating("Reproduce", 5f, 20f);
-        InvokeRepeating("Mutation", 40f, 40f);
+        InvokeRepeating("Mutate", 40f, 40f);
     }
 
     /*
@@ -64,7 +64,7 @@ public class UpdateSpecies : MonoBehaviour {
     /*
      *  Parent Species will be copied into new speciesObject (mutatingSpecies) that will evolve once
      */
-    private void Mutation(Species parentSpecies, bool isPlayer)
+    private void Mutate(Species parentSpecies, bool isPlayer)
     {
         int newName = int.Parse(parentSpecies.getSpeciesName()) + 100;  //  100 should be replaced by number of existing speciesObjects
         Species mutatingSpecies = new Species(newName.ToString());
@@ -194,6 +194,14 @@ public class UpdateSpecies : MonoBehaviour {
                 {
                     GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(location[j]).GetComponent<TileData>().setSpeciesPopulation(i.ToString(), population);
                 }
+            }
+            //  get mutation variables from species to figure out chance - right now just random
+            System.Random rnd = new System.Random();
+            int mutVarTemp = 100;
+            if (rnd.Next(1, 101) <= mutVarTemp)
+            {
+                Mutate(speciesArray[i].GetComponent<Species>(), (i == 0));
+                print(speciesArray[i].GetComponent<Species>().getSpeciesName());
             }
         }
     }
