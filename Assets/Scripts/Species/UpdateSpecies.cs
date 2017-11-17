@@ -80,12 +80,11 @@ public class UpdateSpecies : MonoBehaviour {
             {
                 return;
             }
-            mutatingSpecies.evolve(addNode, newGene);
         }
         else
         {
-            //  have player set addNode to true/false
-            //  have player choose node
+            parentSpecies.mutationPoints += 1;
+            return;
         }
         mutatingSpecies.evolve(addNode, nodeIndex);
         Instantiate(speciesObject, new Vector2(-1, -1), Quaternion.identity);

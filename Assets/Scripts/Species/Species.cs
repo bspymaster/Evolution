@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Species : MonoBehaviour
 {
+    public int mutationPoints;  //  used to evolve
     private string speciesName;  // name of species - for stretch goal, we will want this to be a string that appears like formal latin names, by D3, number will suffice
     //  species name is the sorted list of nodes, can be used to check if species already exists
     private List<Vector2Int> location; // in which tiles this species exists.  Assuming tiles can be simplified to their numerical value
