@@ -9,6 +9,7 @@ public class Global : MonoBehaviour {
     public static List<int> newGenes;
     public static List<int> removeGenes;
     public static int mutationPoints = 0;
+    public static bool change = false;
 
     public void killWorld()
     {

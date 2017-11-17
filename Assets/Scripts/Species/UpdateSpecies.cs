@@ -11,15 +11,6 @@ public class UpdateSpecies : MonoBehaviour {
     private List<GameObject> speciesArray;
 
     // Use this for initialization
-    public void AddGene(int geneNum)
-    {
-        playerSpeciesObject.GetComponent<Species>().evolve(true, geneNum);
-    }
-
-
-
-
-
     public void GenerateSpecies()
     {
         speciesArray = new List<GameObject>();
@@ -92,7 +83,8 @@ public class UpdateSpecies : MonoBehaviour {
         }
         else
         {
-            parentSpecies.mutationPoints += 1;
+            Global.mutationPoints += 1;
+            Global.playerSpeciesGeneList = parentSpecies.getGenes();
             return;
         }
         mutatingSpecies.evolve(addNode, nodeIndex);
@@ -177,6 +169,13 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Reproduce()
     {
+        if (Global.change)
+        {
+            for (int i = 0; i < Global.newGenes.Count; i++)
+            {
+                playerSpeciesObject.GetComponent<Species>().evolve(true, Global.newGenes[i]);
+            }
+        }
         List<Vector2Int> location = new List<Vector2Int>();
         int population = 0;
         for (int i = 0; i < speciesArray.Count; i++)    //  Iterates through all alive species, and increases their population in each tile
