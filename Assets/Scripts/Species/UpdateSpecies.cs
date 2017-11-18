@@ -31,33 +31,34 @@ public class UpdateSpecies : MonoBehaviour {
         int locY = 0;
         Species speciesScript = speciesObject.GetComponent<Species>();
         List<Vector2Int> lctn = new List<Vector2Int>();
-        //Web speciesWeb = speciesObject.GetComponent<Web>();
         List<int> gns = new List<int>();
+        //Web speciesWeb = speciesObject.GetComponent<Web>();
         for (int i = 1; i < 11; i++)
         {
+            lctn = new List<Vector2Int>();
+            gns = new List<int>();
             locX = rnd.Next(0, 100);
             locY = rnd.Next(0, 100);
+            lctn.Add(new Vector2Int(locX, locY));
             GameObject newSpeciesObject = Instantiate(speciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
+            speciesScript = newSpeciesObject.GetComponent<Species>();
             speciesScript.Init(i.ToString(), lctn, gns, new int[4], 0, 0, 0, 0, 0, 0, 0, 0);
             // set parameters
-            lctn.Add(new Vector2Int((DIMENSION * locX), DIMENSION * locY));
             for (int j = 0; j < 11; j++)
             {
                 gns.Add(j);
                 speciesScript.evolve(true, j);
             }
             speciesArray.Add(newSpeciesObject);
-
-            //  Prints null.  Why?
-            print(speciesArray[i - 1].GetComponent<Species>().getSpeciesName());
-            //  Prints null.  Why?
-
+            Dictionary<string, int> localSpecies = new Dictionary<string, int>();
+            localSpecies.Add(i.ToString(), 10);
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().setLocalSpecies(localSpecies);
         }
         locX = rnd.Next(0, 100);
         locY = rnd.Next(0, 100);
+        lctn.Add(new Vector2Int(locX, locY));
         GameObject newPlayerSpeciesObject = Instantiate(playerSpeciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
         speciesScript.Init("0", lctn, gns, new int[4], 0, 0, 0, 0, 0, 0, 0, 0);
-        //  Player Evolve goes here
         speciesArray.Add(newPlayerSpeciesObject);
     }
 
@@ -184,6 +185,8 @@ public class UpdateSpecies : MonoBehaviour {
             location = speciesArray[i].GetComponent<Species>().getLocation();
             for (int j = 0; j < location.Count; j++)
             {
+                Dictionary<string, int> locationDict = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(location[j]).GetComponent<TileData>().getLocalSpecies();
+                print("Species: " + speciesArray[i].GetComponent<Species>().getSpeciesName() + " x: " + location[j].x + ", y: " + location[j].y + locationDict[i.ToString()]);
                 population = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(location[j]).GetComponent<TileData>().getLocalSpecies()[i.ToString()];
                 population += population * speciesArray[i].GetComponent<Species>().getLitterSize();
                 if (population > speciesArray[i].GetComponent<Species>().getMaxPerTile())
@@ -200,8 +203,7 @@ public class UpdateSpecies : MonoBehaviour {
             int mutVarTemp = 100;
             if (rnd.Next(1, 101) <= mutVarTemp)
             {
-                Mutate(speciesArray[i].GetComponent<Species>(), (i == 0));
-                print(speciesArray[i].GetComponent<Species>().getSpeciesName());
+                Mutate(speciesArray[i].GetComponent<Species>(), (speciesArray[i].GetComponent<Species>().getSpeciesName().Equals("0")));
             }
         }
     }
