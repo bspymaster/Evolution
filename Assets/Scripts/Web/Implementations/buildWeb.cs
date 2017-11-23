@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Xml;
 
 public class buildWeb : MonoBehaviour
 {
 
-    private static int NUMNODES = 44;
+    private static int NUMNODES = 95;
+    private static string NODEDATAPATH = "Scripts/Web/Implementations/NodeData.xml";
     private Web web;
 
     // Initialize on startup
@@ -14,11 +17,13 @@ public class buildWeb : MonoBehaviour
         // Create an empty web
         web = new Web(NUMNODES);
 
+        XmlNode rootNode = loadNodeData(NODEDATAPATH);
+
         // Create a list of Nodes
-        web.setNodes(generateNodes());
+        web.setNodes(generateNodes(rootNode));
 
         // Create an edges graph linking the nodes
-        web.setEdges(generateEdges());
+        web.setEdges(generateEdges(rootNode));
     }
 
     public Web getWeb()
@@ -40,143 +45,93 @@ public class buildWeb : MonoBehaviour
         return edges;
     }
 
-    private Node[] generateNodes()
+    private Node[] generateNodes(XmlNode rootNode)
     {
         // Init return value
         Node[] nodes = new Node[NUMNODES];
 
-        //==========CENTRAL NODE==========\\
-        nodes[0] = new Node("Chordata");
+        if (rootNode != null)
+        {
 
-        //===========CORE TREES===========\\
+            for (int i = 0; i < NUMNODES; i++)
+            {
+                XmlNode nodeData = rootNode.ChildNodes[i];
+                // Get node data
+                nodes[i] = new Node(nodeData["name"].InnerText);
+                try
+                {
+                    //TODO
+                    // nodes[i].setHerbivoreFoodSource()
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setCarnivoreFoodSource(int.Parse(nodeData["carnivoreFoodSource"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setRequiredCalories(int.Parse(nodeData["requiredCalories"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setCreatureSize(int.Parse(nodeData["creatureSize"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
 
-        // Carnivores
-        nodes[1] = new Node("Single Jaw Structure");
-        nodes[2] = new Node("Chew Food");
-        nodes[3] = new Node("Short & Fast Digestive Tract");
-
-        nodes[4] = new Node("Double Jaw Structure");
-        nodes[5] = new Node("Swallow Whole");
-        nodes[6] = new Node("Teeth with Venom");
-        nodes[7] = new Node("Intense Stomach Acids");
-
-        nodes[8] = new Node("Large Stomachs with Specialized Acids");
-        nodes[9] = new Node("Foreign Virus Immunity");
-        nodes[10] = new Node("Eats Tiny Animals");
-        nodes[11] = new Node("Eats Small Animals");
-        nodes[12] = new Node("Eats Medium Animals");
-        nodes[13] = new Node("Eats Large Animals");
-        nodes[14] = new Node("Eats humongous Animals");
-
-        // Herbivores
-        nodes[15] = new Node("Chew Food");
-        nodes[16] = new Node("Specialized Digestive Tract");
-        nodes[17] = new Node("Eats Berries");
-        nodes[18] = new Node("Eats Nuts");
-        nodes[19] = new Node("Eats Grass/Seeds");
-        nodes[20] = new Node("Eats Leaves");
-
-
-        //==========AVIARY TREES==========\\
-        nodes[21] = new Node("Hard Eggs");
-        nodes[22] = new Node("Beak");
-        nodes[23] = new Node("Feathers");
-        nodes[24] = new Node("Hollow Bones");
-        nodes[25] = new Node("Glide Feathers");
-        nodes[26] = new Node("Webbing");
-        nodes[27] = new Node("Flapping Ability");  // Feathers
-        nodes[28] = new Node("Flapping Ability");  // Webbing
-        nodes[29] = new Node("Flight Feathers");
-        nodes[30] = new Node("Alula");
-
-        nodes[31] = new Node("Hooked Beak");  // Optimized for meat
-        nodes[32] = new Node("Prying Beak");  // Optimized for fruit/nuts
-        nodes[33] = new Node("Pointed Beak");  // Optimized for seads/plants
-
-        // Glide modifiers
-        nodes[34] = new Node("Improved Glide");
-        nodes[35] = new Node("Improved Glide");
-        nodes[36] = new Node("Improved Glide");
-        nodes[37] = new Node("Improved Glide");
-        nodes[38] = new Node("Improved Glide");
-
-        // Speed modifiers
-        nodes[39] = new Node("Improved Speed");
-        nodes[40] = new Node("Improved Speed");
-        nodes[41] = new Node("Improved Speed");
-        nodes[42] = new Node("Improved Speed");
-        nodes[43] = new Node("Improved Speed");
+            }
+        }
 
         return nodes;
     }
 
-    private int[,] generateEdges()
+    private int[,] generateEdges(XmlNode rootNode)
     {
         // Create an empty edge list
         int[,] edges = makeBaseEdgeGraph(NUMNODES);
 
-        //===========CORE TREES===========\\
+        int childNodeIndex;
 
-        // Carnivores
-        edges[0, 1] = 1;
-        edges[1, 2] = 1;
-        edges[2, 3] = 1;
-
-        edges[0, 4] = 1;
-        edges[4, 5] = 1;
-        edges[5, 6] = 1;
-        edges[5, 7] = 1;
-
-        edges[3, 8] = 1;
-        edges[6, 8] = 1;
-        edges[7, 8] = 1;
-        edges[8, 9] = 1;
-        edges[9, 10] = 1;
-        edges[10, 11] = 1;
-        edges[11, 12] = 1;
-        edges[12, 13] = 1;
-        edges[13, 14] = 1;
-
-        // Herbivores
-        edges[0, 15] = 1;
-        edges[15, 16] = 1;
-        edges[16, 17] = 1;
-        edges[16, 18] = 1;
-        edges[16, 19] = 1;
-        edges[19, 20] = 1;
-
-        //==========AVIARY TREES==========\\
-
-        edges[0, 21] = 1;
-        edges[21, 22] = 1;
-        edges[21, 23] = 1;
-        edges[23, 24] = 1;
-        edges[24, 25] = 1;
-        edges[24, 26] = 1;
-        edges[26, 28] = 1;
-        edges[25, 27] = 1;
-        edges[27, 29] = 1;
-        edges[29, 30] = 1;
-
-        // Beak types
-        edges[22, 31] = 1;
-        edges[22, 32] = 1;
-        edges[22, 33] = 1;
-
-        // Wing optimization
-        // -Glide
-        edges[30, 34] = 1;
-        edges[34, 35] = 1;
-        edges[35, 36] = 1;
-        edges[36, 37] = 1;
-        edges[37, 38] = 1;
-        // -Speed
-        edges[30, 39] = 1;
-        edges[39, 40] = 1;
-        edges[40, 41] = 1;
-        edges[41, 42] = 1;
-        edges[42, 43] = 1;
+        if (rootNode != null)
+        {
+            for (int i = 0; i < NUMNODES; i++)
+            {
+                XmlNode nodeData = rootNode.ChildNodes[i];
+                // Get node children
+                foreach (XmlNode childNode in nodeData["childNodes"])
+                {
+                    childNodeIndex = int.Parse(childNode.InnerText);
+                    edges[i, childNodeIndex] = 1;
+                }
+            }
+        }
 
         return edges;
+    }
+
+    private XmlNode loadNodeData(string nodeDataFileName)
+    {
+        // Create the file path
+        string filePath = Path.Combine(Application.dataPath, nodeDataFileName);
+
+        if (File.Exists(filePath))
+        {
+            // Read the xml from the file
+            string dataString = File.ReadAllText(filePath);
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(dataString);
+
+            // Get the root node
+            XmlNode root = doc.SelectSingleNode("root");
+
+            return root;
+        }
+        else
+        {
+            // Couldn't get the file; throw an error
+            Debug.LogError("Cannot load game data!");
+            return null;
+        }
     }
 }

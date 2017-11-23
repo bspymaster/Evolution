@@ -13,11 +13,12 @@ public class UpdateSpecies : MonoBehaviour {
     // Use this for initialization
     public void GenerateSpecies()
     {
+        speciesArray = new List<GameObject>();
         mapSize = GameObject.Find("TileList").GetComponent<TileListData>().getMapSize();
         Spawn();
         InvokeRepeating("Interact", 10f, 20f);
         InvokeRepeating("Reproduce", 5f, 20f);
-        InvokeRepeating("Mutation", 40f, 40f);
+        InvokeRepeating("Mutate", 40f, 40f);
     }
 
     /*
@@ -28,38 +29,43 @@ public class UpdateSpecies : MonoBehaviour {
         var rnd = new System.Random();
         int locX = 0;
         int locY = 0;
-        speciesArray = new List<GameObject>();
         Species speciesScript = speciesObject.GetComponent<Species>();
         List<Vector2Int> lctn = new List<Vector2Int>();
-        Web speciesWeb = speciesObject.GetComponent<Web>();
         List<int> gns = new List<int>();
+        //Web speciesWeb = speciesObject.GetComponent<Web>();
         for (int i = 1; i < 11; i++)
         {
+            lctn = new List<Vector2Int>();
+            gns = new List<int>();
             locX = rnd.Next(0, 100);
             locY = rnd.Next(0, 100);
+            lctn.Add(new Vector2Int(locX, locY));
             GameObject newSpeciesObject = Instantiate(speciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
+            speciesScript = newSpeciesObject.GetComponent<Species>();
             speciesScript.Init(i.ToString(), lctn, gns, new int[4], 0, 0, 0, 0, 0, 0, 0, 0);
             // set parameters
-            lctn.Add(new Vector2Int((DIMENSION * locX), DIMENSION * locY));
             for (int j = 0; j < 11; j++)
             {
                 gns.Add(j);
                 speciesScript.evolve(true, j);
             }
             speciesArray.Add(newSpeciesObject);
+            Dictionary<string, int> localSpecies = new Dictionary<string, int>();
+            localSpecies.Add(i.ToString(), 10);
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().setLocalSpecies(localSpecies);
         }
         locX = rnd.Next(0, 100);
         locY = rnd.Next(0, 100);
+        lctn.Add(new Vector2Int(locX, locY));
         GameObject newPlayerSpeciesObject = Instantiate(playerSpeciesObject, new Vector2(DIMENSION * locX, DIMENSION * locY), Quaternion.identity);
         speciesScript.Init("0", lctn, gns, new int[4], 0, 0, 0, 0, 0, 0, 0, 0);
-        //  Player Evolve goes here
         speciesArray.Add(newPlayerSpeciesObject);
     }
 
     /*
      *  Parent Species will be copied into new speciesObject (mutatingSpecies) that will evolve once
      */
-    private void Mutation(Species parentSpecies, bool isPlayer)
+    private void Mutate(Species parentSpecies, bool isPlayer)
     {
         int newName = int.Parse(parentSpecies.getSpeciesName()) + 100;  //  100 should be replaced by number of existing speciesObjects
         Species mutatingSpecies = new Species(newName.ToString());
@@ -75,12 +81,12 @@ public class UpdateSpecies : MonoBehaviour {
             {
                 return;
             }
-            mutatingSpecies.evolve(addNode, newGene);
         }
         else
         {
-            //  have player set addNode to true/false
-            //  have player choose node
+            Global.mutationPoints += 1;
+            Global.playerSpeciesGeneList = parentSpecies.getGenes();
+            return;
         }
         mutatingSpecies.evolve(addNode, nodeIndex);
         Instantiate(speciesObject, new Vector2(-1, -1), Quaternion.identity);
@@ -164,6 +170,14 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Reproduce()
     {
+        if (Global.change)
+        {
+            for (int i = 0; i < Global.newGenes.Count; i++)
+            {
+                playerSpeciesObject.GetComponent<Species>().evolve(true, Global.newGenes[i]);
+                print(playerSpeciesObject.GetComponent<Species>().getGenes());
+            }
+        }
         List<Vector2Int> location = new List<Vector2Int>();
         int population = 0;
         for (int i = 0; i < speciesArray.Count; i++)    //  Iterates through all alive species, and increases their population in each tile
@@ -171,6 +185,8 @@ public class UpdateSpecies : MonoBehaviour {
             location = speciesArray[i].GetComponent<Species>().getLocation();
             for (int j = 0; j < location.Count; j++)
             {
+                Dictionary<string, int> locationDict = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(location[j]).GetComponent<TileData>().getLocalSpecies();
+                print("Species: " + speciesArray[i].GetComponent<Species>().getSpeciesName() + " x: " + location[j].x + ", y: " + location[j].y + locationDict[i.ToString()]);
                 population = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(location[j]).GetComponent<TileData>().getLocalSpecies()[i.ToString()];
                 population += population * speciesArray[i].GetComponent<Species>().getLitterSize();
                 if (population > speciesArray[i].GetComponent<Species>().getMaxPerTile())
@@ -181,6 +197,13 @@ public class UpdateSpecies : MonoBehaviour {
                 {
                     GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(location[j]).GetComponent<TileData>().setSpeciesPopulation(i.ToString(), population);
                 }
+            }
+            //  get mutation variables from species to figure out chance - right now just random
+            System.Random rnd = new System.Random();
+            int mutVarTemp = 100;
+            if (rnd.Next(1, 101) <= mutVarTemp)
+            {
+                Mutate(speciesArray[i].GetComponent<Species>(), (speciesArray[i].GetComponent<Species>().getSpeciesName().Equals("0")));
             }
         }
     }
