@@ -135,7 +135,7 @@
   </node>
   <node>
     <id>19</id>
-    <name>Eat Grass & Seeds</name>
+    <name>Eat Grass and Seeds</name>
     <childNodes>
     	<child>20</child>
     </childNodes>

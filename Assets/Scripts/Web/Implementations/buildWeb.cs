@@ -79,7 +79,61 @@ public class buildWeb : MonoBehaviour
                     nodes[i].setCreatureSize(int.Parse(nodeData["creatureSize"].InnerText));
                 }
                 catch (System.NullReferenceException) { }
-
+                try
+                {
+                    nodes[i].setLitterSize(int.Parse(nodeData["litterSize"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setReproductionRate(int.Parse(nodeData["reproductionRate"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setMutationChance(int.Parse(nodeData["mutationChance"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setCarnivorous(int.Parse(nodeData["carnivorous"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setOffspringSize(int.Parse(nodeData["offspringSize"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setAltitude(int.Parse(nodeData["altitude"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setCanFly(int.Parse(nodeData["canFly"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setCreatureSize(int.Parse(nodeData["creatureSize"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setDexterity(int.Parse(nodeData["dexterity"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setMaxPerTile(int.Parse(nodeData["maxPerTile"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setPeckingOrder(int.Parse(nodeData["peckingOrder"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
             }
         }
 
