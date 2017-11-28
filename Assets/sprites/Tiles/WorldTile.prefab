@@ -131,6 +131,8 @@ MonoBehaviour:
     type: 2}
   biomePrefab: {fileID: 114570798446475714, guid: 5bfb81fbb20c91447b30bc72c55631c3,
     type: 2}
+  enviroPrefab: {fileID: 114570798446475714, guid: 62c0b9d645d590e4392667ce42bb0dc8,
+    type: 2}
   noClickPrefab: {fileID: 1601072822311834, guid: 9cb12a5cd261d9442b1a8822d3b8be8d,
     type: 2}
   exitButtonPrefab: {fileID: 1889557421693892, guid: 46a9abe3a1a389d4fbdb6137b5b16814,

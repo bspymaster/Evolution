@@ -6,32 +6,18 @@ using UnityEngine.UI;
 public class StatsBox : TileData
 {
     public GameObject windowManagerPrefab;
-    //public GameObject tileContentsPrefab;
     public GameObject infoPanelPrefab;
     public Text berryFoodPrefab;
     public Text biomePrefab;
+    public Text enviroPrefab;
     public GameObject noClickPrefab;
     public GameObject exitButtonPrefab;
 
-    public void Awake()
-    {
-        /*
-        GameObject tileContents = Instantiate(tileContentsPrefab, new Vector2(0, 0), Quaternion.identity);
-        tileContents.transform.SetParent(GameObject.FindGameObjectWithTag("BaseTile").transform, false);
-        TileData instanceData = tileContents.GetComponent<TileData>();
-        private string replacementText = "Scott has berries: " + tileContents.getNumBerries();
-        */
-        
-
-
-
-
-    }
 
     public void OnMouseDown()
     {
-        // if (toggle == false)
-        // {
+
+        // Gets the values from the selected tile.
         int numBerries = getNumBerries();
         int numGrass = getNumGrass();
         int numNuts = getNumNuts();
@@ -44,15 +30,22 @@ public class StatsBox : TileData
         windowManager.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
         windowManager.gameObject.tag = "WindowManager";
 
+        //Defines the contents of each text box in the tile info window.
         string foodTypes = "Berries: " + numBerries.ToString() + "\nGrass: " + numGrass.ToString() + "\nNuts: " + numNuts.ToString() + "\nLeaves: " + numLeaves.ToString() + "\nMeat: " + numMeat.ToString();
-        string biomeType = biome + "\nAltitude: " + altitude.ToString() + "     Temperature(F): " + temperature.ToString();
+        string biomeType = biome;
+        string enviroType = "Altitude: " + altitude.ToString() + "     Temperature(F): " + temperature.ToString();
 
+        //Defines the positioning and sets parents of each text box in the tile info window.
         Text foods = Instantiate(berryFoodPrefab, new Vector3(-200, -50, -5), Quaternion.identity) as Text;
         foods.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
-        Text biomeTitle = Instantiate(biomePrefab, new Vector3(0, 125, -5), Quaternion.identity) as Text;
+        Text biomeTitle = Instantiate(biomePrefab, new Vector3(0, 140, -5), Quaternion.identity) as Text;
         biomeTitle.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
+        Text enviro = Instantiate(enviroPrefab, new Vector3(0, 75, -5), Quaternion.identity) as Text;
+        enviro.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
+
+        //Creates window and exit button.
         GameObject infoPanel = Instantiate(infoPanelPrefab, new Vector3(0, 0, 5), Quaternion.identity) as GameObject;
         infoPanel.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
@@ -62,12 +55,12 @@ public class StatsBox : TileData
         GameObject exitButton = Instantiate(exitButtonPrefab, new Vector3(335, 150, -5), Quaternion.identity) as GameObject;
         exitButton.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
-        //berryFood = GetComponent<Text>();
+       
         foods.text = foodTypes;
         biomeTitle.text = biomeType;
+        enviro.text = enviroType;
 
 
-        // }
     }
 
 
