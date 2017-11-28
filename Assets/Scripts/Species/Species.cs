@@ -66,12 +66,12 @@ public class Species : MonoBehaviour
             herbivoreFoodSource[i] += op * node.getHerbivoreFoodSource()[i];
         }
         carnivoreFoodSource += op * node.getCarnivoreFoodSource();
-        amntCalories += op * node.getAmntCalories();
+        amntCalories += op * node.getRequiredCalories();
         creatureSize += op * node.getCreatureSize();
         maxPerTile += op * node.getMaxPerTile();
         litterSize += op * node.getLitterSize();
-        matingFrequency += op * node.getMatingFrequency();
-        mateAttachment += op * node.getMateAttachment();
+        matingFrequency += op * node.getMutationChance();
+        mateAttachment += op * node.getReproductionRate();
         peckingOrder += op * node.getPeckingOrder();
     }
 
