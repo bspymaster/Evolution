@@ -22,10 +22,13 @@ public class GeneWebManager : MonoBehaviour {
         this.GetComponent<Button>().interactable = false;
     }
 
-    public void ReadStats()
+    /*public void ReadStats()
     {
-        print(Global.newGenes[0]);
-    }
+        foreach(var gene in Global.newGenes)
+        {
+            print(Global.newGenes[gene]);
+        }   
+    }*/
 
     public void notifyChange()
     {
