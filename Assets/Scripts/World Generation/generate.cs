@@ -64,11 +64,7 @@ public class generate : MonoBehaviour
                 }
                 
                 Vector2 offset = FindHexagonLocation(i,j);
-               // print(offset);
-                //GameObject tileInstance = Instantiate(BaseWorldTile, new Vector2(/*offset **/ (width-3) * Mathf.Sqrt(3) * (float)(i+.5*j), (height-5)* 3/2 * j), Quaternion.identity);
                 GameObject tileInstance = Instantiate(BaseWorldTile, new Vector2(/*offset **/ (float)(width - 2.5)* offset.x, (height - 2) *offset.y), Quaternion.identity);
-
-                // print("tile at"+ offset*(width-1) + "and" + j*(height-1));
                 TileData instanceData = tileInstance.GetComponent<TileData>();
                 instanceData.setTileType(tileType[rand]);
 
