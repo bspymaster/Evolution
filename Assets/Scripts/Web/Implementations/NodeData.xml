@@ -19,28 +19,28 @@
   </node>
   <node>
     <id>2</id>
-    <name></name>
+    <name>Chew Food</name>
     <childNodes>
       <child>3</child>
     </childNodes>
   </node>
   <node>
     <id>3</id>
-    <name></name>
+    <name>Short and Fast Digestive Tract</name>
     <childNodes>
       <child>8</child>
     </childNodes>
   </node>
   <node>
     <id>4</id>
-    <name></name>
+    <name>Double Jaw Sructure</name>
     <childNodes>
       <child>5</child>
     </childNodes>
   </node>
   <node>
     <id>5</id>
-    <name></name>
+    <name>Swallow Whole</name>
     <childNodes>
       <child>6</child>
       <child>7</child>
@@ -48,75 +48,75 @@
   </node>
   <node>
     <id>6</id>
-    <name></name>
+    <name>Teeth with Venom</name>
     <childNodes>
       <child>8</child>
     </childNodes>
   </node>
   <node>
     <id>7</id>
-    <name></name>
+    <name>Intense Stomach Acids</name>
     <childNodes>
       <child>8</child>
     </childNodes>
   </node>
   <node>
     <id>8</id>
-    <name></name>
+    <name>Large Stomachs</name>
     <childNodes>
       <child>9</child>
     </childNodes>
   </node>
   <node>
     <id>9</id>
-    <name></name>
+    <name>Virus Immunity</name>
     <childNodes>
       <child>10</child>
     </childNodes>
   </node>
   <node>
     <id>10</id>
-    <name></name>
+    <name>Eat Ambient Meat</name>
     <childNodes>
       <child>11</child>
     </childNodes>
   </node>
   <node>
     <id>11</id>
-    <name></name>
+    <name>Eat Small Animals</name>
     <childNodes>
       <child>12</child>
     </childNodes>
   </node>
   <node>
     <id>12</id>
-    <name></name>
+    <name>Eat Medium Animals</name>
     <childNodes>
       <child>13</child>
     </childNodes>
   </node>
   <node>
     <id>13</id>
-    <name></name>
+    <name>Eat Large Animals</name>
     <childNodes>
       <child>14</child>
     </childNodes>
   </node>
   <node>
     <id>14</id>
-    <name></name>
+    <name>Eat Humongous Animals</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>15</id>
-    <name></name>
+    <name>Chew Food</name>
     <childNodes>
       <child>16</child>
     </childNodes>
   </node>
   <node>
     <id>16</id>
-    <name></name>
+    <name>Specialized Digestive Tract</name>
     <childNodes>
       <child>17</child>
       <child>18</child>
@@ -125,27 +125,29 @@
   </node>
   <node>
     <id>17</id>
-    <name></name>
+    <name>Eat Berries</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>18</id>
-    <name></name>
+    <name>Eat Nuts</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>19</id>
-    <name></name>
-    <childNodes>20</childNodes>
+    <name>Eat Grass and Seeds</name>
+    <childNodes>
+    	<child>20</child>
+    </childNodes>
   </node>
   <node>
     <id>20</id>
-    <name></name>
+    <name>Eat Leaves</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>21</id>
-    <name></name>
+    <name>Hard Eggs</name>
     <childNodes>
       <child>22</child>
       <child>23</child>
@@ -153,7 +155,7 @@
   </node>
   <node>
     <id>22</id>
-    <name></name>
+    <name>Beaks</name>
     <childNodes>
       <child>31</child>
       <child>32</child>
@@ -162,12 +164,14 @@
   </node>
   <node>
     <id>23</id>
-    <name></name>
-    <childNodes>24</childNodes>
+    <name>Feathers</name>
+    <childNodes>
+    	<child>24</child>
+    </childNodes>
   </node>
   <node>
     <id>24</id>
-    <name></name>
+    <name>Hollow Bones</name>
     <childNodes>
       <child>25</child>
       <child>26</child>
@@ -175,40 +179,40 @@
   </node>
   <node>
     <id>25</id>
-    <name></name>
+    <name>Glide Feathers</name>
     <childNodes>
       <child>27</child>
     </childNodes>
   </node>
   <node>
     <id>26</id>
-    <name></name>
+    <name>Webbing</name>
     <childNodes>
       <child>28</child>
     </childNodes>
   </node>
   <node>
     <id>27</id>
-    <name></name>
+    <name>Flapping Ability</name>
     <childNodes>
       <child>29</child>
     </childNodes>
   </node>
   <node>
     <id>28</id>
-    <name></name>
+    <name>Flapping Ability</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>29</id>
-    <name></name>
+    <name>Flight Feathers</name>
     <childNodes>
       <child>30</child>
     </childNodes>
   </node>
   <node>
     <id>30</id>
-    <name></name>
+    <name>Alula</name>
     <childNodes>
       <child>34</child>
       <child>39</child>
@@ -216,95 +220,95 @@
   </node>
   <node>
     <id>31</id>
-    <name></name>
+    <name>Hooked Beak</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>32</id>
-    <name></name>
+    <name>Prying Beak</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>33</id>
-    <name></name>
+    <name>Pointed Beak</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>34</id>
-    <name></name>
+    <name>Improved Glide</name>
     <childNodes>
       <child>35</child>
     </childNodes>
   </node>
   <node>
     <id>35</id>
-    <name></name>
+    <name>Improved Glide</name>
     <childNodes>
       <child>36</child>
     </childNodes>
   </node>
   <node>
     <id>36</id>
-    <name></name>
+    <name>Improved Glide</name>
     <childNodes>
       <child>37</child>
     </childNodes>
   </node>
   <node>
     <id>37</id>
-    <name></name>
+    <name>Improved Glide</name>
     <childNodes>
       <child>38</child>
     </childNodes>
   </node>
   <node>
     <id>38</id>
-    <name></name>
+    <name>Improved Glide</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>39</id>
-    <name></name>
+    <name>Improved Speed</name>
     <childNodes>
       <child>40</child>
     </childNodes>
   </node>
   <node>
     <id>40</id>
-    <name></name>
+    <name>Improved Speed</name>
     <childNodes>
       <child>41</child>
     </childNodes>
   </node>
   <node>
     <id>41</id>
-    <name></name>
+    <name>Improved Speed</name>
     <childNodes>
       <child>42</child>
     </childNodes>
   </node>
   <node>
     <id>42</id>
-    <name></name>
+    <name>Improved Speed</name>
     <childNodes>
       <child>43</child>
     </childNodes>
   </node>
   <node>
     <id>43</id>
-    <name></name>
+    <name>Improved Speed</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>44</id>
-    <name></name>
+    <name>Hair/Fur</name>
     <childNodes>
       <child>45</child>
     </childNodes>
   </node>
   <node>
     <id>45</id>
-    <name></name>
+    <name>Live-born Babies</name>
     <childNodes>
       <child>46</child>
       <child>49</child>
@@ -313,7 +317,7 @@
   </node>
   <node>
     <id>46</id>
-    <name></name>
+    <name>Larger Size</name>
     <childNodes>
       <child>47</child>
       <child>48</child>
@@ -321,19 +325,19 @@
   </node>
   <node>
     <id>47</id>
-    <name></name>
+    <name>Thicker Hide</name>
     <childNodes>
       <child>80</child>
     </childNodes>
   </node>
   <node>
     <id>48</id>
-    <name></name>
+    <name>Defensive Horn</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>49</id>
-    <name></name>
+    <name>Larger Size</name>
     <childNodes>
       <child>50</child>
       <child>51</child>
@@ -341,24 +345,24 @@
   </node>
   <node>
     <id>50</id>
-    <name></name>
+    <name>Defensive Tusks</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>51</id>
-    <name></name>
+    <name>Elongated Mouth</name>
     <childNodes>
       <child>52</child>
     </childNodes>
   </node>
   <node>
     <id>52</id>
-    <name></name>
+    <name>Prehensile Trunk</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>53</id>
-    <name></name>
+    <name>Improved Appendage Muscles</name>
     <childNodes>
       <child>54</child>
       <child>56</child>
@@ -367,21 +371,21 @@
   </node>
   <node>
     <id>54</id>
-    <name></name>
+    <name>Smaller Size</name>
     <childNodes>
       <child>55</child>
     </childNodes>
   </node>
     <node>
     <id>55</id>
-    <name></name>
+    <name>Improved Senses</name>
     <childNodes>
       <child>26</child>
     </childNodes>
   </node>
   <node>
     <id>56</id>
-    <name></name>
+    <name>Lighter Body</name>
     <childNodes>
       <child>57</child>
       <child>58</child>
@@ -389,38 +393,38 @@
   </node>
   <node>
     <id>57</id>
-    <name></name>
+    <name>Larger Feet</name>
     <childNodes>
       <child>59</child>
     </childNodes>
   </node>
   <node>
     <id>58</id>
-    <name></name>
+    <name>Claws</name>
     <childNodes>
       <child>61</child>
     </childNodes>
   </node>
   <node>
     <id>59</id>
-    <name></name>
+    <name>Foot Padding</name>
     <childNodes>
       <child>60</child>
     </childNodes>
   </node>
   <node>
     <id>60</id>
-    <name></name>
+    <name>Improved Stealth</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>61</id>
-    <name></name>
+    <name>Retractable Claws</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>62</id>
-    <name></name>
+    <name>Opposable Thumbs</name>
     <childNodes>
       <child>63</child>
       <child>64</child>
@@ -428,12 +432,12 @@
   </node>
   <node>
     <id>63</id>
-    <name></name>
+    <name>Prehensile Tail</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>64</id>
-    <name></name>
+    <name>Bipedal</name>
     <childNodes>
       <child>65</child>
       <child>66</child>
@@ -441,38 +445,38 @@
   </node>
   <node>
     <id>65</id>
-    <name></name>
+    <name>Removed Tail</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>66</id>
-    <name></name>
+    <name>Tool Usage</name>
     <childNodes>
       <child>67</child>
     </childNodes>
   </node>
   <node>
     <id>67</id>
-    <name></name>
+    <name>Creativity</name>
     <childNodes>
       <child>68</child>
     </childNodes>
   </node>
   <node>
     <id>68</id>
-    <name></name>
+    <name>Imagination</name>
     <childNodes>
       <child>69</child>
     </childNodes>
   </node>
   <node>
     <id>69</id>
-    <name></name>
+    <name>Self-Awareness</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>70</id>
-    <name></name>
+    <name>Ectothermic</name>
     <childNodes>
       <child>71</child>
       <child>75</child>
@@ -480,7 +484,7 @@
   </node>
   <node>
     <id>71</id>
-    <name></name>
+    <name>Improved Swimming</name>
     <childNodes>
       <child>72</child>
       <child>73</child>
@@ -488,12 +492,12 @@
   </node>
   <node>
     <id>72</id>
-    <name></name>
+    <name>Water Dependence</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>73</id>
-    <name></name>
+    <name>Strong Back Legs</name>
     <childNodes>
       <child>74</child>
       <child>93</child>
@@ -501,12 +505,12 @@
   </node>
   <node>
     <id>74</id>
-    <name></name>
+    <name>Smaller Size</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>75</id>
-    <name></name>
+    <name>Hardened Skin</name>
     <childNodes>
       <child>76</child>
       <child>78</child>
@@ -514,21 +518,21 @@
   </node>
   <node>
     <id>76</id>
-    <name></name>
+    <name>Increased Lifespan</name>
     <childNodes>
       <child>77</child>
     </childNodes>
   </node>
   <node>
     <id>77</id>
-    <name></name>
+    <name>Shells</name>
     <childNodes>
       <child>83</child>
     </childNodes>
   </node>
   <node>
     <id>78</id>
-    <name></name>
+    <name>Scales</name>
     <childNodes>
       <child>79</child>
       <child>80</child>
@@ -538,43 +542,43 @@
   </node>
   <node>
     <id>79</id>
-    <name></name>
+    <name>Claws</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>80</id>
-    <name></name>
+    <name>Armored Scales</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>81</id>
-    <name></name>
+    <name>Sturdy Teeth</name>
     <childNodes>
       <child>82</child>
     </childNodes>
   </node>
   <node>
     <id>82</id>
-    <name></name>
+    <name>Increased Size</name>
     <childNodes>
       <child>83</child>
     </childNodes>
   </node>
   <node>
     <id>83</id>
-    <name></name>
+    <name>Powerful Jaw Muscles</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>84</id>
-    <name></name>
+    <name>Flexible Skeleton</name>
     <childNodes>
       <child>85</child>
     </childNodes>
   </node>
   <node>
     <id>85</id>
-    <name></name>
+    <name>Loss of Legs</name>
     <childNodes>
       <child>83</child>
       <child>86</child>
@@ -583,26 +587,26 @@
   </node>
   <node>
     <id>86</id>
-    <name></name>
+    <name>Threatening Patterns</name>
     <childNodes>
       <child>87</child>
     </childNodes>
   </node>
   <node>
     <id>87</id>
-    <name></name>
+    <name>Retractable Fangs</name>
     <childNodes>
       <child>88</child>
     </childNodes>
   </node>
   <node>
     <id>88</id>
-    <name></name>
+    <name>Strong Venom</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>89</id>
-    <name></name>
+    <name>Increased Size</name>
     <childNodes>
       <child>90</child>
       <child>91</child>
@@ -610,29 +614,29 @@
   </node>
   <node>
     <id>90</id>
-    <name></name>
+    <name>Improved Camouflage</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>91</id>
-    <name></name>
+    <name>Strengthened Body Muscles</name>
     <childNodes>
       <child>92</child>
     </childNodes>
   </node>
   <node>
     <id>92</id>
-    <name></name>
+    <name>Constricting Ability</name>
     <childNodes></childNodes>
   </node>
   <node>
     <id>93</id>
-    <name></name>
+    <name>Threatening Colors</name>
     <childNodes>94</childNodes>
   </node>
   <node>
     <id>94</id>
-    <name></name>
+    <name>Poison-Secreting Skin</name>
     <childNodes></childNodes>
   </node>
 </root>
