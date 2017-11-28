@@ -25,9 +25,9 @@ public class generate : MonoBehaviour
         int minX = 0;
         int maxY = mapSize;
         int maxX = mapSize;
-        float width = BaseWorldTile.transform.lossyScale.x;
+        //float width = BaseWorldTile.transform.lossyScale.x;
         float height = BaseWorldTile.transform.lossyScale.y;
-
+        float width = (Mathf.Sqrt(3) / 2) * height;
         string[] tileType = { "Ocean", "Desert", "Plains", "Forest", "Tundra" };
         Color[] tileColors = { new Color(18f / 255f, 15f / 255f, 62f / 255f, 255f / 255f), new Color(197f / 255f, 183f / 255f, 68f / 255f, 255f / 255f),
                                new Color(60f/255f,242f/255f,2f/255f,255f/255f), new Color(0f/255f,143f/255f,48f/255f,255f/255f), new Color(67f/255f,186f/255f,203f/255f,255f/255f) };
@@ -62,8 +62,9 @@ public class generate : MonoBehaviour
                 {
                     rand = 0;
                 }
-
-                GameObject tileInstance = Instantiate(BaseWorldTile, new Vector2(i * width, j * height), Quaternion.identity);
+                
+                Vector2 offset = FindHexagonLocation(i,j);
+                GameObject tileInstance = Instantiate(BaseWorldTile, new Vector2(/*offset **/ (float)(width - 2.5)* offset.x, (height - 2) *offset.y), Quaternion.identity);
                 TileData instanceData = tileInstance.GetComponent<TileData>();
                 instanceData.setTileType(tileType[rand]);
 
@@ -116,6 +117,12 @@ public class generate : MonoBehaviour
 
         }
 
+    }
+    public Vector2 FindHexagonLocation(int col, int row)
+    {
+        float X = Mathf.Sqrt(3) * (float)(col + .5 * row);
+        float Y = 3 / 2 * row;
+        return new Vector2(X, Y);
     }
 
 }
