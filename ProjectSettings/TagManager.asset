@@ -8,6 +8,7 @@ TagManager:
   - WindowManager
   - WorldMaker
   - GameManager
+  - WebBuild
   layers:
   - Default
   - TransparentFX
