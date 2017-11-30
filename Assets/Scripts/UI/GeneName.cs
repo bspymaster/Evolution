@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class GeneName : MonoBehaviour {
 
-    public GameObject geneNum;
-    int nodeIndex = GeneNum.getNum();
+
     
-    //public GameObject webBuild;
+    public GameObject geneNode;
+    int nodeIndex;
     public Text textPrefab;
 
     // Use this for initialization
@@ -25,7 +25,7 @@ public class GeneName : MonoBehaviour {
 
     IEnumerator Example() { 
 
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(1);
 
         textPrefab.text = GameObject.Find("Web Builder")
             .GetComponent<buildWeb>()

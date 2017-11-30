@@ -6,9 +6,9 @@ public class GeneNum : MonoBehaviour {
 
     public int geneNum;
 
-public int getNum()
-    {
-        return geneNum;
-    }
 
+    public void Update()
+    {
+        GeneDetails.geneNumber = geneNum;
+    }
 }
