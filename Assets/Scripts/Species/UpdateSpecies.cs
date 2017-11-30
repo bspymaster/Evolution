@@ -195,13 +195,6 @@ public class UpdateSpecies : MonoBehaviour {
                     occupiedTile.Add(location[j]);
                 }
             }
-            //  get mutation variables from species to figure out chance - right now just random
-            System.Random rnd = new System.Random();
-            int mutVarTemp = 100;
-            if (rnd.Next(1, 101) <= mutVarTemp)
-            {
-                Mutate(speciesArray[i].GetComponent<Species>(), (speciesArray[i].GetComponent<Species>().getSpeciesID() == 0) );
-            }
         }
         int population = 0;
         //  add population to each of the species in each occupiedTile
@@ -224,6 +217,18 @@ public class UpdateSpecies : MonoBehaviour {
                 }
                 print(species.Key);
             }
+        }
+        //  mutate chance
+        for (int i = 0; i < speciesArray.Count; i++)
+        {
+            //  get mutation variables from species to figure out chance - right now just random
+            System.Random rnd = new System.Random();
+            int mutVarTemp = 100;
+            if (rnd.Next(1, 101) <= mutVarTemp)
+            {
+                Mutate(speciesArray[i].GetComponent<Species>(), (speciesArray[i].GetComponent<Species>().getSpeciesID() == 0));
+            }
+
         }
     }
 
