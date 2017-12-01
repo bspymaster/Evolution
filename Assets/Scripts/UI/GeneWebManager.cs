@@ -6,12 +6,12 @@ using UnityEngine;
 public class GeneWebManager : MonoBehaviour {
 
 
-    public void AddNode(int nodeVal)
+    public static void AddNode(int nodeVal)
     {
         Global.newGenes.Add(nodeVal);
     }
 
-    public void RemoveNode(int nodeVal)
+    public static void RemoveNode(int nodeVal)
     {
         Global.removeGenes.Remove(nodeVal);
     }
