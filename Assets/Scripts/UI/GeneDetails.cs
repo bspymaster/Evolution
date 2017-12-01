@@ -4,5 +4,15 @@ using UnityEngine;
 
 public class GeneDetails : MonoBehaviour {
 
-    public static int geneNumber;
+    public static int geneNumber = 0;
+
+    public int getGeneNum()
+    {
+        return geneNumber;
+    }
+
+    public void setGeneNum(int newVal)
+    {
+        geneNumber = newVal;
+    }
 }

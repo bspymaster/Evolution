@@ -24,8 +24,6 @@ GameObject:
   - component: {fileID: 114264499618581026}
   - component: {fileID: 114989734530926934}
   - component: {fileID: 114446731684556554}
-  - component: {fileID: 114614527846798620}
-  - component: {fileID: 114126889617727788}
   m_Layer: 5
   m_Name: GeneNode
   m_TagString: Untagged
@@ -79,19 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e92a4909f74b1542abef68453da2c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  geneNode: {fileID: 0}
+  nodeIndex: 0
   textPrefab: {fileID: 114807612426866804}
---- !u!114 &114126889617727788
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1703231322238856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31ed63e83d526154e8b47357020b13c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114264499618581026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,18 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c755d4ad0882c9042829e85e8bf996e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114614527846798620
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1703231322238856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf810c40e870f1a419b32505a590ec9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  geneNum: 1
 --- !u!114 &114807612426866804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -244,11 +219,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 43
+    m_MaxSize: 45
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1

@@ -9,6 +9,6 @@ public class GeneNum : MonoBehaviour {
 
     public void Update()
     {
-        GeneDetails.geneNumber = geneNum;
+        
     }
 }

@@ -7,9 +7,14 @@ public class GeneName : MonoBehaviour {
 
 
     
-    public GameObject geneNode;
-    int nodeIndex;
+    //public GameObject geneNode;
+    public int nodeIndex;
     public Text textPrefab;
+
+    public void setGeneNum()
+    {
+        GeneWebManager.AddNode(nodeIndex);
+    }
 
     // Use this for initialization
     void Start() {
@@ -25,7 +30,7 @@ public class GeneName : MonoBehaviour {
 
     IEnumerator Example() { 
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0);
 
         textPrefab.text = GameObject.Find("Web Builder")
             .GetComponent<buildWeb>()
