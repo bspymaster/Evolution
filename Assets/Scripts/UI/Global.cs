@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Global : MonoBehaviour {
 
+    public static bool cameraLock = false;
     public static bool PreWorld = true;
     public static List<int> playerSpeciesGeneList;
     public static List<int> newGenes = new List<int>();

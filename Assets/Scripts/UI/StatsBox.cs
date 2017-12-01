@@ -18,6 +18,7 @@ public class StatsBox : TileData
     {
 
         // Gets the values from the selected tile.
+        Global.cameraLock = true;
         int numBerries = getNumBerries();
         int numGrass = getNumGrass();
         int numNuts = getNumNuts();
