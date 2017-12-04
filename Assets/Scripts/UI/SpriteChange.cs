@@ -8,13 +8,18 @@ public class SpriteChange : MonoBehaviour {
     public Button button;
     public Sprite Unadded;
     public Sprite Added;
+    public Sprite Locked;
 
     //    float timer = 1f;
     //    float delay = 1f;
 
     private void Start()
     {
-        button.image.sprite = Unadded;
+        if(Global.PreWeb == true)
+        {
+            button.image.sprite = Unadded;
+            Global.PreWeb = false;
+        }  
     }
 
     public void toggle2()
@@ -30,6 +35,10 @@ public class SpriteChange : MonoBehaviour {
         
     }
 
+    private void Update()
+    {
+
+    }
 
 
     /*
