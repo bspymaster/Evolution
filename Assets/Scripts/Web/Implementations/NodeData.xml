@@ -15,11 +15,14 @@
   <node>
     <id>1</id>
     <name>Single Jaw Struct</name>
+    <requiredCalories>10</requiredCalories>
     <childNodes>2</childNodes>
   </node>
   <node>
     <id>2</id>
     <name>Chew Food</name>
+    <requiredCalories>10</requiredCalories>
+    <carnivoreFoodSource>20</carnivoreFoodSource>
     <childNodes>
       <child>3</child>
     </childNodes>
@@ -27,6 +30,7 @@
   <node>
     <id>3</id>
     <name>Short and Fast Digestive Tract</name>
+    <requiredCalories>-20</requiredCalories>
     <childNodes>
       <child>8</child>
     </childNodes>
@@ -34,6 +38,7 @@
   <node>
     <id>4</id>
     <name>Double Jaw Sructure</name>
+    <requiredCalories>10</requiredCalories>
     <childNodes>
       <child>5</child>
     </childNodes>
@@ -41,6 +46,8 @@
   <node>
     <id>5</id>
     <name>Swallow Whole</name>
+    <requiredCalories>10</requiredCalories>
+    <creatureSize>10</creatureSize>
     <childNodes>
       <child>6</child>
       <child>7</child>
@@ -49,6 +56,8 @@
   <node>
     <id>6</id>
     <name>Teeth with Venom</name>
+    <carnivoreFoodSource>50</carnivoreFoodSource>
+    <creatureSize>-5</creatureSize>
     <childNodes>
       <child>8</child>
     </childNodes>
@@ -56,6 +65,7 @@
   <node>
     <id>7</id>
     <name>Intense Stomach Acids</name>
+    <requiredCalories>20</requiredCalories>
     <childNodes>
       <child>8</child>
     </childNodes>
@@ -63,6 +73,7 @@
   <node>
     <id>8</id>
     <name>Large Stomachs</name>
+    <creatureSize>10</creatureSize>
     <childNodes>
       <child>9</child>
     </childNodes>
@@ -70,6 +81,7 @@
   <node>
     <id>9</id>
     <name>Virus Immunity</name>
+    <requiredCalories>-5</requiredCalories>
     <childNodes>
       <child>10</child>
     </childNodes>
@@ -77,6 +89,7 @@
   <node>
     <id>10</id>
     <name>Eat Ambient Meat</name>
+    <carnivorous>1</carnivorous>
     <childNodes>
       <child>11</child>
     </childNodes>
@@ -84,6 +97,7 @@
   <node>
     <id>11</id>
     <name>Eat Small Animals</name>
+    <carnivoreFoodSource>100</carnivoreFoodSource>
     <childNodes>
       <child>12</child>
     </childNodes>
@@ -91,6 +105,7 @@
   <node>
     <id>12</id>
     <name>Eat Medium Animals</name>
+    <carnivoreFoodSource>100</carnivoreFoodSource>
     <childNodes>
       <child>13</child>
     </childNodes>
@@ -98,6 +113,7 @@
   <node>
     <id>13</id>
     <name>Eat Large Animals</name>
+    <carnivoreFoodSource>100</carnivoreFoodSource>
     <childNodes>
       <child>14</child>
     </childNodes>
@@ -105,11 +121,13 @@
   <node>
     <id>14</id>
     <name>Eat Humongous Animals</name>
+    <carnivoreFoodSource>100</carnivoreFoodSource>
     <childNodes></childNodes>
   </node>
   <node>
     <id>15</id>
     <name>Chew Food</name>
+    <requiredCalories>10</requiredCalories>
     <childNodes>
       <child>16</child>
     </childNodes>
@@ -117,6 +135,7 @@
   <node>
     <id>16</id>
     <name>Specialized Digestive Tract</name>
+    <requiredCalories>10</requiredCalories>
     <childNodes>
       <child>17</child>
       <child>18</child>
@@ -126,16 +145,21 @@
   <node>
     <id>17</id>
     <name>Eat Berries</name>
+    <herbivoreFoodSource>0,0,0,1</herbivoreFoodSource> <!--grass,leaves,nuts,berries-->
+    <creatureSize>-10</creatureSize>
     <childNodes></childNodes>
   </node>
   <node>
     <id>18</id>
     <name>Eat Nuts</name>
+    <herbivoreFoodSource>0,0,1,0</herbivoreFoodSource>
+    <creatureSize>-10</creatureSize>
     <childNodes></childNodes>
   </node>
   <node>
     <id>19</id>
     <name>Eat Grass and Seeds</name>
+    <herbivoreFoodSource>1,0,0,0</herbivoreFoodSource>
     <childNodes>
     	<child>20</child>
     </childNodes>
@@ -143,11 +167,15 @@
   <node>
     <id>20</id>
     <name>Eat Leaves</name>
+    <herbivoreFoodSource>0,1,0,0</herbivoreFoodSource>
     <childNodes></childNodes>
   </node>
   <node>
     <id>21</id>
     <name>Hard Eggs</name>
+    <litterSize>2</litterSize>
+    <offspringSize>-5</offspringSize>
+    <requiredCalories>5</requiredCalories>
     <childNodes>
       <child>22</child>
       <child>23</child>
@@ -156,6 +184,7 @@
   <node>
     <id>22</id>
     <name>Beaks</name>
+    <requiredCalories>-10</requiredCalories>
     <childNodes>
       <child>31</child>
       <child>32</child>
@@ -165,6 +194,7 @@
   <node>
     <id>23</id>
     <name>Feathers</name>
+    <requiredCalories>-10</requiredCalories>
     <childNodes>
     	<child>24</child>
     </childNodes>
@@ -172,6 +202,10 @@
   <node>
     <id>24</id>
     <name>Hollow Bones</name>
+    <creatureSize>-15</creatureSize>
+    <litterSize>2</litterSize>
+    <offspringSize>-5</offspringSize>
+    <altitude>100</altitude>
     <childNodes>
       <child>25</child>
       <child>26</child>
