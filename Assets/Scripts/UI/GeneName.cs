@@ -5,25 +5,28 @@ using UnityEngine.UI;
 
 public class GeneName : MonoBehaviour {
 
-
-    
-    //public GameObject geneNode;
+    private bool isOn = false;
     public int nodeIndex;
     public Text textPrefab;
 
-    public void setGeneNum()
+    // Adds or removes node when enabling or disabling a gene.
+    public void sendGeneNum()
     {
-        GeneWebManager.AddNode(nodeIndex);
+        if(isOn == false)
+        {
+            GeneWebManager.AddNode(nodeIndex);
+            isOn = true;
+        }
+        else if(isOn == true)
+        {
+            GeneWebManager.RemoveNode(nodeIndex);
+            isOn = false;
+        }
     }
+        
 
     // Use this for initialization
     void Start() {
-
-        //    Node node = GameObject.Find("Web Builder").GetComponent<buildWeb>().getWeb().getNode(nodeIndex);
-        //    string GeneName = node.getName();
-
-        //    textPrefab.text = GeneName;
-        //      Text gene = Instantiate(textPrefab, new Vector3(0, 0, -5), Quaternion.identity) as Text;
         StartCoroutine(Example());
 
     }
