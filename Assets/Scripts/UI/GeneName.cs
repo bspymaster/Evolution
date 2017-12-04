@@ -11,7 +11,7 @@ public class GeneName : MonoBehaviour {
     public int nodeIndex;
     public Text textPrefab;
 
-    public void setGeneNum()
+    public void sendGeneNum()
     {
         GeneWebManager.AddNode(nodeIndex);
     }
