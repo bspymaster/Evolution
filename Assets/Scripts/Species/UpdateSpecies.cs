@@ -10,7 +10,10 @@ public class UpdateSpecies : MonoBehaviour {
     private int mapSize;
     private List<GameObject> speciesArray;
 
-    // Use this for initialization
+    /*
+    *  NEEDS REVIEW - SPAWN IS OBSOLETE
+    *  Use this for initialization
+    */
     public void GenerateSpecies()
     {
         //  print("GenerateSpecies()");
@@ -22,7 +25,8 @@ public class UpdateSpecies : MonoBehaviour {
     }
 
     /*
-     * Spawn() generates 10 game objects as species on game creation
+     *  OBSOLETE - TRANSFER THIS TO TILE-RELATED, POSSIBLY GENERATE?
+     *  Spawn() generates 10 game objects as species on game creation
      */
     private void Spawn()
     {
@@ -43,7 +47,7 @@ public class UpdateSpecies : MonoBehaviour {
             lctn.Add(new Vector2Int(locX, locY));
             GameObject newSpeciesObject = Instantiate(speciesObject, GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX * DIMENSION, locY * DIMENSION), Quaternion.identity);
             speciesScript = newSpeciesObject.GetComponent<Species>();
-            speciesScript.Init(i.ToString(), i, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
+            speciesScript.Init(i.ToString(), i, 0, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
             // set parameters
             for (int j = 0; j < 11; j++)
             {
@@ -60,7 +64,7 @@ public class UpdateSpecies : MonoBehaviour {
         lctn.Add(new Vector2Int(locX, locY));
         GameObject newPlayerSpeciesObject = Instantiate(playerSpeciesObject, GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX * DIMENSION, locY * DIMENSION), Quaternion.identity);
         speciesScript = newPlayerSpeciesObject.GetComponent<Species>();
-        speciesScript.Init("0", 0, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
+        speciesScript.Init("0", 0, -1, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
         speciesArray.Add(newPlayerSpeciesObject);
         Dictionary<int, int> localPlayerSpecies = new Dictionary<int, int>();
         localPlayerSpecies.Add(0, 10);
@@ -68,6 +72,7 @@ public class UpdateSpecies : MonoBehaviour {
     }
 
     /*
+     *  COMPLETE
      *  Have the species in each tile containing species eat
      */
     private void Interact()
@@ -78,6 +83,7 @@ public class UpdateSpecies : MonoBehaviour {
     }
 
     /*
+     *  NEEDS REVIEW - GLOBAL.CHANGE ISSUE
      *  Have the species in each tile reproduce
      */
     private void Reproduce()
@@ -116,8 +122,7 @@ public class UpdateSpecies : MonoBehaviour {
                 population += population * speciesArray[species.Key].GetComponent<Species>().getLitterSize();
                 if (population > speciesArray[species.Key].GetComponent<Species>().getMaxPerTile())
                 {
-                    //  set to false bc no implementation of player movement
-                    Overpopulate(species.Key, (speciesArray[species.Key].GetComponent<Species>().getSpeciesID() == 0), occupiedTile[i]);
+                    Overpopulate(species.Key, occupiedTile[i]);
                 }
                 else
                 {
@@ -140,13 +145,15 @@ public class UpdateSpecies : MonoBehaviour {
     }
 
     /*
+     *  ACHIEVEMENTS NEEDED
+     *  NEEDS REVIEW - ADDNODE ISSUE, SPECIESARRAY ISSUE
      *  Parent Species will be copied into new speciesObject (mutatingSpecies) that will evolve once
      */
     private void Mutate(Species parentSpecies, bool isPlayer)
     {
         //  print("Mutate()");
-        int newName = int.Parse(parentSpecies.getSpeciesName()) + 100;  //  100 should be replaced by number of existing speciesObjects
-        Species mutatingSpecies = new Species(newName.ToString());
+        int newID = speciesArray.Count + 1;
+        Species mutatingSpecies = new Species(newID.ToString());
         mutatingSpecies.clone(parentSpecies);
         bool addNode = false;
         int nodeIndex = 0;
@@ -171,66 +178,98 @@ public class UpdateSpecies : MonoBehaviour {
     }
 
     /*
+     *  NEEDS REVIEW - OUT OF BOUNDS ISSUE, HEXAGONAL MOVEMENT ISSUE
      *  Have the species in a given tile migrate to adjacent tile
      */
-    private void Overpopulate(int migratingSpeciesKey, bool isPlayer, Vector2Int tileLocation)
+    private void Overpopulate(int migratingSpeciesKey, Vector2Int tileLocation)
     {
         //  print("Overpopulate()");
-        if (!isPlayer)
+        var rnd = new System.Random();
+        int receivingTile = rnd.Next(0, 5); //  0 is left tile, 1 is right tile, 2 is top-left tile, 3 is top-right tile, 4 is bottom-left tile, 5 is bottom-right tile
+        switch (receivingTile)
         {
-            var rnd = new System.Random();
-            int receivingTile = rnd.Next(0, 3); //  0 is left tile, 1 is bottom tile, 2 is right tile, 3 is above tile
-            switch (receivingTile)
-            {
-                case 0:
+            case 0:
+                {
+                    Vector2Int target = new Vector2Int(tileLocation.x - 1, tileLocation.y);
+                    if (target.x < 0)
                     {
-                        Vector2Int target = new Vector2Int(tileLocation.x - 1, tileLocation.y);
-                        if (target.x < 0)
-                        {
-                            target.x += 2;
-                        }
-                        Migrate(target, migratingSpeciesKey, tileLocation);
-                        break;
+                        target.x += 2;
                     }
-                case 1:
+                    Migrate(target, migratingSpeciesKey, tileLocation);
+                    break;
+                }
+            case 1:
+                {
+                    Vector2Int target = new Vector2Int(tileLocation.x + 1, tileLocation.y);
+                    if (target.x > mapSize)
                     {
-                        Vector2Int target = new Vector2Int(tileLocation.x, tileLocation.y + 1);
-                        if (target.y > mapSize)
-                        {
-                            target.y -= 2;
-                        }
-                        Migrate(target, migratingSpeciesKey, tileLocation);
-                        break;
+                        target.x -= 2;
                     }
-                case 2:
+                    Migrate(target, migratingSpeciesKey, tileLocation);
+                    break;
+                }
+            case 2:
+                {
+                    Vector2Int target = new Vector2Int(tileLocation.x - 1, tileLocation.y + 1);
+                    if (target.y > mapSize)
                     {
-                        Vector2Int target = new Vector2Int(tileLocation.x + 1, tileLocation.y);
-                        if (target.x > mapSize)
-                        {
-                            target.x -= 2;
-                        }
-                        Migrate(target, migratingSpeciesKey, tileLocation);
-                        break;
+                        target.y -= 2;
                     }
-                case 3:
+                    if (target.x < 0)
                     {
-                        Vector2Int target = new Vector2Int(tileLocation.x, tileLocation.y - 1);
-                        if (target.y < 0)
-                        {
-                            target.y += 2;
-                        }
-                        Migrate(target, migratingSpeciesKey, tileLocation);
-                        break;
+                        target.x += 2;
                     }
-            }
-        }
-        else
-        {
-            //  need player choice to migrate
+                    Migrate(target, migratingSpeciesKey, tileLocation);
+                    break;
+                }
+            case 3:
+                {
+                    Vector2Int target = new Vector2Int(tileLocation.x + 1, tileLocation.y + 1);
+                    if (target.y > mapSize)
+                    {
+                        target.y -= 2;
+                    }
+                    if (target.x > mapSize)
+                    {
+                        target.x -= 2;
+                    }
+                    Migrate(target, migratingSpeciesKey, tileLocation);
+                    break;
+                }
+            case 4:
+                {
+                    Vector2Int target = new Vector2Int(tileLocation.x - 1, tileLocation.y - 1);
+                    if (target.y < 0)
+                    {
+                        target.y += 2;
+                    }
+                    if (target.x < 0)
+                    {
+                        target.x += 2;
+                    }
+                    Migrate(target, migratingSpeciesKey, tileLocation);
+                    break;
+                }
+            case 5:
+                {
+                    Vector2Int target = new Vector2Int(tileLocation.x + 1, tileLocation.y - 1);
+                    if (target.y < 0)
+                    {
+                        target.y += 2;
+                    }
+                    if (target.x > mapSize)
+                    {
+                        target.x -= 2;
+                    }
+                    Migrate(target, migratingSpeciesKey, tileLocation);
+                    break;
+                }
         }
     }
 
+
     /*
+     *  ACHIEVEMENTS NEEDED
      *  Migrates the population for OverPopulation()
      */
     private void Migrate(Vector2Int recievingTile, int speciesKey, Vector2Int givingTile)
@@ -241,9 +280,11 @@ public class UpdateSpecies : MonoBehaviour {
         int stayingPopulation = (int)(0.7 * x);
         GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(recievingTile).GetComponent<TileData>().setSpeciesPopulation(speciesKey, movingPopulation);
         GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(givingTile).GetComponent<TileData>().setSpeciesPopulation(speciesKey, stayingPopulation);
+        speciesArray[speciesKey].GetComponent<Species>().addToLocation(recievingTile);
     }
-    
+
     /*
+     *  IMPLEMENTATION NEEDED
      *  Have the herbivore species in each tile containing species eat tile resources
      */
     private void HerbivoreMove()
@@ -265,6 +306,7 @@ public class UpdateSpecies : MonoBehaviour {
     }
 
     /*
+     *  IMPLEMENTATION NEEDED
      *  Have the carnivore species in each tile containing species eat other species and tiny species (tile resource)
      */
     private void CarnivoreMove()
@@ -283,6 +325,51 @@ public class UpdateSpecies : MonoBehaviour {
          *          humongousInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
          *      }
          *  }
+         */
+    }
+
+    /*
+     *  DRAW TO CANVAS NEEDED
+     *  Determines species danger to player species and changes its color. 
+     */
+    private void setRelation(int sID)
+    {
+        //  print("setRelation()");
+        GameObject relativeSpecies = speciesArray[sID];
+        bool sameHFS = false;
+        for (int i = 0; i < relativeSpecies.GetComponent<Species>().getHFS().Length; i++)
+        {
+            if (GameObject.Find("playerSpecies").GetComponent<Species>().getHFS()[i] == relativeSpecies.GetComponent<Species>().getHFS()[i])
+            {
+                sameHFS = true;
+            }
+        }
+        if (relativeSpecies.GetComponent<Species>().getCFS() > GameObject.Find("playerSpecies").GetComponent<Species>().getCreatureSize() && sameHFS)
+        {
+            relativeSpecies.GetComponent<Species>().setSpeciesColor(5);
+        }
+        else if (relativeSpecies.GetComponent<Species>().getCFS() > 0 && sameHFS)
+        {
+            relativeSpecies.GetComponent<Species>().setSpeciesColor(4);
+        }
+        else if (relativeSpecies.GetComponent<Species>().getCFS() > GameObject.Find("playerSpecies").GetComponent<Species>().getCreatureSize())
+        {
+            relativeSpecies.GetComponent<Species>().setSpeciesColor(3);
+        }
+        else if (relativeSpecies.GetComponent<Species>().getCFS() > 0)
+        {
+            relativeSpecies.GetComponent<Species>().setSpeciesColor(2);
+        }
+        else if (sameHFS)
+        {
+            relativeSpecies.GetComponent<Species>().setSpeciesColor(1);
+        }
+        else
+        {
+            relativeSpecies.GetComponent<Species>().setSpeciesColor(0);
+        }
+        /*
+         *  DRAW TO CANVAS
          */
     }
 }
