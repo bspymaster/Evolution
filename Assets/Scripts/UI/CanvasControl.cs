@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class CanvasControl : MonoBehaviour {
 
-    public void Awake()
+    public void Start()
     {
+        
         DontDestroyOnLoad(this);
         if(FindObjectsOfType(GetType()).Length > 1)
         {
             Destroy(gameObject);
         }
+        GameObject.FindGameObjectWithTag("WebCanvas").transform.position = new Vector2(0, 0);
+
     }
 
 

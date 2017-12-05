@@ -34,6 +34,7 @@ public class GeneName : MonoBehaviour {
     IEnumerator Example() { 
 
         yield return new WaitForSeconds(0);
+        //GameObject.FindGameObjectWithTag("Canvas").SetActive(true);
 
         textPrefab.text = GameObject.Find("Web Builder")
             .GetComponent<buildWeb>()
