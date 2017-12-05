@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     public GameObject WorldMakerPrefab;
     public GameObject GeneWebButtonPrefab;
     public GameObject ExitGameButtonPrefab;
+    public GameObject MutationPointsBackPrefab;
+    public Text MutationPointsTextPrefab;
 
     public void BuildUI()
     {
@@ -16,6 +18,10 @@ public class UIManager : MonoBehaviour
         geneButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
         GameObject exitButton = Instantiate(ExitGameButtonPrefab, new Vector3(650, 260, 0), Quaternion.identity) as GameObject;
         exitButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+        GameObject pointsBack = Instantiate(MutationPointsBackPrefab) as GameObject;
+        pointsBack.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+        Text pointsText = Instantiate(MutationPointsTextPrefab) as Text;
+        pointsText.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
     }
 
     void Start()
@@ -33,6 +39,7 @@ public class UIManager : MonoBehaviour
 
     public void KillManager()
     {
+        Global.cameraLock = false;
         GameObject[] managers = GameObject.FindGameObjectsWithTag("WindowManager");
         foreach(GameObject manager in managers)
         GameObject.Destroy(manager);

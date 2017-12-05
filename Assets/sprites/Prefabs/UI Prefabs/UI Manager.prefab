@@ -57,3 +57,7 @@ MonoBehaviour:
     type: 2}
   ExitGameButtonPrefab: {fileID: 1376852798499644, guid: a38e9199c1a2b194cb4c4fbfc3388d20,
     type: 2}
+  MutationPointsBackPrefab: {fileID: 1880917998023710, guid: 1c061ac162b4ab34d90a43c8bd3477fe,
+    type: 2}
+  MutationPointsTextPrefab: {fileID: 114762838945280414, guid: e0da359d29e147b409c88f9d1565c84c,
+    type: 2}

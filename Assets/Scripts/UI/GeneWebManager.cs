@@ -6,14 +6,30 @@ using UnityEngine;
 public class GeneWebManager : MonoBehaviour {
 
 
-    public void AddNode(int nodeVal)
+    void Start()
+    {
+        
+
+        StartCoroutine(Example());
+
+    }
+
+    IEnumerator Example()
+    {
+
+        yield return new WaitForSeconds(0);
+        //Global.PreWeb = false;
+
+    }
+
+    public static void AddNode(int nodeVal)
     {
         Global.newGenes.Add(nodeVal);
     }
 
-    public void RemoveNode(int nodeVal)
+    public static void RemoveNode(int nodeVal)
     {
-        Global.removeGenes.Remove(nodeVal);
+        Global.removeGenes.Add(nodeVal);
     }
 
     public void DisableButton()
@@ -22,14 +38,14 @@ public class GeneWebManager : MonoBehaviour {
         this.GetComponent<Button>().interactable = false;
     }
 
-    public void ReadStats()
-    {
-        print(Global.newGenes[0]);
-    }
-
     public void notifyChange()
     {
         Global.change = true;
+    }
+
+    public void disableCanvas()
+    {
+        GameObject.FindGameObjectWithTag("WebCanvas").transform.position = new Vector2(0, -500);
     }
 }
 
