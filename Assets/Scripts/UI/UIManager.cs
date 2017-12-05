@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
 
     public void KillManager()
     {
+        Global.cameraLock = false;
         GameObject[] managers = GameObject.FindGameObjectsWithTag("WindowManager");
         foreach(GameObject manager in managers)
         GameObject.Destroy(manager);
