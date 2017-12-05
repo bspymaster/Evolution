@@ -6,7 +6,6 @@ public class Species : MonoBehaviour
 {
     private string speciesName;  // name of species - for stretch goal, we will want this to be a string that appears like formal latin names, by D3, number will suffice
     private int speciesID;  //  number of species
-    private int speciesColor;  //  -1 == playerSpecies, 0 == friendly, 1 == competing Herbivore, 2 == carnivore, 3 == predator, 4 == competing omnivore, 5 == competing omnivore & predator
     private List<Vector2Int> location; // in which tiles this species exists.  Assuming tiles can be simplified to their numerical value
     private List<int> genes;  // what genes this species has.  Assuming genes can be simplified to their numerical value
     private int[] herbivoreFoodSource; // i == 0 berries, i == 1 nuts, i == 2 grass, i == 3 leaves, value of 0 at any index (default) means speceis cannot eat food type at given index
@@ -30,11 +29,10 @@ public class Species : MonoBehaviour
     /*
     *   Initializer
     */
-    public void Init(string sN, int sID, int sC, List<Vector2Int> lctn, List<int> gns, int[] hFS, int cFS, int aC, int cS, int mPT, int lS, int mF, int mA, int pO)
+    public void Init(string sN, int sID, List<Vector2Int> lctn, List<int> gns, int[] hFS, int cFS, int aC, int cS, int mPT, int lS, int mF, int mA, int pO)
     {
         speciesName = sN;
         speciesID = sID;
-        speciesColor = sC;
         location = lctn;
         genes = gns;
         herbivoreFoodSource = hFS;
@@ -83,7 +81,7 @@ public class Species : MonoBehaviour
      */
     public void clone(Species other) // other will be evolved, clone will be parent species
     {
-        Init(other.getSpeciesName(), other.getSpeciesID(), other.getSpeciesColor(), other.getLocation(), other.getGenes(), other.getHFS(), other.getCFS(), other.getAmntCalories(), 
+        Init(other.getSpeciesName(), other.getSpeciesID(), other.getLocation(), other.getGenes(), other.getHFS(), other.getCFS(), other.getAmntCalories(), 
             other.getCreatureSize(), other.getMaxPerTile(), other.getLitterSize(), other.getMatingFrequency(), getMateAttachment(), other.getPeckingOrder());
     }
 
@@ -97,10 +95,6 @@ public class Species : MonoBehaviour
     public int getSpeciesID()
     {
         return speciesID;
-    }
-    public int getSpeciesColor()
-    {
-        return speciesColor;
     }
     public List<Vector2Int> getLocation()
     {
@@ -145,10 +139,6 @@ public class Species : MonoBehaviour
     public int getPeckingOrder()
     {
         return peckingOrder;
-    }
-    public void setSpeciesColor(int newSpeciesColor)
-    {
-        speciesColor = newSpeciesColor;
     }
     public void addToLocation(Vector2Int additionalLocation)
     {

@@ -11,7 +11,7 @@ public class UpdateSpecies : MonoBehaviour {
     private List<GameObject> speciesArray;
 
     /*
-    *  NEEDS REVIEW - SPAWN IS OBSOLETE
+    *  COMPLETE
     *  Use this for initialization
     */
     public void GenerateSpecies()
@@ -25,7 +25,7 @@ public class UpdateSpecies : MonoBehaviour {
     }
 
     /*
-     *  OBSOLETE - TRANSFER THIS TO TILE-RELATED, POSSIBLY GENERATE?
+     *  REVAMP NEEDED - TRANSFER DRAW-TO-CANVAS TO TILEDATA.SETLOCALSPECIES()
      *  Spawn() generates 10 game objects as species on game creation
      */
     private void Spawn()
@@ -47,7 +47,7 @@ public class UpdateSpecies : MonoBehaviour {
             lctn.Add(new Vector2Int(locX, locY));
             GameObject newSpeciesObject = Instantiate(speciesObject, GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX * DIMENSION, locY * DIMENSION), Quaternion.identity);
             speciesScript = newSpeciesObject.GetComponent<Species>();
-            speciesScript.Init(i.ToString(), i, 0, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
+            speciesScript.Init(i.ToString(), i, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
             // set parameters
             for (int j = 0; j < 11; j++)
             {
@@ -64,7 +64,7 @@ public class UpdateSpecies : MonoBehaviour {
         lctn.Add(new Vector2Int(locX, locY));
         GameObject newPlayerSpeciesObject = Instantiate(playerSpeciesObject, GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX * DIMENSION, locY * DIMENSION), Quaternion.identity);
         speciesScript = newPlayerSpeciesObject.GetComponent<Species>();
-        speciesScript.Init("0", 0, -1, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
+        speciesScript.Init("0", 0, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
         speciesArray.Add(newPlayerSpeciesObject);
         Dictionary<int, int> localPlayerSpecies = new Dictionary<int, int>();
         localPlayerSpecies.Add(0, 10);
@@ -91,11 +91,13 @@ public class UpdateSpecies : MonoBehaviour {
         //  print("Reproduce()");
         if (Global.change)
         {
-            for (int i = 0; i < Global.newGenes.Count; i++)
+            int index = Global.newGenes.Count;
+            for (int i = 0; i < index; i++)
             {
                 playerSpeciesObject.GetComponent<Species>().evolve(true, Global.newGenes[i]);
-                print(playerSpeciesObject.GetComponent<Species>().getGenes());
+                Global.newGenes.RemoveAt(i);
             }
+            Global.change = false;
         }
         List<Vector2Int> occupiedTile = new List<Vector2Int>();
         List<Vector2Int> location = new List<Vector2Int>();
@@ -146,7 +148,7 @@ public class UpdateSpecies : MonoBehaviour {
 
     /*
      *  ACHIEVEMENTS NEEDED
-     *  NEEDS REVIEW - ADDNODE ISSUE, SPECIESARRAY ISSUE
+     *  NEEDS REVIEW - ADDNODE ISSUE
      *  Parent Species will be copied into new speciesObject (mutatingSpecies) that will evolve once
      */
     private void Mutate(Species parentSpecies, bool isPlayer)
@@ -178,7 +180,7 @@ public class UpdateSpecies : MonoBehaviour {
     }
 
     /*
-     *  NEEDS REVIEW - OUT OF BOUNDS ISSUE, HEXAGONAL MOVEMENT ISSUE
+     *  NEEDS REVIEW - HEXAGONAL MOVEMENT ISSUE
      *  Have the species in a given tile migrate to adjacent tile
      */
     private void Overpopulate(int migratingSpeciesKey, Vector2Int tileLocation)
@@ -325,51 +327,6 @@ public class UpdateSpecies : MonoBehaviour {
          *          humongousInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
          *      }
          *  }
-         */
-    }
-
-    /*
-     *  DRAW TO CANVAS NEEDED
-     *  Determines species danger to player species and changes its color. 
-     */
-    private void setRelation(int sID)
-    {
-        //  print("setRelation()");
-        GameObject relativeSpecies = speciesArray[sID];
-        bool sameHFS = false;
-        for (int i = 0; i < relativeSpecies.GetComponent<Species>().getHFS().Length; i++)
-        {
-            if (GameObject.Find("playerSpecies").GetComponent<Species>().getHFS()[i] == relativeSpecies.GetComponent<Species>().getHFS()[i])
-            {
-                sameHFS = true;
-            }
-        }
-        if (relativeSpecies.GetComponent<Species>().getCFS() > GameObject.Find("playerSpecies").GetComponent<Species>().getCreatureSize() && sameHFS)
-        {
-            relativeSpecies.GetComponent<Species>().setSpeciesColor(5);
-        }
-        else if (relativeSpecies.GetComponent<Species>().getCFS() > 0 && sameHFS)
-        {
-            relativeSpecies.GetComponent<Species>().setSpeciesColor(4);
-        }
-        else if (relativeSpecies.GetComponent<Species>().getCFS() > GameObject.Find("playerSpecies").GetComponent<Species>().getCreatureSize())
-        {
-            relativeSpecies.GetComponent<Species>().setSpeciesColor(3);
-        }
-        else if (relativeSpecies.GetComponent<Species>().getCFS() > 0)
-        {
-            relativeSpecies.GetComponent<Species>().setSpeciesColor(2);
-        }
-        else if (sameHFS)
-        {
-            relativeSpecies.GetComponent<Species>().setSpeciesColor(1);
-        }
-        else
-        {
-            relativeSpecies.GetComponent<Species>().setSpeciesColor(0);
-        }
-        /*
-         *  DRAW TO CANVAS
          */
     }
 }
