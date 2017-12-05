@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class GeneWebManager : MonoBehaviour {
 
+
     void Start()
     {
+        
+
         StartCoroutine(Example());
 
     }
@@ -14,7 +17,7 @@ public class GeneWebManager : MonoBehaviour {
     IEnumerator Example()
     {
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0);
         //Global.PreWeb = false;
 
     }
@@ -38,6 +41,11 @@ public class GeneWebManager : MonoBehaviour {
     public void notifyChange()
     {
         Global.change = true;
+    }
+
+    public void disableCanvas()
+    {
+        GameObject.FindGameObjectWithTag("WebCanvas").transform.position = new Vector2(0, -500);
     }
 }
 
