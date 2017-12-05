@@ -15,11 +15,14 @@
   <node>
     <id>1</id>
     <name>Single Jaw Struct</name>
+    <requiredCalories>10</requiredCalories>
     <childNodes>2</childNodes>
   </node>
   <node>
     <id>2</id>
     <name>Chew Food</name>
+    <requiredCalories>10</requiredCalories>
+    <carnivoreFoodSource>20</carnivoreFoodSource>
     <childNodes>
       <child>3</child>
     </childNodes>
@@ -27,6 +30,7 @@
   <node>
     <id>3</id>
     <name>Short and Fast Digestive Tract</name>
+    <requiredCalories>-20</requiredCalories>
     <childNodes>
       <child>8</child>
     </childNodes>
@@ -34,6 +38,7 @@
   <node>
     <id>4</id>
     <name>Double Jaw Sructure</name>
+    <requiredCalories>10</requiredCalories>
     <childNodes>
       <child>5</child>
     </childNodes>
@@ -41,6 +46,8 @@
   <node>
     <id>5</id>
     <name>Swallow Whole</name>
+    <requiredCalories>10</requiredCalories>
+    <creatureSize>10</creatureSize>
     <childNodes>
       <child>6</child>
       <child>7</child>
@@ -49,6 +56,8 @@
   <node>
     <id>6</id>
     <name>Teeth with Venom</name>
+    <carnivoreFoodSource>50</carnivoreFoodSource>
+    <creatureSize>-5</creatureSize>
     <childNodes>
       <child>8</child>
     </childNodes>
@@ -56,6 +65,7 @@
   <node>
     <id>7</id>
     <name>Intense Stomach Acids</name>
+    <requiredCalories>20</requiredCalories>
     <childNodes>
       <child>8</child>
     </childNodes>
@@ -63,6 +73,7 @@
   <node>
     <id>8</id>
     <name>Large Stomachs</name>
+    <creatureSize>10</creatureSize>
     <childNodes>
       <child>9</child>
     </childNodes>
@@ -70,6 +81,7 @@
   <node>
     <id>9</id>
     <name>Virus Immunity</name>
+    <requiredCalories>-5</requiredCalories>
     <childNodes>
       <child>10</child>
     </childNodes>
@@ -77,6 +89,7 @@
   <node>
     <id>10</id>
     <name>Eat Ambient Meat</name>
+    <carnivorous>1</carnivorous>
     <childNodes>
       <child>11</child>
     </childNodes>
@@ -84,6 +97,7 @@
   <node>
     <id>11</id>
     <name>Eat Small Animals</name>
+    <carnivoreFoodSource>100</carnivoreFoodSource>
     <childNodes>
       <child>12</child>
     </childNodes>
@@ -91,6 +105,7 @@
   <node>
     <id>12</id>
     <name>Eat Medium Animals</name>
+    <carnivoreFoodSource>100</carnivoreFoodSource>
     <childNodes>
       <child>13</child>
     </childNodes>
@@ -98,6 +113,7 @@
   <node>
     <id>13</id>
     <name>Eat Large Animals</name>
+    <carnivoreFoodSource>100</carnivoreFoodSource>
     <childNodes>
       <child>14</child>
     </childNodes>
@@ -105,11 +121,13 @@
   <node>
     <id>14</id>
     <name>Eat Humongous Animals</name>
+    <carnivoreFoodSource>100</carnivoreFoodSource>
     <childNodes></childNodes>
   </node>
   <node>
     <id>15</id>
     <name>Chew Food</name>
+    <requiredCalories>10</requiredCalories>
     <childNodes>
       <child>16</child>
     </childNodes>
@@ -117,6 +135,7 @@
   <node>
     <id>16</id>
     <name>Specialized Digestive Tract</name>
+    <requiredCalories>10</requiredCalories>
     <childNodes>
       <child>17</child>
       <child>18</child>
@@ -126,16 +145,21 @@
   <node>
     <id>17</id>
     <name>Eat Berries</name>
+    <herbivoreFoodSource>0,0,0,1</herbivoreFoodSource> <!--grass,leaves,nuts,berries-->
+    <creatureSize>-10</creatureSize>
     <childNodes></childNodes>
   </node>
   <node>
     <id>18</id>
     <name>Eat Nuts</name>
+    <herbivoreFoodSource>0,0,1,0</herbivoreFoodSource>
+    <creatureSize>-10</creatureSize>
     <childNodes></childNodes>
   </node>
   <node>
     <id>19</id>
     <name>Eat Grass and Seeds</name>
+    <herbivoreFoodSource>1,0,0,0</herbivoreFoodSource>
     <childNodes>
     	<child>20</child>
     </childNodes>
@@ -143,11 +167,15 @@
   <node>
     <id>20</id>
     <name>Eat Leaves</name>
+    <herbivoreFoodSource>0,1,0,0</herbivoreFoodSource>
     <childNodes></childNodes>
   </node>
   <node>
     <id>21</id>
     <name>Hard Eggs</name>
+    <litterSize>2</litterSize>
+    <offspringSize>-5</offspringSize>
+    <requiredCalories>5</requiredCalories>
     <childNodes>
       <child>22</child>
       <child>23</child>
@@ -156,6 +184,7 @@
   <node>
     <id>22</id>
     <name>Beaks</name>
+    <requiredCalories>-10</requiredCalories>
     <childNodes>
       <child>31</child>
       <child>32</child>
@@ -165,6 +194,7 @@
   <node>
     <id>23</id>
     <name>Feathers</name>
+    <requiredCalories>-10</requiredCalories>
     <childNodes>
     	<child>24</child>
     </childNodes>
@@ -172,6 +202,10 @@
   <node>
     <id>24</id>
     <name>Hollow Bones</name>
+    <creatureSize>-15</creatureSize>
+    <litterSize>2</litterSize>
+    <offspringSize>-5</offspringSize>
+    <altitude>100</altitude>
     <childNodes>
       <child>25</child>
       <child>26</child>
@@ -180,6 +214,8 @@
   <node>
     <id>25</id>
     <name>Glide Feathers</name>
+    <altitude>100</altitude>
+    <requiredCalories>-10</requiredCalories>
     <childNodes>
       <child>27</child>
     </childNodes>
@@ -187,6 +223,8 @@
   <node>
     <id>26</id>
     <name>Webbing</name>
+    <altitude>50</altitude>
+    <requiredCalories>-10</requiredCalories>
     <childNodes>
       <child>28</child>
     </childNodes>
@@ -194,6 +232,9 @@
   <node>
     <id>27</id>
     <name>Flapping Ability</name>
+    <altitude>500</altitude>
+    <requiredCalories>50</requiredCalories>
+    <canFly>1</canFly>
     <childNodes>
       <child>29</child>
     </childNodes>
@@ -201,11 +242,17 @@
   <node>
     <id>28</id>
     <name>Flapping Ability</name>
+    <altitude>300</altitude>
+    <requiredCalories>50</requiredCalories>
+    <canFly>1</canFly>
     <childNodes></childNodes>
   </node>
   <node>
     <id>29</id>
     <name>Flight Feathers</name>
+    <altidude>500</altidude>
+    <requiredCalories>-10</requiredCalories>
+    <dexterity>10</dexterity>
     <childNodes>
       <child>30</child>
     </childNodes>
@@ -213,6 +260,9 @@
   <node>
     <id>30</id>
     <name>Alula</name>
+    <altitude>500</altitude>
+    <requiredCalories>-10</requiredCalories>
+    <dexterity>20</dexterity>
     <childNodes>
       <child>34</child>
       <child>39</child>
@@ -221,21 +271,29 @@
   <node>
     <id>31</id>
     <name>Hooked Beak</name>
+    <carnivoreFoodSize>20</carnivoreFoodSize>
+    <creatureSize>10</creatureSize>
     <childNodes></childNodes>
   </node>
   <node>
     <id>32</id>
     <name>Prying Beak</name>
+    <requiredCalories>-5</requiredCalories>
+    <creatureSize>-5</creatureSize>
     <childNodes></childNodes>
   </node>
   <node>
     <id>33</id>
     <name>Pointed Beak</name>
+    <requiredCalories>-10</requiredCalories>
+    <creatureSize>-10</creatureSize>
     <childNodes></childNodes>
   </node>
   <node>
     <id>34</id>
     <name>Improved Glide</name>
+    <requiredCalories>-10</requiredCalories>
+    <altitude>100</altitude>
     <childNodes>
       <child>35</child>
     </childNodes>
@@ -243,6 +301,8 @@
   <node>
     <id>35</id>
     <name>Improved Glide</name>
+    <requiredCalories>-10</requiredCalories>
+    <altitude>100</altitude>
     <childNodes>
       <child>36</child>
     </childNodes>
@@ -250,6 +310,8 @@
   <node>
     <id>36</id>
     <name>Improved Glide</name>
+    <requiredCalories>-10</requiredCalories>
+    <altitude>100</altitude>
     <childNodes>
       <child>37</child>
     </childNodes>
@@ -257,6 +319,8 @@
   <node>
     <id>37</id>
     <name>Improved Glide</name>
+    <requiredCalories>-10</requiredCalories>
+    <altitude>100</altitude>
     <childNodes>
       <child>38</child>
     </childNodes>
@@ -264,11 +328,16 @@
   <node>
     <id>38</id>
     <name>Improved Glide</name>
+    <requiredCalories>-10</requiredCalories>
+    <altitude>100</altitude>
     <childNodes></childNodes>
   </node>
   <node>
     <id>39</id>
     <name>Improved Speed</name>
+    <requiredCalories>10</requiredCalories>
+    <dexterity>10</dexterity>
+    <altitude>100</altitude>
     <childNodes>
       <child>40</child>
     </childNodes>
@@ -276,6 +345,9 @@
   <node>
     <id>40</id>
     <name>Improved Speed</name>
+    <requiredCalories>10</requiredCalories>
+    <dexterity>10</dexterity>
+    <altitude>100</altitude>
     <childNodes>
       <child>41</child>
     </childNodes>
@@ -283,6 +355,9 @@
   <node>
     <id>41</id>
     <name>Improved Speed</name>
+    <requiredCalories>10</requiredCalories>
+    <dexterity>10</dexterity>
+    <altitude>100</altitude>
     <childNodes>
       <child>42</child>
     </childNodes>
@@ -290,6 +365,9 @@
   <node>
     <id>42</id>
     <name>Improved Speed</name>
+    <requiredCalories>10</requiredCalories>
+    <dexterity>10</dexterity>
+    <altitude>100</altitude>
     <childNodes>
       <child>43</child>
     </childNodes>
@@ -297,11 +375,16 @@
   <node>
     <id>43</id>
     <name>Improved Speed</name>
+    <requiredCalories>10</requiredCalories>
+    <dexterity>10</dexterity>
+    <altitude>100</altitude>
     <childNodes></childNodes>
   </node>
   <node>
     <id>44</id>
     <name>Hair/Fur</name>
+    <requiredCalories>-10</requiredCalories>
+    <altitude>100</altitude>
     <childNodes>
       <child>45</child>
     </childNodes>
@@ -309,6 +392,9 @@
   <node>
     <id>45</id>
     <name>Live-born Babies</name>
+    <requiredCalories>100</requiredCalories>
+    <dexterity>-20</dexterity>
+    <creatureSize>5</creatureSize>
     <childNodes>
       <child>46</child>
       <child>49</child>
@@ -318,6 +404,10 @@
   <node>
     <id>46</id>
     <name>Larger Size</name>
+    <requiredCalories>100</requiredCalories>
+    <creatureSize>100</creatureSize>
+    <dexterity>-10</dexterity>
+    <reproductionRate>-10</reproductionRate>
     <childNodes>
       <child>47</child>
       <child>48</child>
@@ -326,6 +416,9 @@
   <node>
     <id>47</id>
     <name>Thicker Hide</name>
+    <requiredCalories>-10</requiredCalories>
+    <altitude>100</altitude>
+    <dexterity>-5</dexterity>
     <childNodes>
       <child>80</child>
     </childNodes>
@@ -338,6 +431,10 @@
   <node>
     <id>49</id>
     <name>Larger Size</name>
+    <requiredCalories>200</requiredCalories>
+    <creatureSize>200</creatureSize>
+    <dexterity>-20</dexterity>
+    <reproductionRate>-20</reproductionRate>
     <childNodes>
       <child>50</child>
       <child>51</child>
@@ -351,6 +448,7 @@
   <node>
     <id>51</id>
     <name>Elongated Mouth</name>
+    <requiredCalories>-5</requiredCalories>
     <childNodes>
       <child>52</child>
     </childNodes>
@@ -358,11 +456,15 @@
   <node>
     <id>52</id>
     <name>Prehensile Trunk</name>
+    <requiredCalories>-10</requiredCalories>
+    <dexterity>5</dexterity>
     <childNodes></childNodes>
   </node>
   <node>
     <id>53</id>
     <name>Improved Appendage Muscles</name>
+    <requiredCalories>10</requiredCalories>
+    <dexterity>20</dexterity>
     <childNodes>
       <child>54</child>
       <child>56</child>
@@ -372,13 +474,17 @@
   <node>
     <id>54</id>
     <name>Smaller Size</name>
+    <creatureSize>-100</creatureSize>
+    <dexterity>5</dexterity>
+    <requiredCalories>-20</requiredCalories>
     <childNodes>
       <child>55</child>
     </childNodes>
   </node>
-    <node>
+  <node>
     <id>55</id>
     <name>Improved Senses</name>
+    <requiredCalories>-10</requiredCalories>
     <childNodes>
       <child>26</child>
     </childNodes>
@@ -386,6 +492,8 @@
   <node>
     <id>56</id>
     <name>Lighter Body</name>
+    <requiredCalories>-10</requiredCalories>
+    <altitude>100</altitude>
     <childNodes>
       <child>57</child>
       <child>58</child>
@@ -394,6 +502,8 @@
   <node>
     <id>57</id>
     <name>Larger Feet</name>
+    <dexterity>10</dexterity>
+    <requiredCalories>-5</requiredCalories>
     <childNodes>
       <child>59</child>
     </childNodes>
@@ -408,6 +518,8 @@
   <node>
     <id>59</id>
     <name>Foot Padding</name>
+    <requiredCalories>-10</requiredCalories>
+    <dexterity>10</dexterity>
     <childNodes>
       <child>60</child>
     </childNodes>
@@ -415,6 +527,7 @@
   <node>
     <id>60</id>
     <name>Improved Stealth</name>
+    <dexterity>30</dexterity>
     <childNodes></childNodes>
   </node>
   <node>
@@ -425,6 +538,7 @@
   <node>
     <id>62</id>
     <name>Opposable Thumbs</name>
+    <dexterity>10</dexterity>
     <childNodes>
       <child>63</child>
       <child>64</child>
@@ -433,6 +547,7 @@
   <node>
     <id>63</id>
     <name>Prehensile Tail</name>
+    <dexterity>5</dexterity>
     <childNodes></childNodes>
   </node>
   <node>
@@ -446,11 +561,13 @@
   <node>
     <id>65</id>
     <name>Removed Tail</name>
+    <requiredCalories>-5</requiredCalories>
     <childNodes></childNodes>
   </node>
   <node>
     <id>66</id>
     <name>Tool Usage</name>
+    <dexterity>5</dexterity>
     <childNodes>
       <child>67</child>
     </childNodes>
@@ -477,6 +594,8 @@
   <node>
     <id>70</id>
     <name>Ectothermic</name>
+    <requiredCalories>-75</requiredCalories>
+    <reproductionRate>5</reproductionRate>
     <childNodes>
       <child>71</child>
       <child>75</child>
@@ -485,6 +604,8 @@
   <node>
     <id>71</id>
     <name>Improved Swimming</name>
+    <dexterity>5</dexterity>
+    <requiredCalories>10</requiredCalories>
     <childNodes>
       <child>72</child>
       <child>73</child>
@@ -493,11 +614,14 @@
   <node>
     <id>72</id>
     <name>Water Dependence</name>
+    <requiredCalories>-25</requiredCalories>
     <childNodes></childNodes>
   </node>
   <node>
     <id>73</id>
     <name>Strong Back Legs</name>
+    <dexterity>10</dexterity>
+    <creatureSize>-10</creatureSize>
     <childNodes>
       <child>74</child>
       <child>93</child>
@@ -506,11 +630,15 @@
   <node>
     <id>74</id>
     <name>Smaller Size</name>
+    <requiredCalories>-20</requiredCalories>
+    <creatureSize>-100</creatureSize>
     <childNodes></childNodes>
   </node>
   <node>
     <id>75</id>
     <name>Hardened Skin</name>
+    <altitude>50</altitude>
+    <dexterity>-20</dexterity>
     <childNodes>
       <child>76</child>
       <child>78</child>
@@ -519,6 +647,9 @@
   <node>
     <id>76</id>
     <name>Increased Lifespan</name>
+    <reproductionRate>-30</reproductionRate>
+    <creatureSize>50</creatureSize>
+    <litterSize>10</litterSize>
     <childNodes>
       <child>77</child>
     </childNodes>
@@ -526,6 +657,9 @@
   <node>
     <id>77</id>
     <name>Shells</name>
+    <litterSize>10</litterSize>
+    <reproductionRate>-10</reproductionRate>
+    <dexterity>-50</dexterity>
     <childNodes>
       <child>83</child>
     </childNodes>
@@ -533,6 +667,7 @@
   <node>
     <id>78</id>
     <name>Scales</name>
+    <dexterity>-5</dexterity>
     <childNodes>
       <child>79</child>
       <child>80</child>
@@ -553,6 +688,7 @@
   <node>
     <id>81</id>
     <name>Sturdy Teeth</name>
+    <requiredCalories>-5</requiredCalories>
     <childNodes>
       <child>82</child>
     </childNodes>
@@ -560,6 +696,10 @@
   <node>
     <id>82</id>
     <name>Increased Size</name>
+    <requiredCalories>100</requiredCalories>
+    <creatureSize>100</creatureSize>
+    <dexterity>-10</dexterity>
+    <reproductionRate>-10</reproductionRate>
     <childNodes>
       <child>83</child>
     </childNodes>
@@ -567,11 +707,13 @@
   <node>
     <id>83</id>
     <name>Powerful Jaw Muscles</name>
+    <creatureSize>10</creatureSize>
     <childNodes></childNodes>
   </node>
   <node>
     <id>84</id>
     <name>Flexible Skeleton</name>
+    <dexterity>10</dexterity>
     <childNodes>
       <child>85</child>
     </childNodes>
@@ -579,6 +721,9 @@
   <node>
     <id>85</id>
     <name>Loss of Legs</name>
+    <dexterity>-10</dexterity>
+    <requiredCalories>-20</requiredCalories>
+    <altitude>-200</altitude>
     <childNodes>
       <child>83</child>
       <child>86</child>
@@ -607,6 +752,10 @@
   <node>
     <id>89</id>
     <name>Increased Size</name>
+    <requiredCalories>100</requiredCalories>
+    <creatureSize>100</creatureSize>
+    <dexterity>-10</dexterity>
+    <reproductionRate>-10</reproductionRate>
     <childNodes>
       <child>90</child>
       <child>91</child>
@@ -615,11 +764,14 @@
   <node>
     <id>90</id>
     <name>Improved Camouflage</name>
+    <dexterity>10</dexterity>
     <childNodes></childNodes>
   </node>
   <node>
     <id>91</id>
     <name>Strengthened Body Muscles</name>
+    <requiredCalories>20</requiredCalories>
+    <dexterity>5</dexterity>
     <childNodes>
       <child>92</child>
     </childNodes>
@@ -627,6 +779,8 @@
   <node>
     <id>92</id>
     <name>Constricting Ability</name>
+    <requiredCalories>-10</requiredCalories>
+    <dexterity>10</dexterity>
     <childNodes></childNodes>
   </node>
   <node>

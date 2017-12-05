@@ -60,8 +60,14 @@ public class buildWeb : MonoBehaviour
                 nodes[i] = new Node(nodeData["name"].InnerText);
                 try
                 {
-                    //TODO
-                    // nodes[i].setHerbivoreFoodSource()
+                    string[] stringArray = nodeData["herbivoreFoodSource"].InnerText.Split(',');
+                    int[] intArray = new int[4];
+                    int value;
+                    for(value = 0; value < 4; value++)
+                    {
+                        intArray[value] = int.Parse(stringArray[value]);
+                    }
+                    nodes[i].setHerbivoreFoodSource(intArray);
                 }
                 catch (System.NullReferenceException) { }
                 try
