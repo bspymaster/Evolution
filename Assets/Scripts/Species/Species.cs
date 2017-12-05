@@ -140,4 +140,8 @@ public class Species : MonoBehaviour
     {
         return peckingOrder;
     }
+    public void addToLocation(Vector2Int additionalLocation)
+    {
+        location.Add(additionalLocation);
+    }
 }
