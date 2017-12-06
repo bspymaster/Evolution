@@ -26,7 +26,9 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Spawn()
     {
-         float DIMENSION = speciesObject.transform.lossyScale.y;
+        float dimeny = (float)9.9999999999999;//GameObject.Find("BaseWorldTile").GetComponent<generate>().transform.lossyScale.y;
+        float dimenx = (Mathf.Sqrt(3) / 2) * dimeny;
+        float DIMENSION = speciesObject.transform.lossyScale.y;
     //  print("Spawn()");
     var rnd = new System.Random();
         int locX = 0;
@@ -43,8 +45,8 @@ public class UpdateSpecies : MonoBehaviour {
             locY = rnd.Next(0, 99);
             lctn.Add(new Vector2Int(locX, locY));
            Vector2 holder= GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX, locY);
-            holder.x *=(DIMENSION /*- (float)2.5*/);
-            holder.y *=(DIMENSION/* - (float)2*/);
+            holder.x = holder.x * (dimenx - (float)2.5);
+            holder.y = holder.y * (dimeny - (float)2);
         GameObject newSpeciesObject = Instantiate(speciesObject, holder, Quaternion.identity);
             speciesScript = newSpeciesObject.GetComponent<Species>();
             speciesScript.Init(i.ToString(), i, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
@@ -62,11 +64,11 @@ public class UpdateSpecies : MonoBehaviour {
         locX = rnd.Next(0, 99);
         locY = rnd.Next(0, 99);
         lctn.Add(new Vector2Int(locX, locY));
-       float dimeny = GameObject.Find("BaseWorldTile").GetComponent<generate>().transform.lossyScale.y;
-        float dimenx = (Mathf.Sqrt(3) / 2) * dimeny;
+        print("Player loc: "+locX + "," + locY);
+        
         Vector2 hold = GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX, locY);
-        hold.x = hold.x * (dimenx);// - (float)2.5);
-        hold.y = hold.y * (dimeny);//- (float)2);
+        hold.x = hold.x * (dimenx - (float)2.5);
+        hold.y = hold.y * (dimeny- (float)2);
 
         GameObject newPlayerSpeciesObject = Instantiate(playerSpeciesObject,hold, Quaternion.identity);
         speciesScript = newPlayerSpeciesObject.GetComponent<Species>();
