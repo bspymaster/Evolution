@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class GeneName : MonoBehaviour {
 
     private bool isOn = false;
-    public int nodeIndex;
+    private int nodeIndex;
     public Text textPrefab;
+    public GameObject nodeButton;
 
     // Adds or removes node when enabling or disabling a gene.
     public void sendGeneNum()
@@ -24,23 +25,23 @@ public class GeneName : MonoBehaviour {
         }
     }
         
+    
 
     // Use this for initialization
     void Start() {
-        StartCoroutine(Example());
 
+        nodeIndex = this.transform.parent.GetComponent<SpriteChange>().getIndex();
+        StartCoroutine(Example());
     }
 
     IEnumerator Example() { 
 
         yield return new WaitForSeconds(0);
-        //GameObject.FindGameObjectWithTag("Canvas").SetActive(true);
 
         textPrefab.text = GameObject.Find("Web Builder")
             .GetComponent<buildWeb>()
             .getWeb()
             .getNode(nodeIndex)
-            .getName();
-    }
-	
+            .getName();    
+    }	
 }
