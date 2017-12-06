@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SpriteChange : MonoBehaviour {
 
+    public int trueNodeIndex;
     public Button button;
     public Sprite Unadded;
     public Sprite Added;
