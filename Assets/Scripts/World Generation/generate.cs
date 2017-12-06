@@ -28,7 +28,6 @@ public class generate : MonoBehaviour
         //float width = BaseWorldTile.transform.lossyScale.x;
         float height = BaseWorldTile.transform.lossyScale.y;
         float width = (Mathf.Sqrt(3) / 2) * height;
-        print(height+" "+ width);
         string[] tileType = { "Ocean", "Desert", "Plains", "Forest", "Tundra" };
         Color[] tileColors = { new Color(18f / 255f, 15f / 255f, 62f / 255f, 255f / 255f), new Color(197f / 255f, 183f / 255f, 68f / 255f, 255f / 255f),
                                new Color(60f/255f,242f/255f,2f/255f,255f/255f), new Color(0f/255f,143f/255f,48f/255f,255f/255f), new Color(67f/255f,186f/255f,203f/255f,255f/255f) };

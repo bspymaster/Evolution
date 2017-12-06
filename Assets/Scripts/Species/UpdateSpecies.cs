@@ -30,7 +30,7 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Spawn()
     {
-        float dimeny = (float)9.9999999999999;//GameObject.Find("BaseWorldTile").GetComponent<generate>().transform.lossyScale.y;
+        float dimeny = (float)9.9999999999999;
         float dimenx = (Mathf.Sqrt(3) / 2) * dimeny;
         float DIMENSION = speciesObject.transform.lossyScale.y;
     //  print("Spawn()");
@@ -67,9 +67,7 @@ public class UpdateSpecies : MonoBehaviour {
         }
         locX = rnd.Next(0, 99);
         locY = rnd.Next(0, 99);
-        lctn.Add(new Vector2Int(locX, locY));
-        print("Player loc: "+locX + "," + locY);
-        
+        lctn.Add(new Vector2Int(locX, locY));        
         Vector2 hold = GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX, locY);
         hold.x = hold.x * (dimenx - (float)2.5);
         hold.y = hold.y * (dimeny- (float)2);
