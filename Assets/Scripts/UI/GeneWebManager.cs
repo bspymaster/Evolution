@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class GeneWebManager : MonoBehaviour {
 
-    List<int> UnlockedGenes = new List<int>();
+    
+    
 
     void Start()
     {
 
-        
+        if (Global.PreWeb == true)
+        {
+
+            Global.UnlockedGenes.Add(0);
+            Global.PreWeb = false;
+        }
         StartCoroutine(Example());
 
     }

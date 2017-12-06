@@ -12,6 +12,7 @@ public class Global : MonoBehaviour {
     public static List<int> removeGenes = new List<int>();
     public static int mutationPoints = 0;
     public static bool change = false;
+    public static List<int> UnlockedGenes = new List<int>();
 
     public void killWorld()
     {
