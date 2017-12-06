@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 222952783070727364}
   - component: {fileID: 114772666000931806}
   - component: {fileID: 114710155065429488}
-  - component: {fileID: 114163481183875924}
   m_Layer: 5
   m_Name: ToTileWorld
   m_TagString: Untagged
@@ -82,17 +81,6 @@ MonoBehaviour:
   m_Text: 'World
 
     Map'
---- !u!114 &114163481183875924
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1735958985548340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c755d4ad0882c9042829e85e8bf996e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114710155065429488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,7 +127,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -204,7 +192,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1735958985548340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 650, y: 180, z: 0}
+  m_LocalPosition: {x: 575, y: 180, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224951648489628268}
@@ -213,7 +201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 650, y: 180}
+  m_AnchoredPosition: {x: 575, y: 180}
   m_SizeDelta: {x: 70, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224951648489628268
