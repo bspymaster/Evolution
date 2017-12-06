@@ -14,9 +14,9 @@ public class UIManager : MonoBehaviour
 
     public void BuildUI()
     {
-        GameObject geneButton = Instantiate(GeneWebButtonPrefab, new Vector3(650, 180, 0), Quaternion.identity) as GameObject;
+        GameObject geneButton = Instantiate(GeneWebButtonPrefab) as GameObject;
         geneButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-        GameObject exitButton = Instantiate(ExitGameButtonPrefab, new Vector3(650, 260, 0), Quaternion.identity) as GameObject;
+        GameObject exitButton = Instantiate(ExitGameButtonPrefab) as GameObject;
         exitButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
         GameObject pointsBack = Instantiate(MutationPointsBackPrefab) as GameObject;
         pointsBack.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);

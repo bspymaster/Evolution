@@ -64,6 +64,7 @@ public class SpriteChange : MonoBehaviour {
         if (Global.UnlockedGenes.Contains(nodeIndex) & button.image.sprite != Added)
         {
             button.image.sprite = Unadded;
+            button.interactable = true;
         }
     }
 }
