@@ -150,10 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0159bcc99855260409dda890a7c5f665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trueNodeIndex: 0
   button: {fileID: 114264499618581026}
   Unadded: {fileID: 21300000, guid: ce5836ec55e4dbb4ab943438e803023c, type: 3}
   Added: {fileID: 21300000, guid: e75f5740a4ae443419216c2369d3f635, type: 3}
-  Locked: {fileID: 0}
+  Locked: {fileID: 21300000, guid: fca1386ba23368940a591fb65a4b5c3c, type: 3}
 --- !u!114 &114807612426866804
 MonoBehaviour:
   m_ObjectHideFlags: 1

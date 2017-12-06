@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class GeneWebManager : MonoBehaviour {
 
+    List<int> UnlockedGenes = new List<int>();
 
     void Start()
     {
-        
 
+        
         StartCoroutine(Example());
 
     }
