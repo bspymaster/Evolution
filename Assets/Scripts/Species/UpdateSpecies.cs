@@ -6,7 +6,7 @@ public class UpdateSpecies : MonoBehaviour {
 
     public GameObject speciesObject;
     public GameObject playerSpeciesObject;
-    private static int DIMENSION = 10;
+    //private int DIMENSION = speciesObject.transform.lossyScale.y;
     private int mapSize;
     private List<GameObject> speciesArray;
 
@@ -26,8 +26,9 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Spawn()
     {
-        //  print("Spawn()");
-        var rnd = new System.Random();
+         float DIMENSION = speciesObject.transform.lossyScale.y;
+    //  print("Spawn()");
+    var rnd = new System.Random();
         int locX = 0;
         int locY = 0;
         Species speciesScript = speciesObject.GetComponent<Species>();
@@ -38,10 +39,13 @@ public class UpdateSpecies : MonoBehaviour {
         {
             lctn = new List<Vector2Int>();
             gns = new List<int>();
-            locX = rnd.Next(0, 100);
-            locY = rnd.Next(0, 100);
+            locX = rnd.Next(0, 99);
+            locY = rnd.Next(0, 99);
             lctn.Add(new Vector2Int(locX, locY));
-            GameObject newSpeciesObject = Instantiate(speciesObject, GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX * DIMENSION, locY * DIMENSION), Quaternion.identity);
+           Vector2 holder= GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX, locY);
+            holder.x *=(DIMENSION /*- (float)2.5*/);
+            holder.y *=(DIMENSION/* - (float)2*/);
+        GameObject newSpeciesObject = Instantiate(speciesObject, holder, Quaternion.identity);
             speciesScript = newSpeciesObject.GetComponent<Species>();
             speciesScript.Init(i.ToString(), i, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
             // set parameters
@@ -55,10 +59,16 @@ public class UpdateSpecies : MonoBehaviour {
             localSpecies.Add(i, 10);
             GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().setLocalSpecies(localSpecies);
         }
-        locX = rnd.Next(0, 100);
-        locY = rnd.Next(0, 100);
+        locX = rnd.Next(0, 99);
+        locY = rnd.Next(0, 99);
         lctn.Add(new Vector2Int(locX, locY));
-        GameObject newPlayerSpeciesObject = Instantiate(playerSpeciesObject, GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX * DIMENSION, locY * DIMENSION), Quaternion.identity);
+       float dimeny = GameObject.Find("BaseWorldTile").GetComponent<generate>().transform.lossyScale.y;
+        float dimenx = (Mathf.Sqrt(3) / 2) * dimeny;
+        Vector2 hold = GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX, locY);
+        hold.x = hold.x * (dimenx);// - (float)2.5);
+        hold.y = hold.y * (dimeny);//- (float)2);
+
+        GameObject newPlayerSpeciesObject = Instantiate(playerSpeciesObject,hold, Quaternion.identity);
         speciesScript = newPlayerSpeciesObject.GetComponent<Species>();
         speciesScript.Init("0", 0, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
         speciesArray.Add(newPlayerSpeciesObject);
