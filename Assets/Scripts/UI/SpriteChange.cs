@@ -5,22 +5,46 @@ using UnityEngine.UI;
 
 public class SpriteChange : MonoBehaviour {
 
+    public int nodeIndex;
     public Button button;
     public Sprite Unadded;
     public Sprite Added;
     public Sprite Locked;
+    public List<int> nodeChildren = new List<int>();
 
-    //    float timer = 1f;
-    //    float delay = 1f;
 
     private void Start()
     {
-        if(Global.PreWeb == true)
-        {
-            button.image.sprite = Unadded;
-            Global.PreWeb = false;
-        }  
+        button.image.sprite = Locked;
+        
     }
+
+    //Returns the node's index number
+    public int getIndex()
+    {
+        return nodeIndex;
+    }
+
+    //Sets the node's index number
+    public void setIndex(int ind)
+    {
+        nodeIndex = ind;
+    }
+
+
+    public void getTheChildren()
+    {
+        nodeChildren = GameObject.Find("Web Builder")
+            .GetComponent<buildWeb>()
+            .getWeb()
+            .getChildren(nodeIndex);
+
+        foreach (int child in nodeChildren)
+        {
+            Global.UnlockedGenes.Add(child);
+        }
+    }
+
 
     public void toggle2()
     {
@@ -28,42 +52,18 @@ public class SpriteChange : MonoBehaviour {
         {
             button.image.sprite = Added;
         }
-        else
+        else if(button.image.sprite == Added)
+        {
+            button.image.sprite = Unadded;
+        }     
+    }
+
+    
+    private void Update()
+    {
+        if (Global.UnlockedGenes.Contains(nodeIndex) & button.image.sprite != Added)
         {
             button.image.sprite = Unadded;
         }
-        
     }
-
-    private void Update()
-    {
-
-    }
-
-
-    /*
-
-
-
-        private void Update()
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                if (this.gameObject.GetComponent<SpriteRenderer>().sprite == Unadded)
-                {
-                    this.gameObject.GetComponent<SpriteRenderer>().sprite = Added;
-                    timer = delay;
-                    return;
-                }
-                if (this.gameObject.GetComponent<SpriteRenderer>().sprite == Added)
-                {
-                    this.gameObject.GetComponent<SpriteRenderer>().sprite = Unadded;
-                    timer = delay;
-                    return;
-                }
-
-            }
-        }
-    */
 }

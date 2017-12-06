@@ -7,7 +7,7 @@ using System.Xml;
 public class buildWeb : MonoBehaviour
 {
 
-    private static int NUMNODES = 95;
+    private static int NUMNODES = 110;
     private static string NODEDATAPATH = "Scripts/Web/Implementations/NodeData.xml";
     private Web web;
 
@@ -138,6 +138,11 @@ public class buildWeb : MonoBehaviour
                 try
                 {
                     nodes[i].setPeckingOrder(int.Parse(nodeData["peckingOrder"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setPeckingOrder(int.Parse(nodeData["offspringSurvivalChance"].InnerText));
                 }
                 catch (System.NullReferenceException) { }
             }

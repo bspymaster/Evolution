@@ -10,6 +10,9 @@
       <child>21</child>
       <child>44</child>
       <child>70</child>
+      <child>95</child>
+      <child>100</child>
+      <child>106</child>
     </childNodes>
   </node>
   <node>
@@ -791,6 +794,134 @@
   <node>
     <id>94</id>
     <name>Poison-Secreting Skin</name>
+    <childNodes></childNodes>
+  </node>
+  <node>
+    <id>95</id>
+    <name>Increased Litter Size</name>
+    <litterSize>5</litterSize>
+    <requiredCalories>10</requiredCalories>
+    <childNodes>
+      <child>96</child>
+    </childNodes>
+  </node>
+  <node>
+    <id>96</id>
+    <name>Increased Litter Size</name>
+    <litterSize>5</litterSize>
+    <requiredCalories>10</requiredCalories>
+    <childNodes>
+      <child>97</child>
+    </childNodes>
+  </node>
+  <node>
+    <id>97</id>
+    <name>Increased Litter Size</name>
+    <litterSize>5</litterSize>
+    <requiredCalories>10</requiredCalories>
+    <childNodes>
+      <child>98</child>
+    </childNodes>
+  </node>
+  <node>
+    <id>98</id>
+    <name>Increased Litter Size</name>
+    <litterSize>5</litterSize>
+    <requiredCalories>10</requiredCalories>
+    <childNodes>
+      <child>99</child>
+    </childNodes>
+  </node>
+  <node>
+    <id>99</id>
+    <name>Increased Litter Size</name>
+    <litterSize>5</litterSize>
+    <requiredCalories>10</requiredCalories>
+    <childNodes></childNodes>
+  </node>
+  <node>
+    <id>100</id>
+    <name>Monagamous Relationships</name>
+    <mutationChance>10</mutationChance>
+    <childNodes>
+      <child>101</child>
+      <child>103</child>
+    </childNodes>
+  </node>
+  <node>
+    <id>101</id>
+    <name>Polygamous Relationships</name>
+    <offspringSurvivalChance>-5</offspringSurvivalChance>
+    <mutationChance>20</mutationChance>
+    <childNodes>
+      <child>102</child>
+    </childNodes>
+  </node>
+  <node>
+    <id>102</id>
+    <name>polygynandrous Relationships</name>
+    <offspringSurvivalChance>-10</offspringSurvivalChance>
+    <mutationChance>20</mutationChance>
+    <childNodes></childNodes>
+  </node>
+  <node>
+    <id>103</id>
+    <name>Single Parent Protection</name>
+    <offspringSurvivalChance>10</offspringSurvivalChance>
+    <childNodes>
+      <child>104</child>
+    </childNodes>
+  </node>
+  <node>
+    <id>104</id>
+    <name>Bi-Parent Protection</name>
+    <offspringSurvivalChance>20</offspringSurvivalChance>
+    <childNodes>
+      <child>105</child>
+    </childNodes>
+  </node>
+  <node>
+    <id>105</id>
+    <name>Communal Protection</name>
+    <offspringSurvivalChance>20</offspringSurvivalChance>
+    <childNodes></childNodes>
+  </node>
+  <node>
+    <id>106</id>
+    <name>Increased Mating Frequency</name>
+    <creatureSize>-10</creatureSize>
+    <reproductionRate>10</reproductionRate>
+    <requiredCalories>5</requiredCalories>
+    <childNodes>
+      <child>107</child>
+    </childNodes>
+  </node>
+  <node>
+    <id>107</id>
+    <name>Increased Mating Frequency</name>
+    <creatureSize>-10</creatureSize>
+    <reproductionRate>10</reproductionRate>
+    <requiredCalories>5</requiredCalories>
+    <childNodes>
+      <child>108</child>
+    </childNodes>
+  </node>
+  <node>
+    <id>108</id>
+    <name>Increased Mating Frequency</name>
+    <creatureSize>-10</creatureSize>
+    <reproductionRate>10</reproductionRate>
+    <requiredCalories>5</requiredCalories>
+    <childNodes>
+      <child>109</child>
+    </childNodes>
+  </node>
+  <node>
+    <id>109</id>
+    <name>Increased Mating Frequency</name>
+    <creatureSize>-10</creatureSize>
+    <reproductionRate>10</reproductionRate>
+    <requiredCalories>5</requiredCalories>
     <childNodes></childNodes>
   </node>
 </root>
