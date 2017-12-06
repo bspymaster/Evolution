@@ -19,6 +19,7 @@ public class Node
     private int dexterity;              // defensive trait
     private int maxPerTile;             // max number of individuals of a species in a given tile, -1 is unlimited
     private int peckingOrder;           // determines when the species eats in the eating algorithm
+    private int offspringSurvivalChance;// the chance that any given offspring will survive to adulthood
 
     public Node(string name)
     {
@@ -27,11 +28,13 @@ public class Node
         carnivoreFoodSource = 0;
         requiredCalories = 0;
         creatureSize = 0;
-        //maxPerTile = 0;
+        maxPerTile = 0;
         litterSize = 0;
         reproductionRate = 0;
         mutationChance = 0;
-        //peckingOrder = 0;
+        peckingOrder = 0;
+        offspringSurvivalChance = 0;
+
     }
 
     public string getName()
@@ -162,5 +165,14 @@ public class Node
     public void setPeckingOrder(int change)
     {
         peckingOrder = change;
+    }
+
+    public int getOffspringSurvivalChance()
+    {
+        return offspringSurvivalChance;
+    }
+    public void setOffspringSurvivalChance(int change)
+    {
+        offspringSurvivalChance = change;
     }
 }

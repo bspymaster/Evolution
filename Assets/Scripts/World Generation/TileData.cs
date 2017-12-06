@@ -90,6 +90,7 @@ public class TileData:MonoBehaviour {
     {
         this.numAmbientMeat = numAmbientMeat;
     }
+    //  Tile will draw its own info about cohabitable/competing species or playerspecies
     public void setLocalSpecies(Dictionary<int, int> localSpecies)
     {
         this.localSpecies = localSpecies;
