@@ -19,16 +19,18 @@ public class Species : MonoBehaviour
     private int peckingOrder; // determines when the species eats in the eating algorithm
 
     /*
-    *   Constructor
-    */
+     *  COMPLETE
+     *  Constructor
+     */
     public Species(string speciesName)
     {
         this.speciesName = speciesName;
     }
 
     /*
-    *   Initializer
-    */
+     *  NEEDS ALL MODIFIERS
+     *  Initializer
+     */
     public void Init(string sN, int sID, List<Vector2Int> lctn, List<int> gns, int[] hFS, int cFS, int aC, int cS, int mPT, int lS, int mF, int mA, int pO)
     {
         speciesName = sN;
@@ -44,10 +46,15 @@ public class Species : MonoBehaviour
         matingFrequency = mF;
         mateAttachment = mA;
         peckingOrder = pO;
+        /*
+         *  NEEDS ALL MODIFIERS
+         */
     }
 
     /*
-     *  Take boolean to determine if adding/subtracting node in evolutionary web, and takes index of that node to modify species instance accordingly
+     *  NEEDS ALL MODIFIERS
+     *  NEEDS REVIEW - ARE THERE NODES THAT DICTATE OTHER NODES UNATTAINABLE?
+     *  Take boolean to determine if adding/subtracting node in evolutionary web, and takes index of that node to modify species instance accordingly with -1 being random node
      */
     public void evolve(bool addNode, int nodeIndex)
     {
@@ -59,6 +66,34 @@ public class Species : MonoBehaviour
         else
         {
             op = -1;
+        }
+        //  random evolution based on children
+        if (nodeIndex == -1)
+        {
+            List<int> children = new List<int>();
+            foreach (int nodeI in genes)
+            {   //  iterate through species' genes
+                if (GameObject.Find("Web Builder").GetComponent<buildWeb>().getWeb().getChildren(nodeI).Count > 0)
+                {   //  check if given node has children
+                    for (int i = 0; i < GameObject.Find("Web Builder").GetComponent<buildWeb>().getWeb().getChildren(nodeI).Count; i++)
+                    {   //  iterate through given node's children
+                        if (!genes.Contains(GameObject.Find("Web Builder").GetComponent<buildWeb>().getWeb().getChildren(nodeI)[i]))
+                        {   //  if given node's child is not already in species' genes, add it to children list
+                            children.Add(GameObject.Find("Web Builder").GetComponent<buildWeb>().getWeb().getChildren(nodeI)[i]);
+                        }
+                    }
+                }
+            }
+            //  randomly choose one of the eligible nodes
+            if (children.Count > 0)
+            {   //  check if there was any eligible node
+                var rnd = new System.Random();
+                nodeIndex = rnd.Next(0, children.Count);
+            }
+        }
+        if (nodeIndex == -1)
+        {   //  species has all possible nodes
+            return;
         }
         Node node = GameObject.Find("Web Builder").GetComponent<buildWeb>().getWeb().getNode(nodeIndex);
         // Added a node
@@ -80,6 +115,7 @@ public class Species : MonoBehaviour
     }
 
     /*
+     *  NEEDS ALL MODIFIERS
      *  Deep copy of species instance of passed species
      */
     public void clone(Species other) // other will be evolved, clone will be parent species
@@ -89,6 +125,7 @@ public class Species : MonoBehaviour
     }
 
     /*
+     *  COMPLETE
      *  Get methods for attributes of Species
      */
     public string getSpeciesName()

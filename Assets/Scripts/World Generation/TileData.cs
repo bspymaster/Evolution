@@ -90,65 +90,15 @@ public class TileData:MonoBehaviour {
     {
         this.numAmbientMeat = numAmbientMeat;
     }
-    //  Tile will draw its own info about cohabitable/competing species or playerspecies
-    public void setLocalSpecies(int speciesID, int pop)
+    public void setLocalSpecies(Species sp, int pop)
     {
-        localSpecies.Add(speciesID, pop);
+        localSpecies.Add(sp.getSpeciesID(), pop);
+        drawSpecies(sp);
     }
-
- //       float dimeny = (float)9.9999999999999;
- //       float dimenx = (Mathf.Sqrt(3) / 2) * dimeny;
- //       float DIMENSION = speciesObject.transform.lossyScale.y;
- //       //  print("Spawn()");
- //       var rnd = new System.Random();
- //       int locX = 0;
- //       int locY = 0;
- //       Species speciesScript = speciesObject.GetComponent<Species>();
- //       List<Vector2Int> lctn = new List<Vector2Int>();
- //       List<int> gns = new List<int>();
- //       //Web speciesWeb = speciesObject.GetComponent<Web>();
- //       for (int i = 1; i < 11; i++)
- //       {
- //           lctn = new List<Vector2Int>();
- //           gns = new List<int>();
- //           locX = rnd.Next(0, 100);
- //           locY = rnd.Next(0, 100);
- //           lctn.Add(new Vector2Int(locX, locY));
- //           Vector2 holder = GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX, locY);
- //           holder.x = holder.x * (dimenx - (float)2.5);
- //           holder.y = holder.y * (dimeny - (float)2);
- //           GameObject newSpeciesObject = Instantiate(speciesObject, holder, Quaternion.identity);
- //           speciesScript = newSpeciesObject.GetComponent<Species>();
- //           speciesScript.Init(i.ToString(), i, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
- //           // set parameters
- //           for (int j = 0; j < 11; j++)
- //           {
- //               gns.Add(j);
- //               speciesScript.evolve(true, j);
- //           }
- //           speciesDict.Add(newSpeciesObject, lctn);
- //           Dictionary<int, int> localSpecies = new Dictionary<int, int>();
- //           localSpecies.Add(i, 10);
- //           GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().setLocalSpecies(localSpecies);
- //       }
- //       locX = rnd.Next(0, 100);
- //       locY = rnd.Next(0, 100);
- //       lctn.Add(new Vector2Int(locX, locY));
- //       Vector2 hold = GameObject.Find("Generator").GetComponent<generate>().FindHexagonLocation(locX, locY);
- //       hold.x = hold.x * (dimenx - (float)2.5);
- //       hold.y = hold.y * (dimeny - (float)2);
-
- //       GameObject newPlayerSpeciesObject = Instantiate(playerSpeciesObject, hold, Quaternion.identity);
- //       speciesScript = newPlayerSpeciesObject.GetComponent<Species>();
- //       speciesScript.Init("0", 0, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
- //       speciesDict.Add(newPlayerSpeciesObject, lctn);
- //       Dictionary<int, int> localPlayerSpecies = new Dictionary<int, int>();
- //       localPlayerSpecies.Add(0, 10);
- //       GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().setLocalSpecies(localPlayerSpecies);
-
-    public void setSpeciesPopulation(int key, int population)
+    public void setSpeciesPopulation(Species sp, int population)
     {
-        localSpecies[key] = population;
+        localSpecies[sp.getSpeciesID()] = population;
+        drawSpecies(sp);
     }
     public void setTemperature(int temperature)
     {
@@ -157,5 +107,16 @@ public class TileData:MonoBehaviour {
     public void setAltitude(int altitude)
     {
         this.altitude = altitude;
+    }
+    private void drawSpecies(Species sp)
+    {
+        if (sp.getSpeciesID() == 0)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 }
