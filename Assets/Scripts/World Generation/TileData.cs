@@ -90,14 +90,15 @@ public class TileData:MonoBehaviour {
     {
         this.numAmbientMeat = numAmbientMeat;
     }
-    //  Tile will draw its own info about cohabitable/competing species or playerspecies
-    public void setLocalSpecies(Dictionary<int, int> localSpecies)
+    public void setLocalSpecies(Species sp, int pop)
     {
-        this.localSpecies = localSpecies;
+        localSpecies.Add(sp.getSpeciesID(), pop);
+        drawSpecies(sp);
     }
-    public void setSpeciesPopulation(int key, int population)
+    public void setSpeciesPopulation(Species sp, int population)
     {
-        localSpecies[key] = population;
+        localSpecies[sp.getSpeciesID()] = population;
+        drawSpecies(sp);
     }
     public void setTemperature(int temperature)
     {
@@ -106,5 +107,16 @@ public class TileData:MonoBehaviour {
     public void setAltitude(int altitude)
     {
         this.altitude = altitude;
+    }
+    private void drawSpecies(Species sp)
+    {
+        if (sp.getSpeciesID() == 0)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 }
