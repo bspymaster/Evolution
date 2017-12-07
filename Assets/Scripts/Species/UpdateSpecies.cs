@@ -216,7 +216,7 @@ public class UpdateSpecies : MonoBehaviour {
              *  NEEDS MUTATION MODIFIERS
              */
             System.Random rnd = new System.Random();
-            int mutVarTemp = 0;
+            int mutVarTemp = 100;
             if (rnd.Next(1, 101) <= mutVarTemp)
             {
                 Mutate(species.Key.GetComponent<Species>(), (species.Key.GetComponent<Species>().getSpeciesID() == 0));
@@ -226,34 +226,21 @@ public class UpdateSpecies : MonoBehaviour {
 
     /*
      *  ACHIEVEMENTS NEEDED
-     *  NEEDS AI RANDOM EVOLVE
      *  Parent Species will be copied into new speciesObject (mutatingSpecies) that will evolve once
      */
     private void Mutate(Species parentSpecies, bool isPlayer)
     {
         print("Mutate()");
-        int newID = speciesDict.Count + 1;
-        Species mutatingSpecies = new Species(newID.ToString());
+        Species mutatingSpecies = new Species("Species: " + speciesDict.Count + 1);
         mutatingSpecies.clone(parentSpecies);
-        int nodeIndex = 0;
-        if (!isPlayer)
-        {
-            /*
-             *  AI RANDOM EVOLVE
-             */
-            int geneIndex = mutatingSpecies.getGenes().Count - 1;
-            int newGene = mutatingSpecies.getGenes()[geneIndex] + 1;
-            if (newGene <= GameObject.Find("Web Builder").GetComponent<buildWeb>().getNumNodes())
-            {
-                //  addNode for evolve may eventually allow false
-                mutatingSpecies.evolve(true, nodeIndex);
-                Instantiate(speciesObject, new Vector2(-1, -1), Quaternion.identity);
-            }
-        }
-        else
+        if (isPlayer)
         {
             Global.mutationPoints += 1;
             Global.playerSpeciesGeneList = parentSpecies.getGenes();
+        }
+        else
+        {
+            parentSpecies.evolve(true, -1);
         }
     }
 
