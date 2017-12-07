@@ -8,7 +8,6 @@ public class GeneName : MonoBehaviour {
     private bool isOn = false;
     private int nodeIndex;
     public Text textPrefab;
-    public GameObject webObject;
 
     // Adds or removes node when enabling or disabling a gene.
     public void sendGeneNum()
