@@ -14,26 +14,39 @@ public class UIManager : MonoBehaviour
 
     public void BuildUI()
     {
-        GameObject geneButton = Instantiate(GeneWebButtonPrefab, new Vector3(650, 180, 0), Quaternion.identity) as GameObject;
+
+        ExitGameButtonPrefab.SetActive(true);
+        /*
+        GameObject geneButton = Instantiate(GeneWebButtonPrefab) as GameObject;
         geneButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-        GameObject exitButton = Instantiate(ExitGameButtonPrefab, new Vector3(650, 260, 0), Quaternion.identity) as GameObject;
+        GameObject exitButton = Instantiate(ExitGameButtonPrefab) as GameObject;
         exitButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
         GameObject pointsBack = Instantiate(MutationPointsBackPrefab) as GameObject;
         pointsBack.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
         Text pointsText = Instantiate(MutationPointsTextPrefab) as Text;
         pointsText.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+        */
     }
 
     void Start()
     {
         if (Global.PreWorld == true)
         {
-            GameObject worldButton = Instantiate(WorldMakerPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-            worldButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
 
-        }else
+            GeneWebButtonPrefab.SetActive(false);
+            ExitGameButtonPrefab.SetActive(false);
+            MutationPointsBackPrefab.SetActive(false);
+            MutationPointsTextPrefab.enabled = false;
+            //GameObject.FindGameObjectWithTag("Canvas").transform.position = new Vector2(0, 30);
+
+            //GameObject worldButton = Instantiate(WorldMakerPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+            //worldButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+
+        }
+        else
         {
-            BuildUI();
+            
+            WorldMakerPrefab.SetActive(false);
         }
     }
 
@@ -47,10 +60,11 @@ public class UIManager : MonoBehaviour
 
     public void KillWorldMaker()
     {
+        
         Global.PreWorld = false;
         GameObject[] managers = GameObject.FindGameObjectsWithTag("WorldMaker");
         foreach (GameObject manager in managers)
-        GameObject.Destroy(manager);
+        manager.SetActive(false);
     }
 
     

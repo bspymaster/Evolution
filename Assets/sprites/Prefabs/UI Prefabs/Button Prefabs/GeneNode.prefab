@@ -73,9 +73,9 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8897059, g: 1, b: 0.913286, a: 1}
     m_PressedColor: {r: 0, g: 0.8308824, b: 0.040111635, a: 1}
-    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
+    m_FadeDuration: 1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 114823713956364226}
   m_OnClick:
     m_PersistentCalls:
@@ -124,6 +124,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114762813390948382}
+        m_MethodName: getTheChildren
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114597780271682684
@@ -137,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41555332e6f826b4f838a5b84abed8ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeIndex: 3
   textPrefab: {fileID: 114807612426866804}
+  nodeButton: {fileID: 0}
 --- !u!114 &114762813390948382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,10 +161,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0159bcc99855260409dda890a7c5f665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeIndex: 0
   button: {fileID: 114264499618581026}
   Unadded: {fileID: 21300000, guid: ce5836ec55e4dbb4ab943438e803023c, type: 3}
   Added: {fileID: 21300000, guid: e75f5740a4ae443419216c2369d3f635, type: 3}
-  Locked: {fileID: 0}
+  Locked: {fileID: 21300000, guid: fca1386ba23368940a591fb65a4b5c3c, type: 3}
+  nodeChildren: 
 --- !u!114 &114807612426866804
 MonoBehaviour:
   m_ObjectHideFlags: 1
