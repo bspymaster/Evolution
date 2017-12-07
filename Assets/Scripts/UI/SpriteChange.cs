@@ -10,6 +10,7 @@ public class SpriteChange : MonoBehaviour {
     public Sprite Unadded;
     public Sprite Added;
     public Sprite Locked;
+    public GameObject webObject;
     public List<int> nodeChildren = new List<int>();
 
 
@@ -34,7 +35,7 @@ public class SpriteChange : MonoBehaviour {
 
     public void getTheChildren()
     {
-        nodeChildren = GameObject.Find("Web Builder")
+        nodeChildren = webObject
             .GetComponent<buildWeb>()
             .getWeb()
             .getChildren(nodeIndex);

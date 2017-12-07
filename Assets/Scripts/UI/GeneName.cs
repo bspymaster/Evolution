@@ -8,7 +8,7 @@ public class GeneName : MonoBehaviour {
     private bool isOn = false;
     private int nodeIndex;
     public Text textPrefab;
-    public GameObject nodeButton;
+    public GameObject webObject;
 
     // Adds or removes node when enabling or disabling a gene.
     public void sendGeneNum()
@@ -38,10 +38,25 @@ public class GeneName : MonoBehaviour {
 
         yield return new WaitForSeconds(0);
 
+        //Debug.LogError("This message will make the console appear in Development Builds");
+
+        /* if (GameObject.Find("Web Builder").GetComponent<buildWeb>().getWeb().getNode(nodeIndex) == null)
+         {
+             textPrefab.text = "Family friendly quip 1!!!!!";
+         }
+
+        */
+
+
+
         textPrefab.text = GameObject.Find("Web Builder")
             .GetComponent<buildWeb>()
             .getWeb()
+
+
+
             .getNode(nodeIndex)
             .getName();    
-    }	
+        
+    }
 }
