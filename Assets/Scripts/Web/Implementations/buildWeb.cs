@@ -30,6 +30,12 @@ public class buildWeb : MonoBehaviour
     {
         return web;
     }
+
+    public int getNumNodes()
+    {
+        return NUMNODES;
+    }
+
     // Generates an empty edges graph with a given number of nodes
     private int[,] makeBaseEdgeGraph(int numNodes)
     {
