@@ -9,7 +9,9 @@ public class buildWeb : MonoBehaviour
 
     private static int NUMNODES = 110;
     private static string NODEDATAPATH = "Scripts/Web/Implementations/NodeData.xml";
+    //private static string NODEDATAPATH = Resources.Load("NodeData.xml");
     private Web web;
+
 
     // Initialize on startup
     void Start()
