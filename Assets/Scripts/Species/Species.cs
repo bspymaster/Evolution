@@ -74,6 +74,9 @@ public class Species : MonoBehaviour
         matingFrequency += op * node.getMutationChance();
         mateAttachment += op * node.getReproductionRate();
         peckingOrder += op * node.getPeckingOrder();
+        /*
+         *  NEEDS ALL MODIFIERS
+         */
     }
 
     /*
