@@ -8,8 +8,10 @@ public class buildWeb : MonoBehaviour
 {
 
     private static int NUMNODES = 110;
-    private static string NODEDATAPATH = "Scripts/Web/Implementations/NodeData.xml";
+    private static string NODEDATAPATH = "NodeData";
+    //private static string NODEDATAPATH = Resources.Load("NodeData.xml");
     private Web web;
+
 
     // Initialize on startup
     void Start()
@@ -30,6 +32,12 @@ public class buildWeb : MonoBehaviour
     {
         return web;
     }
+
+    public int getNumNodes()
+    {
+        return NUMNODES;
+    }
+
     // Generates an empty edges graph with a given number of nodes
     private int[,] makeBaseEdgeGraph(int numNodes)
     {
@@ -179,24 +187,15 @@ public class buildWeb : MonoBehaviour
     {
         // Create the file path
         string filePath = Path.Combine(Application.dataPath, nodeDataFileName);
+        
+        // Read the xml from the file
+        TextAsset xmlDoc = (TextAsset) Resources.Load(NODEDATAPATH);
+        XmlDocument doc = new XmlDocument();
+        doc.LoadXml(xmlDoc.text);
 
-        if (File.Exists(filePath))
-        {
-            // Read the xml from the file
-            string dataString = File.ReadAllText(filePath);
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(dataString);
+        // Get the root node
+        XmlNode root = doc.SelectSingleNode("root");
 
-            // Get the root node
-            XmlNode root = doc.SelectSingleNode("root");
-
-            return root;
-        }
-        else
-        {
-            // Couldn't get the file; throw an error
-            Debug.LogError("Cannot load game data!");
-            return null;
-        }
+        return root;
     }
 }
