@@ -10,6 +10,7 @@ public class GeneName : MonoBehaviour {
     public Text textPrefab;
 
     // Adds or removes node when enabling or disabling a gene.
+    /*
     public void sendGeneNum()
     {
         if(isOn == false)
@@ -23,7 +24,7 @@ public class GeneName : MonoBehaviour {
             isOn = false;
         }
     }
-        
+    */    
     
 
     // Use this for initialization

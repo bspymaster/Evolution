@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        
         if (Global.PreWorld == true)
         {
 
@@ -48,6 +49,16 @@ public class UIManager : MonoBehaviour
             
             WorldMakerPrefab.SetActive(false);
         }
+    }
+
+    private void Update()
+    {
+        StartCoroutine(AlertDisplay());
+    }
+
+    IEnumerator AlertDisplay()
+    {
+        yield return new WaitForSeconds(1f);
     }
 
     public void KillManager()

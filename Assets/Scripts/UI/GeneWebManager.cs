@@ -52,7 +52,7 @@ public class GeneWebManager : MonoBehaviour {
 
     public void disableCanvas()
     {
-        GameObject.FindGameObjectWithTag("WebCanvas").transform.position = new Vector2(0, -500);
+        GameObject.FindGameObjectWithTag("WebCanvas").transform.position = new Vector2(0, -5000);
     }
 }
 
