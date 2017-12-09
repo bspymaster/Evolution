@@ -92,15 +92,9 @@ public class TileData:MonoBehaviour {
     {
         this.numAmbientMeat = numAmbientMeat;
     }
-    public void setLocalSpecies(Species sp, int pop, Species playerS)
+    public void setSpeciesPopulation(int speciesKey, int population)
     {
-        localSpecies.Add(sp.getSpeciesID(), pop);
-        drawSpecies(sp, playerS);
-    }
-    public void setSpeciesPopulation(Species sp, int population, Species playerS)
-    {
-        localSpecies[sp.getSpeciesID()] = population;
-        drawSpecies(sp, playerS);
+        localSpecies[speciesKey] = population;
     }
     public void setTemperature(int temperature)
     {
@@ -110,16 +104,19 @@ public class TileData:MonoBehaviour {
     {
         this.altitude = altitude;
     }
-    private void drawSpecies(Species sp, Species playerS)
+    public void setLocalSpecies(Species sp, int pop, Species playerS)
     {
+        localSpecies.Add(sp.getSpeciesID(), pop);
         /*
          *  NEEDS REVIEW - THERE MAY BE OTHER WAYS OF BEING COHABITABLE, E.G. SHELL MAKING IT IMPOSSIBLE FOR SP TO EAT PLAYER
          */
-        if (sp.getSpeciesID() == 0 & !speciesRelations[0])
+        if (sp.getSpeciesID() == 0)
         {
-            //  draw player species (yellow)
+            /*
+             *  DRAW PLAYER SPECIES COLOR (YELLOW)
+             */
         }
-        else if (sp.getSpeciesID() != 0)
+        else
         {
             bool isCohabitable = true;
             if (playerS.getCFS() > sp.getCreatureSize())

@@ -16,7 +16,7 @@ public class UpdateSpecies : MonoBehaviour {
         //print("GenerateSpecies()");
         speciesDict = new Dictionary<int, Species>();
         mapSize = GameObject.Find("TileList").GetComponent<TileListData>().getMapSize() - 1;
-        Spawn(10);
+        Spawn();
         InvokeRepeating("Interact", 10f, 20f);
         InvokeRepeating("Reproduce", 5f, 20f);
     }
@@ -42,19 +42,17 @@ public class UpdateSpecies : MonoBehaviour {
      *  NEEDS DIFFERENT INIT VALUES
      *  Spawn() generates n game objects as species on game creation
      */
-    private void Spawn(int n)
+    private void Spawn()
     {
         //print("Spawn()");
         var rnd = new System.Random();
         int locX = 0;
         int locY = 0;
-        List<Vector2Int> lctn = new List<Vector2Int>();
-        List<int> gns = new List<int>();
-        for (int i = 1; i < n + 1; i++)
+        for (int i = 1; i < 11; i++)
         {
             Species speciesScript = new Species("SHOULD NOT APPEAR: -2");
-            lctn = new List<Vector2Int>();
-            gns = new List<int>();
+            List<Vector2Int> lctn = new List<Vector2Int>();
+            List<int> gns = new List<int>();
             locX = rnd.Next(1, 99);
             locY = rnd.Next(1, 99);
             lctn.Add(new Vector2Int(locX, locY));
@@ -121,20 +119,18 @@ public class UpdateSpecies : MonoBehaviour {
                 speciesScript.evolve(true, -1);
             }
         }
+        List<Vector2Int> playerLctn = new List<Vector2Int>();
+        List<int> playerGns = new List<int>();
         locX = rnd.Next(1, 99);
         locY = rnd.Next(1, 99);
-        lctn.Add(new Vector2Int(locX, locY));
+        playerLctn.Add(new Vector2Int(locX, locY));
         Species playerSpeciesScript = new Species("SHOULD NOT APPEAR: 0");
-        playerSpeciesScript.Init("Player Species", 0, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
+        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
         speciesDict.Add(0, playerSpeciesScript);
         //  addNode is now locked to true, we may want to change this later, time permitted
         playerSpeciesScript.evolve(true, 0);
         Global.mutationPoints = 11;
-        Global.playerSpeciesGeneList = gns;
-        foreach (KeyValuePair<int, Species> sp in speciesDict)
-        {
-            print("Species: " + sp.Value.getSpeciesID() + ", location: " + sp.Value.getLocation()[0]);
-        }
+        Global.playerSpeciesGeneList = playerGns;
         foreach (KeyValuePair<int, Species> sp in speciesDict)
         {
             GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[0]).GetComponent<TileData>().setLocalSpecies(sp.Value, 10, getPlayerSpecies());
@@ -147,7 +143,7 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Interact()
     {
-        print("Interact()");
+        //print("Interact()");
         HerbivoreMove();
         CarnivoreMove();
     }
@@ -167,13 +163,15 @@ public class UpdateSpecies : MonoBehaviour {
             {
                 playerSpecies.evolve(true, Global.newGenes[i]);
             }
+            Global.mutationPoints -= Global.newGenes.Count;
             Global.newGenes.Clear();
             Global.change = false;
         }
         int population = 0;
         foreach (KeyValuePair<int, Species> sp in speciesDict)
         {
-            for (int i = 0; i < sp.Value.getLocation().Count; i++)
+            int originalLocationCount = sp.Value.getLocation().Count;
+            for (int i = 0; i < originalLocationCount; i++)
             {
                 population = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
                 population += population * sp.Value.getLitterSize();
@@ -186,7 +184,7 @@ public class UpdateSpecies : MonoBehaviour {
                 }
                 else
                 {
-                    GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Value, population, getPlayerSpecies());
+                    GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Value.getSpeciesID(), population);
                 }
             }
             /*
@@ -208,9 +206,12 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Mutate(Species parentSpecies, bool isPlayer)
     {
-        print("Mutate()");
+        //print("Mutate()");
         Species mutatingSpecies = new Species("Species: " + speciesDict.Count + 1);
         mutatingSpecies.clone(parentSpecies);
+        /*
+         *  CHILD SPECIES NEEDED TO BE CREATED
+         */
         if (isPlayer)
         {
             Global.mutationPoints += 1;
@@ -228,7 +229,7 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Overpopulate(Species migratingSpecies, Vector2Int tileLocation)
     {
-        print("Overpopulate()");
+        //print("Overpopulate()");
         var rnd = new System.Random();
         int receivingTile = rnd.Next(0, 6); //  0 is left tile, 1 is right tile, 2 is top-left tile, 3 is top-right tile, 4 is bottom-left tile, 5 is bottom-right tile
         if (receivingTile == 0)
@@ -303,8 +304,7 @@ public class UpdateSpecies : MonoBehaviour {
         //print("Migrate()");
         TileData rTile = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(recievingTile).GetComponent<TileData>();
         TileData gTile = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(givingTile).GetComponent<TileData>();
-        Species sp = migratingSpecies;
-        int pop = gTile.getSpeciesPopulation(sp.getSpeciesID());
+        int pop = gTile.getSpeciesPopulation(migratingSpecies.getSpeciesID());
         int movingPopulation = (int)(0.3 * pop);
         if (movingPopulation == 0)
         {
@@ -316,23 +316,23 @@ public class UpdateSpecies : MonoBehaviour {
             stayingPopulation = 1;
         }
         bool speciesIsThere = false;
-        for (int i = 0; i < rTile.getLocalSpecies().Count; i++)
+        foreach (KeyValuePair<int, int> localS in rTile.getLocalSpecies())
         {
-            if (rTile.getLocalSpecies()[i] == sp.getSpeciesID())
+            if (localS.Key == migratingSpecies.getSpeciesID())
             {
                 speciesIsThere = true;
             }
         }
         if (speciesIsThere)
         {
-            rTile.setSpeciesPopulation(sp, rTile.getSpeciesPopulation(sp.getSpeciesID()) + movingPopulation, getPlayerSpecies());
+            rTile.setSpeciesPopulation(migratingSpecies.getSpeciesID(), rTile.getSpeciesPopulation(migratingSpecies.getSpeciesID()) + movingPopulation);
         }
         else
         {
-            rTile.setLocalSpecies(sp, movingPopulation, getPlayerSpecies());
+            rTile.setLocalSpecies(migratingSpecies, movingPopulation, getPlayerSpecies());
         }
-        gTile.setSpeciesPopulation(sp, stayingPopulation, getPlayerSpecies());
-        migratingSpecies.GetComponent<Species>().addToLocation(recievingTile);
+        gTile.setSpeciesPopulation(migratingSpecies.getSpeciesID(), stayingPopulation);
+        migratingSpecies.addToLocation(recievingTile);
     }
 
     /*
