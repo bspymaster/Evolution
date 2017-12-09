@@ -12,6 +12,7 @@ public class TileData:MonoBehaviour {
     private int altitude;
     private int temperature;
     private Dictionary<int, int> localSpecies;
+    private bool[] speciesRelations; //  [0] is player species, [1] is cohabitable species, [2] is competitive species
 
     public TileData()
     {
@@ -24,6 +25,7 @@ public class TileData:MonoBehaviour {
         numLeaves = 0;
         numAmbientMeat = 0;
         localSpecies = new Dictionary<int, int>();
+        speciesRelations = new bool[3] { false, false, false };
     }
     
     public int getSpeciesPopulation(int key)
@@ -90,15 +92,15 @@ public class TileData:MonoBehaviour {
     {
         this.numAmbientMeat = numAmbientMeat;
     }
-    public void setLocalSpecies(Species sp, int pop)
+    public void setLocalSpecies(Species sp, int pop, Species playerS)
     {
         localSpecies.Add(sp.getSpeciesID(), pop);
-        drawSpecies(sp);
+        drawSpecies(sp, playerS);
     }
-    public void setSpeciesPopulation(Species sp, int population)
+    public void setSpeciesPopulation(Species sp, int population, Species playerS)
     {
         localSpecies[sp.getSpeciesID()] = population;
-        drawSpecies(sp);
+        drawSpecies(sp, playerS);
     }
     public void setTemperature(int temperature)
     {
@@ -108,15 +110,40 @@ public class TileData:MonoBehaviour {
     {
         this.altitude = altitude;
     }
-    private void drawSpecies(Species sp)
+    private void drawSpecies(Species sp, Species playerS)
     {
-        if (sp.getSpeciesID() == 0)
+        /*
+         *  NEEDS REVIEW - THERE MAY BE OTHER WAYS OF BEING COHABITABLE, E.G. SHELL MAKING IT IMPOSSIBLE FOR SP TO EAT PLAYER
+         */
+        if (sp.getSpeciesID() == 0 & !speciesRelations[0])
         {
-
+            //  draw player species (yellow)
         }
-        else
+        else if (sp.getSpeciesID() != 0)
         {
-
+            bool isCohabitable = true;
+            if (playerS.getCFS() > sp.getCreatureSize())
+            {   //  sp can eat player species
+                isCohabitable = false;
+            }
+            else
+            {
+                for (int i = 0; i < sp.getHFS().Length; i++)
+                {   //  check if sp eats any of the same herbivore food sources as player species
+                    if (playerS.getHFS()[i] > 0 & sp.getHFS()[i] > 0)
+                    {
+                        isCohabitable = false;
+                    }
+                }
+            }
+            if (isCohabitable)
+            {
+                //  draw blue indicator
+            }
+            else
+            {
+                //  draw red indicator
+            }
         }
     }
 }
