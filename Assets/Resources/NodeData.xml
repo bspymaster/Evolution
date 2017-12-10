@@ -123,7 +123,7 @@
   </node>
   <node>
     <id>14</id>
-    <name>Eat Humongous Animals</name>
+    <name>Eat Huge Animals</name>
     <carnivoreFoodSource>100</carnivoreFoodSource>
     <childNodes></childNodes>
   </node>
@@ -591,7 +591,7 @@
   </node>
   <node>
     <id>69</id>
-    <name>Self-Awareness</name>
+    <name>Self- Awareness</name>
     <childNodes></childNodes>
   </node>
   <node>
@@ -616,7 +616,7 @@
   </node>
   <node>
     <id>72</id>
-    <name>Water Dependence</name>
+    <name>Water Reliance</name>
     <requiredCalories>-25</requiredCalories>
     <childNodes></childNodes>
   </node>
@@ -735,7 +735,7 @@
   </node>
   <node>
     <id>86</id>
-    <name>Threatening Patterns</name>
+    <name>Threat Colors</name>
     <childNodes>
       <child>87</child>
     </childNodes>
@@ -766,7 +766,7 @@
   </node>
   <node>
     <id>90</id>
-    <name>Improved Camouflage</name>
+    <name>Improved Stealth</name>
     <dexterity>10</dexterity>
     <childNodes></childNodes>
   </node>
@@ -788,12 +788,12 @@
   </node>
   <node>
     <id>93</id>
-    <name>Threatening Colors</name>
+    <name>Threat Colors</name>
     <childNodes>94</childNodes>
   </node>
   <node>
     <id>94</id>
-    <name>Poison-Secreting Skin</name>
+    <name>Poisonous Skin</name>
     <childNodes></childNodes>
   </node>
   <node>
@@ -841,7 +841,7 @@
   </node>
   <node>
     <id>100</id>
-    <name>Monagamous Relationships</name>
+    <name>Marriage- Like Relations</name>
     <mutationChance>10</mutationChance>
     <childNodes>
       <child>101</child>
@@ -850,7 +850,7 @@
   </node>
   <node>
     <id>101</id>
-    <name>Polygamous Relationships</name>
+    <name>Harem- Like Relations</name>
     <offspringSurvivalChance>-5</offspringSurvivalChance>
     <mutationChance>20</mutationChance>
     <childNodes>
@@ -859,7 +859,7 @@
   </node>
   <node>
     <id>102</id>
-    <name>polygynandrous Relationships</name>
+    <name>Orgy- Like Relations</name>
     <offspringSurvivalChance>-10</offspringSurvivalChance>
     <mutationChance>20</mutationChance>
     <childNodes></childNodes>
