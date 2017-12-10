@@ -47,7 +47,11 @@ public class GeneWebManager : MonoBehaviour {
 
     public void notifyChange()
     {
-        Global.change = true;
+        if(Global.mutationPoints > 0)
+        {
+            Global.change = true;
+        }
+        
     }
 
     public void disableCanvas()
