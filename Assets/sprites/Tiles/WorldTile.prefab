@@ -112,6 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55d359fa9505f143a2f57c515e59115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  competitive: {fileID: 0}
+  cohabitable: {fileID: 0}
 --- !u!114 &114886905199093068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,6 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e282970fa16cc74788b324c7a5a8a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1646766388523528, guid: a829a3143247a54449a7512cda647142, type: 2}
+  competitive: {fileID: 1640749520503698, guid: d725736fb0af00340ab5e6a9477a84ae,
+    type: 2}
+  cohabitable: {fileID: 1052649456419452, guid: cadd5f9fdde4ab54f93f2ef1f8e928e1,
+    type: 2}
   windowManagerPrefab: {fileID: 1086105163294284, guid: 84c208c8f253e66459bb2a79fda9a138,
     type: 2}
   infoPanelPrefab: {fileID: 1710603878542482, guid: 935c30a104e693643a247eb6bb25ba14,
