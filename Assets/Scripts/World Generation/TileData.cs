@@ -13,6 +13,9 @@ public class TileData:MonoBehaviour {
     private int temperature;
     private Dictionary<int, int> localSpecies;
     private bool[] speciesRelations; //  [0] is player species, [1] is cohabitable species, [2] is competitive species
+    public GameObject player;
+    public GameObject competitive;
+    public GameObject cohabitable;
 
     public TileData()
     {
@@ -107,14 +110,9 @@ public class TileData:MonoBehaviour {
     public void setLocalSpecies(Species sp, int pop, Species playerS)
     {
         localSpecies.Add(sp.getSpeciesID(), pop);
-        /*
-         *  NEEDS REVIEW - THERE MAY BE OTHER WAYS OF BEING COHABITABLE, E.G. SHELL MAKING IT IMPOSSIBLE FOR SP TO EAT PLAYER
-         */
         if (sp.getSpeciesID() == 0)
         {
-            /*
-             *  DRAW PLAYER SPECIES COLOR (YELLOW)
-             */
+            Instantiate(player, transform.position, Quaternion.identity);
         }
         else
         {
@@ -135,11 +133,11 @@ public class TileData:MonoBehaviour {
             }
             if (isCohabitable)
             {
-                //  draw blue indicator
+                Instantiate(cohabitable, transform.position, Quaternion.identity);
             }
             else
             {
-                //  draw red indicator
+                Instantiate(competitive, transform.position , Quaternion.identity);
             }
         }
     }
