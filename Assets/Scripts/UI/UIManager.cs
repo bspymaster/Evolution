@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject GeneWebButtonPrefab;
     public GameObject ExitGameButtonPrefab;
     public GameObject MutationPointsBackPrefab;
+    public GameObject AlertPrefab;
     public Text MutationPointsTextPrefab;
 
     public void BuildUI()
@@ -51,15 +52,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        StartCoroutine(AlertDisplay());
-    }
-
-    IEnumerator AlertDisplay()
-    {
-        yield return new WaitForSeconds(1f);
-    }
+    
 
     public void KillManager()
     {
