@@ -7,11 +7,6 @@ public class UpdateSpecies : MonoBehaviour {
     private int mapSize;
     private Dictionary<int, Species> speciesDict;   //  speciesID as key, Species as value
 
-    private void Start()
-    {
-        GameObject.Find("Event System").GetComponent<AlertSystem>().addAlert(new Alert("It Begins", "Start evolving!"));
-    }
-
     /*
     *  COMPLETE
     *  Use this for initialization
@@ -19,7 +14,6 @@ public class UpdateSpecies : MonoBehaviour {
     public void GenerateSpecies()
     {
         //print("GenerateSpecies()");
-        GameObject.Find("Event System").GetComponent<AlertSystem>().addAlert(new Alert("It Begins", "Start evolving!"));
         speciesDict = new Dictionary<int, Species>();
         mapSize = GameObject.Find("TileList").GetComponent<TileListData>().getMapSize() - 1;
         Spawn();
@@ -150,13 +144,8 @@ public class UpdateSpecies : MonoBehaviour {
     private void Interact()
     {
         //print("Interact()");
-        int aliveBefore = speciesDict.Count;
         HerbivoreMove();
         CarnivoreMove();
-        if (speciesDict.Count < aliveBefore)
-        {
-            GameObject.Find("Event System").GetComponent<AlertSystem>().addAlert(new Alert("Another One Bites The Dust", "A potential competitor has gone extinct somewhere in the world!"));
-        }
     }
 
     /*
@@ -170,12 +159,7 @@ public class UpdateSpecies : MonoBehaviour {
         //print("Reproduce()");
         if (Global.change)
         {
-            //print("change");
             Species playerSpecies = getPlayerSpecies();
-            if (playerSpecies.getGenes().Count == 1)
-            {
-                GameObject.Find("Event System").GetComponent<AlertSystem>().addAlert(new Alert("First Mutation!", "Congratulations, your species has evolved! But beware, your old self still roams"));
-            }
             for (int i = 0; i < Global.newGenes.Count; i++)
             {
                 playerSpecies.evolve(true, Global.newGenes[i]);
@@ -190,10 +174,6 @@ public class UpdateSpecies : MonoBehaviour {
             int originalLocationCount = sp.Value.getLocation().Count;
             for (int i = 0; i < originalLocationCount; i++)
             {
-                if (speciesDict.Count == 1 & sp.Value.getSpeciesID() == 0)
-                {
-                    GameObject.Find("Event System").GetComponent<AlertSystem>().addAlert(new Alert("Veni, Vidi, Vici", "You've won! You have led all other potential competition to extinction. Congratulations?"));
-                }
                 population = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
                 population += population * sp.Value.getLitterSize();
                 /*
@@ -235,16 +215,7 @@ public class UpdateSpecies : MonoBehaviour {
          */
         if (isPlayer)
         {
-            if (parentSpecies.getGenes().Count == GameObject.Find("Web Builder").GetComponent<buildWeb>().getNumNodes())
-            {
-                GameObject.Find("Event System").GetComponent<AlertSystem>().addAlert(new Alert("Perfect Organism", "'You still don't understand what you're dealing with, do you?' Obtain all genes"));
-                return;
-            }
             Global.mutationPoints += 1;
-            if (Global.mutationPoints > 29)
-            {
-                GameObject.Find("Event System").GetComponent<AlertSystem>().addAlert(new Alert("Horder", "Have 30+ mutation points and still survive without using them"));
-            }
             Global.playerSpeciesGeneList = parentSpecies.getGenes();
         }
         else
@@ -363,10 +334,6 @@ public class UpdateSpecies : MonoBehaviour {
         }
         gTile.setSpeciesPopulation(migratingSpecies.getSpeciesID(), stayingPopulation);
         migratingSpecies.addToLocation(recievingTile);
-        if (getPlayerSpecies().getLocation().Count > 99)
-        {
-            GameObject.Find("Event System").GetComponent<AlertSystem>().addAlert(new Alert("A Whole New World", "Have members of your species in 100+ tiles"));
-        }
     }
 
     /*

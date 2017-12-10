@@ -17,7 +17,6 @@ public class TileListData : MonoBehaviour {
 
     public GameObject getTileAtLocation(Vector2Int location)
     {
-        print("tile list data; location: " + location);
         return tileArray[location.x, location.y];
     }
     
