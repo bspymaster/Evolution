@@ -12,6 +12,10 @@ public class TileData:MonoBehaviour {
     private int altitude;
     private int temperature;
     private Dictionary<int, int> localSpecies;
+    private bool[] speciesRelations; //  [0] is player species, [1] is cohabitable species, [2] is competitive species
+    public GameObject player;
+    public GameObject competitive;
+    public GameObject cohabitable;
 
     public TileData()
     {
@@ -24,6 +28,7 @@ public class TileData:MonoBehaviour {
         numLeaves = 0;
         numAmbientMeat = 0;
         localSpecies = new Dictionary<int, int>();
+        speciesRelations = new bool[3] { false, false, false };
     }
     
     public int getSpeciesPopulation(int key)
@@ -90,15 +95,9 @@ public class TileData:MonoBehaviour {
     {
         this.numAmbientMeat = numAmbientMeat;
     }
-    public void setLocalSpecies(Species sp, int pop)
+    public void setSpeciesPopulation(int speciesKey, int population)
     {
-        localSpecies.Add(sp.getSpeciesID(), pop);
-        drawSpecies(sp);
-    }
-    public void setSpeciesPopulation(Species sp, int population)
-    {
-        localSpecies[sp.getSpeciesID()] = population;
-        drawSpecies(sp);
+        localSpecies[speciesKey] = population;
     }
     public void setTemperature(int temperature)
     {
@@ -108,15 +107,38 @@ public class TileData:MonoBehaviour {
     {
         this.altitude = altitude;
     }
-    private void drawSpecies(Species sp)
+    public void setLocalSpecies(Species sp, int pop, Species playerS)
     {
+        localSpecies.Add(sp.getSpeciesID(), pop);
         if (sp.getSpeciesID() == 0)
         {
-
+            //Instantiate(player, transform.position, Quaternion.identity);
         }
         else
         {
-
+            bool isCohabitable = true;
+            if (playerS.getCFS() > sp.getCreatureSize())
+            {   //  sp can eat player species
+                isCohabitable = false;
+            }
+            else
+            {
+                for (int i = 0; i < sp.getHFS().Length; i++)
+                {   //  check if sp eats any of the same herbivore food sources as player species
+                    if (playerS.getHFS()[i] > 0 & sp.getHFS()[i] > 0)
+                    {
+                        isCohabitable = false;
+                    }
+                }
+            }
+            if (isCohabitable)
+            {
+                //Instantiate(cohabitable, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                //Instantiate(competitive, transform.position , Quaternion.identity);
+            }
         }
     }
 }
