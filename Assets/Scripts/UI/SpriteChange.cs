@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SpriteChange : MonoBehaviour {
 
     public int nodeIndex;
+    public bool Active = false;
     public Button button;
     public Sprite Unadded;
     public Sprite Added;
@@ -47,18 +48,21 @@ public class SpriteChange : MonoBehaviour {
 
 
     public void toggle2()
-    {
-        if(button.image.sprite == Unadded)
+    {   
+        if (Active == false)
         {
             button.image.sprite = Added;
+            Global.newGenes.Add(nodeIndex);
+            Active = true;
         }
+        /*
         else if(button.image.sprite == Added)
         {
             button.image.sprite = Unadded;
-        }     
+        } */
     }
 
-    
+
     private void Update()
     {
         if (Global.UnlockedGenes.Contains(nodeIndex) & button.image.sprite != Added)

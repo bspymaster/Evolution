@@ -89,17 +89,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114597780271682684}
-        m_MethodName: sendGeneNum
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 114637308909408260, guid: 3776d67da55a0e04191a6eda028b3d68,
           type: 2}
         m_MethodName: notifyChange
@@ -148,7 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textPrefab: {fileID: 114807612426866804}
-  webObject: {fileID: 1010053404371570, guid: 43944ea185894854ab76a738d97920b1, type: 2}
 --- !u!114 &114762813390948382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,11 +149,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeIndex: 0
+  Active: 0
   button: {fileID: 114264499618581026}
   Unadded: {fileID: 21300000, guid: ce5836ec55e4dbb4ab943438e803023c, type: 3}
   Added: {fileID: 21300000, guid: e75f5740a4ae443419216c2369d3f635, type: 3}
   Locked: {fileID: 21300000, guid: fca1386ba23368940a591fb65a4b5c3c, type: 3}
-  webObject: {fileID: 1010053404371570, guid: 43944ea185894854ab76a738d97920b1, type: 2}
   nodeChildren: 
 --- !u!114 &114807612426866804
 MonoBehaviour:
