@@ -172,6 +172,7 @@ public class TileData:MonoBehaviour {
             }
         }
     }
+
     /*
      *  Returns a list of each local species' data as int[8]; 0 == ID, 1 == size, 2 == berries, 3 == nuts, 4 == grass, 5 == leaves, 6 == carnivoreFoodSize, 7 == relation
      */

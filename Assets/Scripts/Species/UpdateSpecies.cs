@@ -42,8 +42,16 @@ public class UpdateSpecies : MonoBehaviour
             List<int> gns = new List<int>();
             locX = rnd.Next(1, 99);
             locY = rnd.Next(1, 99);
+            while (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTileType() == "Ocean" ||
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() < 40 ||
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() > 100 ||
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getAltitude() > 40)
+            {   //  checks if tile is in the ocean, too high, too cold, or too hot
+                locX = rnd.Next(1, 99);
+                locY = rnd.Next(1, 99);
+            }
             lctn.Add(new Vector2Int(locX, locY));
-            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, -1, 50, 50, 100, 1, 1, 1, 1);
+            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, -1, 50, 50, 100, 1, 1, 1, 1, new Vector2Int(40, 100), 100, 0);
             speciesDict.Add(i, speciesScript);
             //  addNode is now locked to true, we may want to change this later, time permitted
             speciesScript.evolve(true, 0);
@@ -108,17 +116,25 @@ public class UpdateSpecies : MonoBehaviour
         }
         List<Vector2Int> playerLctn = new List<Vector2Int>();
         List<int> playerGns = new List<int>();
-        locX = rnd.Next(1, 99);
-        locY = rnd.Next(1, 99);
+        locX = rnd.Next(44, 56);
+        locY = rnd.Next(44, 56);
+        while (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTileType() == "Ocean" ||
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() < 40 ||
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() > 100 ||
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getAltitude() > 40)
+        {   //  checks if tile is in the ocean, too high, too cold, or too hot
+            locX = rnd.Next(33, 67);
+            locY = rnd.Next(33, 67);
+        }
         playerLctn.Add(new Vector2Int(locX, locY));
         Species playerSpeciesScript = new Species("SHOULD NOT APPEAR: 0");
-        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, 1, 1, 1, 1, 1, 1, 1, 1);
+        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, -1, 50, 50, 100, 1, 1, 1, 1, new Vector2Int(40, 100), 100, 0);
         speciesDict.Add(0, playerSpeciesScript);
-        Global.mutationPoints = 11;
+        Global.mutationPoints = 12;
         Global.playerSpeciesGeneList = playerGns;
         foreach (KeyValuePair<int, Species> sp in speciesDict)
         {
-            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[0]).GetComponent<TileData>().setLocalSpecies(sp.Value, 10, speciesDict[0]);
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[0]).GetComponent<TileData>().setLocalSpecies(sp.Value, 100, speciesDict[0]);
         }
     }
 
@@ -164,6 +180,7 @@ public class UpdateSpecies : MonoBehaviour
             Global.change = false;
         }
         int population = 0;
+        bool mutation = false;
         foreach (KeyValuePair<int, Species> sp in speciesDict)
         {
             int originalLocationCount = sp.Value.getLocation().Count;
@@ -194,15 +211,24 @@ public class UpdateSpecies : MonoBehaviour
                     GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, population);
                 }
             }
+            System.Random rnd = new System.Random();
+            int mutVarTemp = 10;
             /*
              *  NEEDS MUTATION MODIFIERS
              */
-            System.Random rnd = new System.Random();
-            int mutVarTemp = 100;
             if (rnd.Next(1, 101) <= mutVarTemp)
             {
+                if (sp.Value.getSpeciesID() != 0)
+                {
+                    mutation = true;
+                }
                 Mutate(sp.Value, (sp.Key == 0));
             }
+        }
+        if (mutation)
+        {
+            GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("It's Alive!", "Another competitor emerges from the chaos"));
+            mutation = false;
         }
     }
 
@@ -247,6 +273,8 @@ public class UpdateSpecies : MonoBehaviour
 
     /*
      *  OCEAN IMPLEMENTATION NEEDED
+     *  ALTITUDE IMPLEMENTATION NEEDED
+     *  TEMPERATURE IMPLEMENTATION NEEDED
      *  Have the species in a given tile migrate to adjacent tile
      */
     private void Overpopulate(Species migratingSpecies, Vector2Int tileLocation)
@@ -388,14 +416,17 @@ public class UpdateSpecies : MonoBehaviour
          *      }
          *  }
          */
-        if (speciesDict[0].getLocation().Count == 0 & alerts[7])
+        if (alerts[7])
         {
-            GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Game Over, Man; Game Over!", "And because the hungry hungry baby ate too many people, it exploded"));
-            alerts[7] = false;
-            speciesDict.Remove(0);
-            /*
-             *  END GAME?
-             */
+            if (speciesDict[0].getLocation().Count == 0)
+            {
+                GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Game Over, Man; Game Over!", "And because the hungry hungry baby ate too many people, it exploded"));
+                alerts[7] = false;
+                speciesDict.Remove(0);
+                /*
+                 *  END GAME?
+                 */
+            }
         }
     }
 
@@ -420,5 +451,17 @@ public class UpdateSpecies : MonoBehaviour
          *      }
          *  }
          */
+        if (alerts[7])
+        {   //  seperated these checks, as if player species dies in the other move method, checking its location would cause an error
+            if (speciesDict[0].getLocation().Count == 0)
+            {
+                GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Game Over, Man; Game Over!", "And because the hungry hungry baby ate too many people, it exploded"));
+                alerts[7] = false;
+                speciesDict.Remove(0);
+                /*
+                 *  END GAME?
+                 */
+            }
+        }
     }
 }
