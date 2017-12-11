@@ -53,7 +53,6 @@ public class Species : MonoBehaviour
 
     /*
      *  NEEDS ALL MODIFIERS
-     *  NEEDS REVIEW - ARE THERE NODES THAT DICTATE OTHER NODES UNATTAINABLE?
      *  Take boolean to determine if adding/subtracting node in evolutionary web, and takes index of that node to modify species instance accordingly with -1 being random node
      */
     public void evolve(bool addNode, int nodeIndex)
