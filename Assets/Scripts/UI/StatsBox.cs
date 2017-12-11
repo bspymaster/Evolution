@@ -13,8 +13,6 @@ public class StatsBox : MonoBehaviour
     public Text enviroPrefab;
     public GameObject noClickPrefab;
     public GameObject exitButtonPrefab;
-    public Text TEST;
-
 
     public void OnMouseDown()
     {
@@ -52,10 +50,7 @@ public class StatsBox : MonoBehaviour
             Text enviro = Instantiate(enviroPrefab, new Vector3(0, 75, -5), Quaternion.identity) as Text;
             enviro.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
-            //Creates window and exit button.
-            
-            //infoPanel.layer = LayerMask.NameToLayer("UI");
-
+            //Creates window and exit button.            
             GameObject noClick = Instantiate(noClickPrefab, new Vector3(500, 300, -1), Quaternion.identity) as GameObject;
             noClick.gameObject.tag = "WindowManager";
 
@@ -65,6 +60,14 @@ public class StatsBox : MonoBehaviour
             foods.text = foodTypes;
             biomeTitle.text = biomeType;
             enviro.text = enviroType;
+
+
+            List<int[]> speciesData = this.GetComponent<TileData>().getSpeciesData();
+
+
+
+
+
         }       
     }
 }
