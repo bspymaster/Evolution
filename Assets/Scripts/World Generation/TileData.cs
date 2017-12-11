@@ -28,7 +28,8 @@ public class TileData:MonoBehaviour {
         numLeaves = 0;
         numAmbientMeat = 0;
         localSpecies = new Dictionary<int, int>();
-    }
+        speciesRelation = new Dictionary<int, int>();
+}
     
     public void enablePlayer()
     {
