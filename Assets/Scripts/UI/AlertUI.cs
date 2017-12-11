@@ -13,6 +13,7 @@ public class AlertUI : MonoBehaviour {
     public float x;
     public float y1;
     public float y2;
+    public float z;
     private bool pleaseWait = false;
 
     private Alert blue;
@@ -21,7 +22,7 @@ public class AlertUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        this.transform.position = new Vector2(x, y1);
+        this.transform.position = new Vector3(x, y1, z);
     }
 	
     public void AddBlue()
@@ -51,7 +52,6 @@ public class AlertUI : MonoBehaviour {
                 pleaseWait = true;
                 TitleText.text = currentAlert.getTitle();
                 DescText.text = currentAlert.getDetails();
-
 
                 this.transform.position = new Vector2(x, y2);
                 yield return new WaitForSeconds(AlertDelay);

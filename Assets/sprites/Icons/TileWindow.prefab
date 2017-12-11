@@ -20,7 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4019342738955136}
   - component: {fileID: 212858670396387482}
-  m_Layer: 0
+  - component: {fileID: 222473515170451238}
+  - component: {fileID: 225861077244530162}
+  m_Layer: 5
   m_Name: TileWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,3 +86,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!222 &222473515170451238
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1710603878542482}
+--- !u!225 &225861077244530162
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1710603878542482}
+  m_Enabled: 0
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
