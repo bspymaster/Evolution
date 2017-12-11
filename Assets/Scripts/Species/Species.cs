@@ -17,6 +17,9 @@ public class Species : MonoBehaviour
     private int matingFrequency; // reproduction speed
     private int mateAttachment; // mutation chance v offspring survivability
     private int peckingOrder; // determines when the species eats in the eating algorithm
+    private Vector2Int temperatureTolerance;    //  x is min temperature, y is max
+    private int maxAltitude;    //  how high of a tile this species can enter
+    private int canFly;    //  0 == no flight, 1 == flight
 
     /*
      *  COMPLETE
@@ -31,7 +34,7 @@ public class Species : MonoBehaviour
      *  NEEDS ALL MODIFIERS
      *  Initializer
      */
-    public void Init(string sN, int sID, List<Vector2Int> lctn, List<int> gns, int[] hFS, int cFS, int aC, int cS, int mPT, int lS, int mF, int mA, int pO)
+    public void Init(string sN, int sID, List<Vector2Int> lctn, List<int> gns, int[] hFS, int cFS, int aC, int cS, int mPT, int lS, int mF, int mA, int pO, Vector2Int tT, int maxA, int canF)
     {
         speciesName = sN;
         speciesID = sID;
@@ -46,6 +49,9 @@ public class Species : MonoBehaviour
         matingFrequency = mF;
         mateAttachment = mA;
         peckingOrder = pO;
+        temperatureTolerance = tT;
+        maxAltitude = maxA;
+        canFly = canF;
         /*
          *  NEEDS ALL MODIFIERS
          */
@@ -53,7 +59,6 @@ public class Species : MonoBehaviour
 
     /*
      *  NEEDS ALL MODIFIERS
-     *  NEEDS REVIEW - ARE THERE NODES THAT DICTATE OTHER NODES UNATTAINABLE?
      *  Take boolean to determine if adding/subtracting node in evolutionary web, and takes index of that node to modify species instance accordingly with -1 being random node
      */
     public void evolve(bool addNode, int nodeIndex)
@@ -121,7 +126,8 @@ public class Species : MonoBehaviour
     public void clone(Species other) // other will be evolved, clone will be parent species
     {
         Init(other.getSpeciesName(), other.getSpeciesID(), other.getLocation(), other.getGenes(), other.getHFS(), other.getCFS(), other.getAmntCalories(), 
-            other.getCreatureSize(), other.getMaxPerTile(), other.getLitterSize(), other.getMatingFrequency(), getMateAttachment(), other.getPeckingOrder());
+            other.getCreatureSize(), other.getMaxPerTile(), other.getLitterSize(), other.getMatingFrequency(), getMateAttachment(), other.getPeckingOrder(),
+            other.getTemperatureTolerance(), getMaxAltitude(), other.getCanFly());
     }
 
     /*
@@ -179,6 +185,18 @@ public class Species : MonoBehaviour
     public int getPeckingOrder()
     {
         return peckingOrder;
+    }
+    public Vector2Int getTemperatureTolerance()
+    {
+        return temperatureTolerance;
+    }
+    public int getMaxAltitude()
+    {
+        return maxAltitude;
+    }
+    public int getCanFly()
+    {
+        return canFly;
     }
     public void addToLocation(Vector2Int additionalLocation)
     {
