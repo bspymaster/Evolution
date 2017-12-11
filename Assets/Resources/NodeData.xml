@@ -606,9 +606,10 @@
   </node>
   <node>
     <id>71</id>
-    <name>Improved Swimming</name>
+    <name>Strong Swimmer</name>
     <dexterity>5</dexterity>
     <requiredCalories>10</requiredCalories>
+    <canSwim>1</canSwim>
     <childNodes>
       <child>72</child>
       <child>73</child>
