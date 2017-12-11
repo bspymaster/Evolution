@@ -137,7 +137,7 @@ public class TileData:MonoBehaviour {
         localSpecies.Add(sp.getSpeciesID(), pop);
         if (sp.getSpeciesID() == 0)
         {
-            //Instantiate(player, transform.position, Quaternion.identity);
+            enablePlayer();
         }
         else
         {
@@ -158,11 +158,11 @@ public class TileData:MonoBehaviour {
             }
             if (isCohabitable)
             {
-                //Instantiate(cohabitable, transform.position, Quaternion.identity);
+                enableCohabitable();
             }
             else
             {
-                //Instantiate(competitive, transform.position , Quaternion.identity);
+                enableCompetitive();
             }
         }
     }
