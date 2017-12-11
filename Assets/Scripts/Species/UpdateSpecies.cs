@@ -25,7 +25,7 @@ public class UpdateSpecies : MonoBehaviour
 
     /*
      *  COMPLETE
-     *  Use this to get the player species
+     *  Use this to get a species
      */
     public Species getSpecies(int id)
     {
