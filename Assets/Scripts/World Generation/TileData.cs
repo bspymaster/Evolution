@@ -31,6 +31,31 @@ public class TileData:MonoBehaviour {
         speciesRelations = new bool[3] { false, false, false };
     }
     
+    public void enablePlayer()
+    {
+        player.SetActive(true);
+    }
+    public void enableCohabitable()
+    {
+        cohabitable.SetActive(true);
+    }
+    public void enableCompetitive()
+    {
+        competitive.SetActive(true);
+    }
+    public void disablePlayer()
+    {
+        player.SetActive(false);
+    }
+    public void disableCohabitable()
+    {
+        cohabitable.SetActive(false);
+    }
+    public void disableCompetitive()
+    {
+        competitive.SetActive(false);
+    }
+
     public int getSpeciesPopulation(int key)
     {
         return localSpecies[key];
