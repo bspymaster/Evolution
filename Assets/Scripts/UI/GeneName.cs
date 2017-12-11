@@ -38,16 +38,6 @@ public class GeneName : MonoBehaviour {
 
         yield return new WaitForSeconds(0);
 
-        //Debug.LogError("This message will make the console appear in Development Builds");
-
-        /* if (GameObject.Find("Web Builder").GetComponent<buildWeb>().getWeb().getNode(nodeIndex) == null)
-         {
-             textPrefab.text = "Family friendly quip 1!!!!!";
-         }
-
-        */
-
-
 
         textPrefab.text = GameObject.Find("Web Builder")
             .GetComponent<buildWeb>()

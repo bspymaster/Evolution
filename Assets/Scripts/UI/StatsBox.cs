@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class StatsBox : TileData
+public class StatsBox : MonoBehaviour
 {
     public GameObject windowManagerPrefab;
     public GameObject infoPanelPrefab;
@@ -13,6 +13,7 @@ public class StatsBox : TileData
     public Text enviroPrefab;
     public GameObject noClickPrefab;
     public GameObject exitButtonPrefab;
+    public Text TEST;
 
 
     public void OnMouseDown()
@@ -21,17 +22,20 @@ public class StatsBox : TileData
         {
             // Gets the values from the selected tile.
             Global.cameraLock = true;
-            int numBerries = getNumBerries();
-            int numGrass = getNumGrass();
-            int numNuts = getNumNuts();
-            int numLeaves = getNumLeaves();
-            int numMeat = getNumAmbientMeat();
-            string biome = getTileType();
-            int altitude = getAltitude();
-            int temperature = getTemperature();
+            int numBerries = this.GetComponent<TileData>().getNumBerries();
+            int numGrass = this.GetComponent<TileData>().getNumGrass();
+            int numNuts = this.GetComponent<TileData>().getNumNuts();
+            int numLeaves = this.GetComponent<TileData>().getNumLeaves();
+            int numMeat = this.GetComponent<TileData>().getNumAmbientMeat();
+            string biome = this.GetComponent<TileData>().getTileType();
+            int altitude = this.GetComponent<TileData>().getAltitude();
+            int temperature = this.GetComponent<TileData>().getTemperature();
             GameObject windowManager = Instantiate(windowManagerPrefab, new Vector3(0, 0, 5), Quaternion.identity) as GameObject;
             windowManager.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
             windowManager.gameObject.tag = "WindowManager";
+
+            GameObject infoPanel = Instantiate(infoPanelPrefab, new Vector3(0, 0, -5), Quaternion.identity) as GameObject;
+            infoPanel.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
             //Defines the contents of each text box in the tile info window.
             string foodTypes = "Berries: " + numBerries.ToString() + "\nGrass: " + numGrass.ToString() + "\nNuts: " + numNuts.ToString() + "\nLeaves: " + numLeaves.ToString() + "\nMeat: " + numMeat.ToString();
@@ -49,15 +53,14 @@ public class StatsBox : TileData
             enviro.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
             //Creates window and exit button.
-            GameObject infoPanel = Instantiate(infoPanelPrefab, new Vector3(0, 0, 5), Quaternion.identity) as GameObject;
-            infoPanel.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
+            
+            //infoPanel.layer = LayerMask.NameToLayer("UI");
 
             GameObject noClick = Instantiate(noClickPrefab, new Vector3(500, 300, -1), Quaternion.identity) as GameObject;
             noClick.gameObject.tag = "WindowManager";
 
             GameObject exitButton = Instantiate(exitButtonPrefab, new Vector3(335, 150, -5), Quaternion.identity) as GameObject;
             exitButton.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
-
 
             foods.text = foodTypes;
             biomeTitle.text = biomeType;

@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4238323402247192}
   - component: {fileID: 212965424681683920}
   - component: {fileID: 114318200895683266}
-  - component: {fileID: 114886905199093068}
   - component: {fileID: 114374307316780850}
   - component: {fileID: 114734998414342428}
   - component: {fileID: 60989586914771700}
+  - component: {fileID: 114425971322594280}
   m_Layer: 0
   m_Name: WorldTile
   m_TagString: Untagged
@@ -48,7 +48,23 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
+--- !u!1 &1650527632406820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4569813296979502}
+  - component: {fileID: 114170349151446076}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1892847940175352
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +83,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1934940055245076
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4063498931222768
 Transform:
   m_ObjectHideFlags: 1
@@ -111,6 +127,7 @@ Transform:
   - {fileID: 4063498931222768}
   - {fileID: 4353007090643586}
   - {fileID: 4945725864453460}
+  - {fileID: 4569813296979502}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.3}
@@ -126,6 +143,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4238323402247192}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4569813296979502
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1650527632406820}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0026179885, w: 0.9999966}
+  m_LocalPosition: {x: 0, y: 0, z: 1.1746645}
+  m_LocalScale: {x: 0.1, y: 0.1, z: -0.11961723}
+  m_Children: []
+  m_Father: {fileID: 4238323402247192}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4945725864453460
 Transform:
@@ -190,6 +220,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d55bd1144cf154d87d5622d1449767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114170349151446076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1650527632406820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e282970fa16cc74788b324c7a5a8a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windowManagerPrefab: {fileID: 1086105163294284, guid: 84c208c8f253e66459bb2a79fda9a138,
+    type: 2}
+  infoPanelPrefab: {fileID: 1497648905945826, guid: 69e8ca8dad49c6848b9f161f08b5ed4c,
+    type: 2}
+  berryFoodPrefab: {fileID: 114570798446475714, guid: d7996ab59a87167438b3016096665144,
+    type: 2}
+  biomePrefab: {fileID: 114570798446475714, guid: 5bfb81fbb20c91447b30bc72c55631c3,
+    type: 2}
+  enviroPrefab: {fileID: 114570798446475714, guid: 62c0b9d645d590e4392667ce42bb0dc8,
+    type: 2}
+  noClickPrefab: {fileID: 1601072822311834, guid: 9cb12a5cd261d9442b1a8822d3b8be8d,
+    type: 2}
+  exitButtonPrefab: {fileID: 1889557421693892, guid: 46a9abe3a1a389d4fbdb6137b5b16814,
+    type: 2}
+  TEST: {fileID: 114754549525399732, guid: 92ca6563d98c7d341aa6cb229daf0138, type: 2}
 --- !u!114 &114318200895683266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,6 +285,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c755d4ad0882c9042829e85e8bf996e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114425971322594280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1447847701695058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e282970fa16cc74788b324c7a5a8a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windowManagerPrefab: {fileID: 1086105163294284, guid: 84c208c8f253e66459bb2a79fda9a138,
+    type: 2}
+  infoPanelPrefab: {fileID: 1497648905945826, guid: 69e8ca8dad49c6848b9f161f08b5ed4c,
+    type: 2}
+  berryFoodPrefab: {fileID: 114570798446475714, guid: d7996ab59a87167438b3016096665144,
+    type: 2}
+  biomePrefab: {fileID: 114570798446475714, guid: 5bfb81fbb20c91447b30bc72c55631c3,
+    type: 2}
+  enviroPrefab: {fileID: 114570798446475714, guid: 62c0b9d645d590e4392667ce42bb0dc8,
+    type: 2}
+  noClickPrefab: {fileID: 1601072822311834, guid: 9cb12a5cd261d9442b1a8822d3b8be8d,
+    type: 2}
+  exitButtonPrefab: {fileID: 1889557421693892, guid: 46a9abe3a1a389d4fbdb6137b5b16814,
+    type: 2}
+  TEST: {fileID: 114754549525399732, guid: 92ca6563d98c7d341aa6cb229daf0138, type: 2}
 --- !u!114 &114502286356038216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -265,34 +347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c755d4ad0882c9042829e85e8bf996e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114886905199093068
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1447847701695058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e282970fa16cc74788b324c7a5a8a81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  competitive: {fileID: 0}
-  cohabitable: {fileID: 0}
-  windowManagerPrefab: {fileID: 1086105163294284, guid: 84c208c8f253e66459bb2a79fda9a138,
-    type: 2}
-  infoPanelPrefab: {fileID: 1710603878542482, guid: 935c30a104e693643a247eb6bb25ba14,
-    type: 2}
-  berryFoodPrefab: {fileID: 114570798446475714, guid: d7996ab59a87167438b3016096665144,
-    type: 2}
-  biomePrefab: {fileID: 114570798446475714, guid: 5bfb81fbb20c91447b30bc72c55631c3,
-    type: 2}
-  enviroPrefab: {fileID: 114570798446475714, guid: 62c0b9d645d590e4392667ce42bb0dc8,
-    type: 2}
-  noClickPrefab: {fileID: 1601072822311834, guid: 9cb12a5cd261d9442b1a8822d3b8be8d,
-    type: 2}
-  exitButtonPrefab: {fileID: 1889557421693892, guid: 46a9abe3a1a389d4fbdb6137b5b16814,
-    type: 2}
 --- !u!212 &212603686447816206
 SpriteRenderer:
   m_ObjectHideFlags: 1
