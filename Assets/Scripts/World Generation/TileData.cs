@@ -12,7 +12,7 @@ public class TileData:MonoBehaviour {
     private int altitude;
     private int temperature;
     private Dictionary<int, int> localSpecies;
-    private bool[] speciesRelations; //  [0] is player species, [1] is cohabitable species, [2] is competitive species
+    private Dictionary<int, int> speciesRelation;  //  key is species id, value is their relation to player species; 0 == player, 1 == cohabitable, 2 == competitive
     public GameObject player;
     public GameObject competitive;
     public GameObject cohabitable;
@@ -28,7 +28,6 @@ public class TileData:MonoBehaviour {
         numLeaves = 0;
         numAmbientMeat = 0;
         localSpecies = new Dictionary<int, int>();
-        speciesRelations = new bool[3] { false, false, false };
     }
     
     public void enablePlayer()
@@ -138,6 +137,7 @@ public class TileData:MonoBehaviour {
         if (sp.getSpeciesID() == 0)
         {
             enablePlayer();
+            speciesRelation[sp.getSpeciesID()] = 0;
         }
         else
         {
@@ -159,11 +159,34 @@ public class TileData:MonoBehaviour {
             if (isCohabitable)
             {
                 enableCohabitable();
+                speciesRelation[sp.getSpeciesID()] = 1;
             }
             else
             {
                 enableCompetitive();
+                speciesRelation[sp.getSpeciesID()] = 2;
             }
         }
+    }
+    /*
+     *  Returns a list of each local species' data as int[8]; 0 == ID, 1 == size, 2 == berries, 3 == nuts, 4 == grass, 5 == leaves, 6 == carnivoreFoodSize, 7 == relation
+     */
+    public List<int[]> getSpeciesData()
+    {
+        List<int[]> speciesData = new List<int[]>();
+        foreach (KeyValuePair<int, int> sp in localSpecies)
+        {   //  iterates through all species in this tile
+            Species species = GameObject.Find("Species Updater").GetComponent<UpdateSpecies>().getSpecies(sp.Key);
+            int[] data = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+            data[0] = species.getSpeciesID();
+            data[1] = species.getCreatureSize();
+            data[2] = species.getHFS()[0];
+            data[3] = species.getHFS()[1];
+            data[4] = species.getHFS()[2];
+            data[5] = species.getHFS()[3];
+            data[6] = species.getCFS();
+            data[7] = speciesRelation[sp.Key];
+        }
+        return speciesData;
     }
 }
