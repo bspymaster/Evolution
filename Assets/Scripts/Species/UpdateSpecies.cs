@@ -27,12 +27,12 @@ public class UpdateSpecies : MonoBehaviour
      *  COMPLETE
      *  Use this to get the player species
      */
-    public Species getPlayerSpecies()
+    public Species getSpecies(int id)
     {
         //print("getPlayerSpecies()");
         foreach (KeyValuePair<int, Species> sp in speciesDict)
         {
-            if (sp.Key == 0)
+            if (sp.Key == id)
             {
                 return sp.Value;
             }
@@ -135,7 +135,7 @@ public class UpdateSpecies : MonoBehaviour
         Global.playerSpeciesGeneList = playerGns;
         foreach (KeyValuePair<int, Species> sp in speciesDict)
         {
-            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[0]).GetComponent<TileData>().setLocalSpecies(sp.Value, 10, getPlayerSpecies());
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[0]).GetComponent<TileData>().setLocalSpecies(sp.Value, 10, getSpecies(0));
         }
     }
 
@@ -167,7 +167,7 @@ public class UpdateSpecies : MonoBehaviour
         if (Global.change)
         {
             //print("change");
-            Species playerSpecies = getPlayerSpecies();
+            Species playerSpecies = getSpecies(0);
             if (playerSpecies.getGenes().Count == 1)
             {
                 GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("First Mutation!", "Congratulations, your species has evolved! But beware, your old self still roams"));
@@ -237,9 +237,9 @@ public class UpdateSpecies : MonoBehaviour
                 return;
             }
             Global.mutationPoints += 1;
-            if (Global.mutationPoints > 29)
+            if (Global.mutationPoints > 19)
             {
-                GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Horder", "Have 30+ mutation points and still survive without using them"));
+                GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Horder", "Have 20+ mutation points and still survive without using them"));
             }
             Global.playerSpeciesGeneList = parentSpecies.getGenes();
         }
@@ -356,11 +356,11 @@ public class UpdateSpecies : MonoBehaviour
         }
         else
         {
-            rTile.setLocalSpecies(migratingSpecies, movingPopulation, getPlayerSpecies());
+            rTile.setLocalSpecies(migratingSpecies, movingPopulation, getSpecies(0));
         }
         gTile.setSpeciesPopulation(migratingSpecies.getSpeciesID(), stayingPopulation);
         migratingSpecies.addToLocation(recievingTile);
-        if (getPlayerSpecies().getLocation().Count > 99)
+        if (getSpecies(0).getLocation().Count > 99)
         {
             GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("A Whole New World", "Have members of your species in 100+ tiles"));
         }
