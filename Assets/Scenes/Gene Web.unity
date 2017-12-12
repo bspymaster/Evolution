@@ -10778,7 +10778,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 800376842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1420.3, y: -137, z: -10}
+  m_LocalPosition: {x: -588.72, y: -137, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10795,12 +10795,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de2b00dd3840d74180b810f9484e503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panSpeed: 500
+  panSpeed: 1000
   panLimit: {x: 50, y: 50}
-  panMinY: -1000
-  panMaxY: 1200
-  panMinX: -900
-  panMaxX: 1000
+  panMinY: -1600
+  panMaxY: 1800
+  panMinX: -1800
+  panMaxX: 1800
   minY: 400
   maxY: 1200
 --- !u!1001 &803198390
@@ -21580,6 +21580,7 @@ GameObject:
   - component: {fileID: 1676171284}
   - component: {fileID: 1676171283}
   - component: {fileID: 1676171282}
+  - component: {fileID: 1676171285}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -21632,6 +21633,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1676171285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1676171281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f87a7fa9c2177418014aed44b6f8cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1680255822
 Prefab:
   m_ObjectHideFlags: 0
