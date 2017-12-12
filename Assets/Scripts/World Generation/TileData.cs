@@ -11,9 +11,8 @@ public class TileData:MonoBehaviour {
     private string tileType;
     private int altitude;
     private int temperature;
-    private Dictionary<int, Species> localSpecies;  // key is species id, value is the species
-    private Dictionary<int, int> speciesPopulation; //  key is species id, value is their population
-    private Dictionary<int, int> speciesRelation;  //  key is species id, value is their relation to player species; 0 == player, 1 == cohabitable, 2 == competitive
+    private Dictionary<int, int> localSpecies;
+    private bool[] speciesRelations; //  [0] is player species, [1] is cohabitable species, [2] is competitive species
     public GameObject player;
     public GameObject competitive;
     public GameObject cohabitable;
@@ -28,39 +27,13 @@ public class TileData:MonoBehaviour {
         temperature = 0;
         numLeaves = 0;
         numAmbientMeat = 0;
-        localSpecies = new Dictionary<int, Species>();
-        speciesPopulation = new Dictionary<int, int>();
-        speciesRelation = new Dictionary<int, int>();
-}
+        localSpecies = new Dictionary<int, int>();
+        speciesRelations = new bool[3] { false, false, false };
+    }
     
-    public void enablePlayer()
-    {
-        player.SetActive(true);
-    }
-    public void enableCohabitable()
-    {
-        cohabitable.SetActive(true);
-    }
-    public void enableCompetitive()
-    {
-        competitive.SetActive(true);
-    }
-    public void disablePlayer()
-    {
-        player.SetActive(false);
-    }
-    public void disableCohabitable()
-    {
-        cohabitable.SetActive(false);
-    }
-    public void disableCompetitive()
-    {
-        competitive.SetActive(false);
-    }
-
     public int getSpeciesPopulation(int key)
     {
-        return speciesPopulation[key];
+        return localSpecies[key];
     }
     public string getTileType()
     {
@@ -86,7 +59,7 @@ public class TileData:MonoBehaviour {
     {
         return numAmbientMeat;
     }
-    public Dictionary<int, Species> getLocalSpecies()
+    public Dictionary<int, int> getLocalSpecies()
     {
         return localSpecies;
     }
@@ -124,7 +97,7 @@ public class TileData:MonoBehaviour {
     }
     public void setSpeciesPopulation(int speciesKey, int population)
     {
-        speciesPopulation[speciesKey] = population;
+        localSpecies[speciesKey] = population;
     }
     public void setTemperature(int temperature)
     {
@@ -136,12 +109,10 @@ public class TileData:MonoBehaviour {
     }
     public void setLocalSpecies(Species sp, int pop, Species playerS)
     {
-        localSpecies.Add(sp.getSpeciesID(), sp);
-        speciesPopulation.Add(sp.getSpeciesID(), pop);
+        localSpecies.Add(sp.getSpeciesID(), pop);
         if (sp.getSpeciesID() == 0)
         {
-            enablePlayer();
-            speciesRelation[sp.getSpeciesID()] = 0;
+            Instantiate(player);
         }
         else
         {
@@ -162,54 +133,12 @@ public class TileData:MonoBehaviour {
             }
             if (isCohabitable)
             {
-                enableCohabitable();
-                speciesRelation[sp.getSpeciesID()] = 1;
+                Instantiate(cohabitable);
             }
             else
             {
-                enableCompetitive();
-                speciesRelation[sp.getSpeciesID()] = 2;
+                Instantiate(competitive);
             }
         }
-    }
-    public void killSpecies(int speciesKey)
-    {
-        localSpecies.Remove(speciesKey);
-        speciesPopulation.Remove(speciesKey);
-        if (speciesRelation[speciesKey] == 0)
-        {
-            disablePlayer();
-        }
-        else if (speciesRelation[speciesKey] == 1)
-        {
-            disableCohabitable();
-        }
-        else if (speciesRelation[speciesKey] == 2)
-        {
-            disableCompetitive();
-        }
-        speciesRelation.Remove(speciesKey);
-    }
-
-    /*
-     *  Returns a list of each local species' data as int[8]; 0 == ID, 1 == size, 2 == berries, 3 == nuts, 4 == grass, 5 == leaves, 6 == carnivoreFoodSize, 7 == relation
-     */
-    public List<int[]> getSpeciesData()
-    {
-        List<int[]> speciesData = new List<int[]>();
-        foreach (KeyValuePair<int, Species> sp in localSpecies)
-        {   //  iterates through all species in this tile
-            int[] data = new int[8] { -1, -1, -1, -1, -1, -1, -1, -1 };
-            data[0] = sp.Value.getSpeciesID();
-            data[1] = sp.Value.getCreatureSize();
-            data[2] = sp.Value.getHFS()[0];
-            data[3] = sp.Value.getHFS()[1];
-            data[4] = sp.Value.getHFS()[2];
-            data[5] = sp.Value.getHFS()[3];
-            data[6] = sp.Value.getCFS();
-            data[7] = speciesRelation[sp.Value.getSpeciesID()];
-            speciesData.Add(data);
-        }
-        return speciesData;
     }
 }
