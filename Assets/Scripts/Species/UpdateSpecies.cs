@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UpdateSpecies : MonoBehaviour
@@ -249,7 +249,8 @@ public class UpdateSpecies : MonoBehaviour
     }
 
     /*
-     *  OBSOLETE - CHILD SPECIES NEEDED TO BE ADDED TO WORLD
+     *  COMPLETE
+     *      OBSOLETE - CHILD SPECIES NEEDED TO BE ADDED TO WORLD
      *  Parent Species will be copied into new speciesObject (mutatingSpecies) that will evolve once
      */
     private void Mutate(Species parentSpecies, bool isPlayer)
@@ -458,25 +459,105 @@ public class UpdateSpecies : MonoBehaviour
     }
 
     /*
-     *  IMPLEMENTATION NEEDED
+     *  NEEDS REVIEW - BALANCE?
      *  Have the herbivore species in each tile containing species eat tile resources
      */
     private void HerbivoreMove()
     {
-        //print("HerbivoreMove()");
-        //  int[] validTiles = 'tiles who have herbivores in them'
-        //  for each valid tile, get herbivore food sources (tile gets)
-        //  for each species in valid tile, species.getHFS()
-        //  int[] localSpecies = 'species in valid tile';
-        /*  for (int i = 0; i < localSpecies.Length; i++) {
-         *      for (int j = 0; j < 4; j++) {
-         *          berriesInTile - ( localSpecies[i].getHFS(j) * localSpecies[i].getAmntCalories() );
-         *          nutsInTile - ( localSpecies[i].getHFS(j) * localSpecies[i].getAmntCalories() );
-         *          grassInTile - ( localSpecies[i].getHFS(j) * localSpecies[i].getAmntCalories() );
-         *          leavesInTile - ( localSpecies[i].getHFS(j) * localSpecies[i].getAmntCalories() );
-         *      }
-         *  }
-         */
+        print("HerbivoreMove(), Player Species: " + speciesDict[0].getSpeciesID());
+        List<Vector2Int> berriesTiles = new List<Vector2Int>();
+        List<Vector2Int> nutsTiles = new List<Vector2Int>();
+        List<Vector2Int> grassTiles = new List<Vector2Int>();
+        List<Vector2Int> leavesTiles = new List<Vector2Int>();
+        foreach (KeyValuePair<int, Species> sp in speciesDict)
+        {
+            for (int i = 0; i < sp.Value.getLocation().Count; i++)
+            {
+                if (sp.Value.getHFS()[0] > 0)
+                {   //  check if species eats berries
+                    if (!berriesTiles.Contains(sp.Value.getLocation()[i]))
+                    {   //  check if this tile is already in berries
+                        berriesTiles.Add(sp.Value.getLocation()[i]);
+                    }
+                }
+                else if (sp.Value.getHFS()[1] > 0)
+                {   //  check if species eats nuts
+                    if (!nutsTiles.Contains(sp.Value.getLocation()[i]))
+                    {   //  check if this tile is already in berries
+                        nutsTiles.Add(sp.Value.getLocation()[i]);
+                    }
+
+                }
+                else if (sp.Value.getHFS()[2] > 0)
+                {   //  check if species eats grass
+                    if (!grassTiles.Contains(sp.Value.getLocation()[i]))
+                    {   //  check if this tile is already in berries
+                        grassTiles.Add(sp.Value.getLocation()[i]);
+                    }
+
+                }
+                else if (sp.Value.getHFS()[3] > 0)
+                {   //  check if species eats leaves
+                    if (!leavesTiles.Contains(sp.Value.getLocation()[i]))
+                    {   //  check if this tile is already in berries
+                        leavesTiles.Add(sp.Value.getLocation()[i]);
+                    }
+
+                }
+            }
+        }
+        for (int i = 0; i < berriesTiles.Count; i++)
+        {   //  iterate through all tiles that contain at least one berry-eating species
+            int food = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().getNumBerries() * 10;
+            foreach (KeyValuePair<int, Species> sp in GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().getLocalSpecies())
+            {
+                int caloriesNeeded = sp.Value.getRequiredCalories() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((food - caloriesNeeded) / sp.Value.getCreatureSize()));
+                if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                {
+                    //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
+                }
+            }
+        }
+        for (int i = 0; i < nutsTiles.Count; i++)
+        {   //  iterate through all tiles that contain at least one berry-eating species
+            int food = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().getNumBerries() * 10;
+            foreach (KeyValuePair<int, Species> sp in GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().getLocalSpecies())
+            {
+                int caloriesNeeded = sp.Value.getRequiredCalories() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((food - caloriesNeeded) / sp.Value.getCreatureSize()));
+                if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                {
+                    //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
+                }
+            }
+        }
+        for (int i = 0; i < grassTiles.Count; i++)
+        {   //  iterate through all tiles that contain at least one berry-eating species
+            int food = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().getNumBerries() * 10;
+            foreach (KeyValuePair<int, Species> sp in GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().getLocalSpecies())
+            {
+                int caloriesNeeded = sp.Value.getRequiredCalories() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((food - caloriesNeeded) / sp.Value.getCreatureSize()));
+                if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                {
+                    //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
+                }
+            }
+        }
+        for (int i = 0; i < leavesTiles.Count; i++)
+        {   //  iterate through all tiles that contain at least one berry-eating species
+            int food = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().getNumBerries() * 10;
+            foreach (KeyValuePair<int, Species> sp in GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().getLocalSpecies())
+            {
+                int caloriesNeeded = sp.Value.getRequiredCalories() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((food - caloriesNeeded) / sp.Value.getCreatureSize()));
+                if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                {
+                    //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
+                }
+            }
+        }
         if (alerts[7])
         {
             if (speciesDict[0].getLocation().Count == 0)
@@ -489,26 +570,139 @@ public class UpdateSpecies : MonoBehaviour
     }
 
     /*
-     *  IMPLEMENTATION NEEDED
+     *  NEEDS REVIEW - BALANCE?
      *  Have the carnivore species in each tile containing species eat other species and tiny species (tile resource)
      */
     private void CarnivoreMove()
     {
         //print("CarnivoreMove()");
-        //  int[] validTiles = 'tiles who have carnivores in them'
-        //  for each valid tile, get carnivore food sources (tile gets)
-        //  for each species in valid tile, species.getCFS()
-        //  int[] localSpecies = 'species in valid tile';
-        /*  for (int i = 0; i < localSpecies.Length; i++) {
-         *      for (int j = 0; j < 5; j++) {
-         *          ambientInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
-         *          smallInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
-         *          mediumInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
-         *          largeInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
-         *          humongousInTile - ( localSpecies[i].getCFS(j) * localSpecies[i].getAmntCalories() );
-         *      }
-         *  }
-         */
+        List<Vector2Int> carnivoreTiles = new List<Vector2Int>();
+        foreach (KeyValuePair<int, Species> sp in speciesDict)
+        {   //  iterates through all species
+            if (sp.Value.getCFS() > 0)
+            {   //  checks if species is a carnivore
+                for (int i = 0; i < sp.Value.getLocation().Count; i++)
+                {   //  gets the carnivore's tiles
+                    if (!carnivoreTiles.Contains(sp.Value.getLocation()[i]))
+                    {   //  checks if the tile is already included
+                        carnivoreTiles.Add(sp.Value.getLocation()[i]);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < carnivoreTiles.Count; i++)
+        {   //  iterates through each carniverous tile
+            int tiny = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getNumAmbientMeat();
+            int small = 0;
+            int medium = 0;
+            int large = 0;
+            int humungous = 0;
+            foreach (KeyValuePair<int, Species> sp in GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies())
+            {   //  add food from other species
+                if (sp.Value.getCreatureSize() > 300)
+                {
+                    humungous += sp.Value.getCreatureSize() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Value.getSpeciesID());
+                }
+                else if (sp.Value.getCreatureSize() > 200)
+                {
+                    large += sp.Value.getCreatureSize() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Value.getSpeciesID());
+                }
+                else if (sp.Value.getCreatureSize() > 100)
+                {
+                    medium += sp.Value.getCreatureSize() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Value.getSpeciesID());
+                }
+                else if (sp.Value.getCreatureSize() > 1)
+                {
+                    small += sp.Value.getCreatureSize() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Value.getSpeciesID());
+                }
+                tiny += sp.Value.getOffspringSurvivalChance() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Value.getSpeciesID());
+            }
+            int[] deaths = new int[4] { 0, 0, 0, 0 };
+            foreach (KeyValuePair<int, Species> sp in GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies())
+            {   //  hunt for food
+                int caloriesNeeded = sp.Value.getRequiredCalories() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
+                bool more = true;
+                if (sp.Value.getCFS() > 300)
+                {
+                    if (humungous > caloriesNeeded)
+                    {
+                        more = false;
+                        tiny += humungous - caloriesNeeded;
+                        deaths[0] = humungous - caloriesNeeded;
+                    }
+                    GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((humungous - caloriesNeeded) / sp.Value.getCreatureSize()));
+                }
+                else if (sp.Value.getCFS() > 200 & more)
+                {
+                    if (large > caloriesNeeded)
+                    {
+                        more = false;
+                        tiny += large - caloriesNeeded;
+                        deaths[1] = large - caloriesNeeded;
+                    }
+                    GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((large - caloriesNeeded) / sp.Value.getCreatureSize()));
+                }
+                else if (sp.Value.getCFS() > 100 & more)
+                {
+                    if (medium > caloriesNeeded)
+                    {
+                        more = false;
+                        tiny += medium - caloriesNeeded;
+                        deaths[2] = medium - caloriesNeeded;
+                    }
+                    GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((medium - caloriesNeeded) / sp.Value.getCreatureSize()));
+                }
+                else if (sp.Value.getCFS() > 1 & more)
+                {
+                    if (small > caloriesNeeded)
+                    {
+                        more = false;
+                        tiny += small - caloriesNeeded;
+                        deaths[3] = small - caloriesNeeded;
+                    }
+                    GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((small - caloriesNeeded) / sp.Value.getCreatureSize()));
+                }
+                else if (more)
+                {
+                    GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((tiny - caloriesNeeded) / sp.Value.getCreatureSize()));
+                }
+                for (int j = 0; j < 4; j++)
+                {   //  tally deaths
+                    if (sp.Value.getCFS() > 300)
+                    {
+                        GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) - (deaths[0]/ GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies().Count));
+                        if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                        {
+                            //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
+                        }
+                    }
+                    else if (sp.Value.getCFS() > 200)
+                    {
+                        GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) - (deaths[1] / GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies().Count));
+                        if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                        {
+                            //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
+                        }
+                    }
+                    else if (sp.Value.getCFS() > 100)
+                    {
+                        GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) - (deaths[2] / GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies().Count));
+                        if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                        {
+                            //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
+                        }
+                    }
+                    else if (sp.Value.getCFS() > 1)
+                    {
+                        GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) - (deaths[3] / GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies().Count));
+                        if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                        {
+                            //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
+                        }
+                    }
+                }
+            }
+        }
         if (alerts[7])
         {   //  seperated these checks, as if player species dies in the other move method, checking its location would cause an error
             if (speciesDict[0].getLocation().Count == 0)
