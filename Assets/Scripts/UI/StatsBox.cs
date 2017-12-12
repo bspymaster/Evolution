@@ -18,7 +18,7 @@ public class StatsBox : MonoBehaviour
     public string getText(int[] speciesArray)
     {
         Debug.Log("Entered getText");
-        Debug.Log("ID" + speciesArray[0]);
+        Debug.Log("Original ID " + speciesArray[0]);
         string ID;
         string size;
         string meatSize;
@@ -33,6 +33,7 @@ public class StatsBox : MonoBehaviour
         {
             ID = speciesArray[0].ToString();
         }
+        Debug.Log("New ID " + ID);
         //Gets species size
         size = checkSize(speciesArray[1]);
         meatSize = checkSize(speciesArray[6]);
@@ -70,7 +71,7 @@ public class StatsBox : MonoBehaviour
 
         string sendText = "Species ID: " + ID + "   Size: " + size + "\n" + relation + "Food Consumption:\n" + foods + "\n\n";
         Debug.Log("Full Text" + sendText);
-        return sendText;
+        return ID;
     }
 
     public string checkSize(int num)
@@ -131,7 +132,7 @@ public class StatsBox : MonoBehaviour
             string enviroType = "Altitude: " + altitude.ToString() + "     Temperature(F): " + temperature.ToString();
 
             //Defines the positioning and sets parents of each text box in the tile info window.
-            Text foods = Instantiate(berryFoodPrefab, new Vector3(-200, 0, -5), Quaternion.identity) as Text;
+            Text foods = Instantiate(berryFoodPrefab, new Vector3(-200, -100, -5), Quaternion.identity) as Text;
             foods.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
             Text biomeTitle = Instantiate(biomePrefab, new Vector3(0, 140, -5), Quaternion.identity) as Text;
@@ -157,18 +158,20 @@ public class StatsBox : MonoBehaviour
             int numSpecies = 3;
             bool noHostile = false;
 
-            string presentSpecies = "Top Three Species   \n";
+            string presentSpecies = "Top Three Species" + "\n";
 
             foreach (int[] sp in speciesData)
             {
                 Debug.Log("Entered Player search");
                 if (sp[7] == 0)
                 {
-                    presentSpecies += getText(sp);
+                    string temp = getText(sp);
+                    presentSpecies += temp;
                     numSpecies--;
                     Debug.Log("Found Player");
                 }
             }
+            /*
             while (numSpecies > 0)
             {
                 if(noHostile == false)
@@ -200,6 +203,7 @@ public class StatsBox : MonoBehaviour
                     return;
                 }
             }
+            */
             Text animals = Instantiate(berryFoodPrefab, new Vector3(200, 0, -5), Quaternion.identity) as Text;
             animals.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
