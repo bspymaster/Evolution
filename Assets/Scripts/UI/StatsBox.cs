@@ -15,6 +15,90 @@ public class StatsBox : MonoBehaviour
     public GameObject exitButtonPrefab;
     bool foundPlayer = false;
 
+    public string getText(int[] speciesArray)
+    {
+        Debug.Log("Entered getText");
+        string ID;
+        string size;
+        string meatSize;
+        string relation = "";
+        string foods = "";
+        //Gets species ID
+        if(speciesArray[7] == 0)
+        {
+            ID = "Player";
+        }
+        else
+        {
+            ID = speciesArray[0].ToString();
+        }
+        //Gets species size
+        size = checkSize(speciesArray[1]);
+        meatSize = checkSize(speciesArray[6]);
+
+        if (speciesArray[7] == 1)
+        {
+            relation = "Cohabitor\n";
+        }
+        if (speciesArray[7] == 2)
+        {
+            relation = "Competitor\n";
+        }
+
+        if(speciesArray[2] == 1)
+        {
+            foods += "Berries  ";
+        }
+        if (speciesArray[3] == 1)
+        {
+            foods += "Nuts  ";
+        }
+        if (speciesArray[4] == 1)
+        {
+            foods += "Grass  ";
+        }
+        if (speciesArray[5] == 1)
+        {
+            foods += "Leaves  ";
+        }
+        foods += meatSize;
+
+        string sendText = "Species ID: " + ID + "   Size: " + size + "\n" + relation + "Food Consumption:\n" + foods + "\n\n";
+        Debug.Log("Full Text" + sendText);
+        return sendText;
+    }
+
+    public string checkSize(int num)
+    {
+        Debug.Log("Entered checkSize");
+        string size;
+        if (num > 0 && num < 2)
+        {
+            size = "Meat: Tiny";
+        }
+        else if (num > 1 && num < 101)
+        {
+            size = "Meat: Small";
+        }
+        else if (num > 100 && num < 201)
+        {
+            size = "Meat: Medium";
+        }
+        else if (num > 200 && num < 301)
+        {
+            size = "Meat: Large";
+        }
+        else if (num > 300 && num < 401)
+        {
+            size = "Meat: Huge";
+        }
+        else
+        {
+            size = "";
+        }
+        return size;
+    }
+
     public void OnMouseDown()
     {
         if (!EventSystem.current.IsPointerOverGameObject())
@@ -29,20 +113,20 @@ public class StatsBox : MonoBehaviour
             string biome = this.GetComponent<TileData>().getTileType();
             int altitude = this.GetComponent<TileData>().getAltitude();
             int temperature = this.GetComponent<TileData>().getTemperature();
-            GameObject windowManager = Instantiate(windowManagerPrefab, new Vector3(0, 0, 5), Quaternion.identity) as GameObject;
+            GameObject windowManager = Instantiate(windowManagerPrefab, new Vector3(0, 100, 5), Quaternion.identity) as GameObject;
             windowManager.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
             windowManager.gameObject.tag = "WindowManager";
 
-            GameObject infoPanel = Instantiate(infoPanelPrefab, new Vector3(0, -25, -5), Quaternion.identity) as GameObject;
+            GameObject infoPanel = Instantiate(infoPanelPrefab, new Vector3(0, -100, -5), Quaternion.identity) as GameObject;
             infoPanel.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
             //Defines the contents of each text box in the tile info window.
-            string foodTypes = "   Food Sources" + "\nBerries: " + numBerries.ToString() + "\nGrass: " + numGrass.ToString() + "\nNuts: " + numNuts.ToString() + "\nLeaves: " + numLeaves.ToString() + "\nMeat: " + numMeat.ToString();
+            string foodTypes = "   Food Sources" + "\n\nBerries: " + numBerries.ToString() + "\nGrass: " + numGrass.ToString() + "\nNuts: " + numNuts.ToString() + "\nLeaves: " + numLeaves.ToString() + "\nMeat: " + numMeat.ToString();
             string biomeType = biome;
             string enviroType = "Altitude: " + altitude.ToString() + "     Temperature(F): " + temperature.ToString();
 
             //Defines the positioning and sets parents of each text box in the tile info window.
-            Text foods = Instantiate(berryFoodPrefab, new Vector3(-200, -75, -5), Quaternion.identity) as Text;
+            Text foods = Instantiate(berryFoodPrefab, new Vector3(-200, 0, -5), Quaternion.identity) as Text;
             foods.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
             Text biomeTitle = Instantiate(biomePrefab, new Vector3(0, 140, -5), Quaternion.identity) as Text;
@@ -64,44 +148,54 @@ public class StatsBox : MonoBehaviour
 
 
             List<int[]> speciesData = this.GetComponent<TileData>().getSpeciesData();
-            int temp1 = 0;
-            int[] temp2 = null;
+            print("List Received");
+            int numSpecies = 3;
+            bool noHostile = false;
 
-            while (foundPlayer == false)
+            string presentSpecies = "Top Three Species   \n";
+
+            foreach (int[] sp in speciesData)
             {
-
-                if (speciesData == null)
+                Debug.Log("Entered Player search");
+                if (sp[7] == 0)
                 {
-                    Debug.Log("Null List!");
+                    presentSpecies += getText(sp);
+                    numSpecies--;
+                    Debug.Log("Found Player");
                 }
-                else
+            }
+            while (numSpecies > 0)
+            {
+                if(noHostile == false)
                 {
-                    Debug.Log("List Working?");
-                    /*
-                    int[] data = speciesData[0];
-
-                    Debug.Log(data[7]);
-                    */
-
                     foreach (int[] sp in speciesData)
                     {
-                        if (sp[7] == 0)
+                        Debug.Log("Entered Hostile search");
+                        if (sp[7] == 2)
                         {
-                            Debug.Log("Player is here!");
+                            presentSpecies += getText(sp);
+                            Debug.Log("Found Hostile");
+                            speciesData.Remove(sp);
+                            numSpecies--;
                         }
-                        else
-                        {
-                            Debug.Log("No Player found.");
-                        }
+                        return;
                     }
-
+                    noHostile = true;
                 }
-                foundPlayer = true;
+                foreach (int[] sp in speciesData)
+                {
+                    Debug.Log("Entered Cohabit search");
+                    if (sp[7] == 1)
+                    {
+                        presentSpecies += getText(sp);
+                        Debug.Log("Found Cohabit");
+                        speciesData.Remove(sp);
+                        numSpecies--;
+                    }
+                    return;
+                }
             }
-
-            string presentSpecies = "Top Five Species   \n" + temp1;
-
-            Text animals = Instantiate(berryFoodPrefab, new Vector3(200, -75, -5), Quaternion.identity) as Text;
+            Text animals = Instantiate(berryFoodPrefab, new Vector3(200, 0, -5), Quaternion.identity) as Text;
             animals.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
 
             animals.text = presentSpecies;
