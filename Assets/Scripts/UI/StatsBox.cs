@@ -65,13 +65,13 @@ public class StatsBox : MonoBehaviour
         }
         if (speciesArray[6] != -1)
         {
-            foods += meatSize;
+            foods += (meatSize + " Meat");
         }
-            
 
-        string sendText = "Species ID: " + ID + "   Size: " + size + "\n" + relation + "Food Consumption:\n" + foods + "\n\n";
+
+        string sendText = "Species ID: " + ID + "   Size: " + size + "\n"; //+ relation + "Food Consumption:\n" + foods + "\n\n";
         Debug.Log("Full Text" + sendText);
-        return ID;
+        return sendText;
     }
 
     public string checkSize(int num)
@@ -80,23 +80,23 @@ public class StatsBox : MonoBehaviour
         string size;
         if (num > 0 && num < 2)
         {
-            size = "Meat: Tiny";
+            size = "Tiny";
         }
         else if (num > 1 && num < 101)
         {
-            size = "Meat: Small";
+            size = "Small";
         }
         else if (num > 100 && num < 201)
         {
-            size = "Meat: Medium";
+            size = "Medium";
         }
         else if (num > 200 && num < 301)
         {
-            size = "Meat: Large";
+            size = "Large";
         }
         else if (num > 300 && num < 401)
         {
-            size = "Meat: Huge";
+            size = "Huge";
         }
         else
         {
