@@ -53,7 +53,7 @@ public class UpdateSpecies : MonoBehaviour
                 locY = rnd.Next(1, 99);
             }
             lctn.Add(new Vector2Int(locX, locY));
-            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, -1, 50, 50, 100, 1, 1, 1, 1, new Vector2Int(40, 100), 100, 0);
+            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, -1, 50, 50, 1, 1, 10, 0, 5, 50, 0, 1, 100, 0, 10, 0);
             speciesDict.Add(i, speciesScript);
             //  addNode is now locked to true, we may want to change this later, time permitted
             speciesScript.evolve(true, 0);
@@ -130,7 +130,7 @@ public class UpdateSpecies : MonoBehaviour
         }
         playerLctn.Add(new Vector2Int(locX, locY));
         Species playerSpeciesScript = new Species("SHOULD NOT APPEAR: 0");
-        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, -1, 50, 50, 100, 1, 1, 1, 1, new Vector2Int(40, 100), 100, 0);
+        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, -1, 50, 50, 1, 1, 10, 0, 5, 50, 0, 1, 100, 0, 10, 0);
         speciesDict.Add(0, playerSpeciesScript);
         Global.mutationPoints = 12;
         Global.playerSpeciesGeneList = playerGns;
@@ -384,9 +384,9 @@ public class UpdateSpecies : MonoBehaviour
             stayingPopulation = 1;
         }
         bool speciesIsThere = false;
-        foreach (KeyValuePair<int, Species> localS in rTile.getLocalSpecies())
+        foreach (KeyValuePair<int, int> localS in rTile.getLocalSpecies())
         {
-            if (localS.Value.getSpeciesID() == migratingSpecies.getSpeciesID())
+            if (localS.Key == migratingSpecies.getSpeciesID())
             {
                 speciesIsThere = true;
             }
