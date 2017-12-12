@@ -190,6 +190,7 @@ public class TileData:MonoBehaviour {
             data[5] = sp.Value.getHFS()[3];
             data[6] = sp.Value.getCFS();
             data[7] = speciesRelation[sp.Value.getSpeciesID()];
+            speciesData.Add(data);
         }
         return speciesData;
     }
