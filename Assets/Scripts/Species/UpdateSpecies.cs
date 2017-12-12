@@ -17,7 +17,7 @@ public class UpdateSpecies : MonoBehaviour
     public void GenerateSpecies()
     {
         //print("GenerateSpecies()");
-        nextId = 11;
+        nextId = 21;
         GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("It Begins - Start evolving!", "I'll trade a magic trick for a vase!"));
         speciesDict = new Dictionary<int, Species>();
         mapSize = GameObject.Find("TileList").GetComponent<TileListData>().getMapSize() - 1;
@@ -28,7 +28,7 @@ public class UpdateSpecies : MonoBehaviour
     }
 
     /*
-     *  NEEDS DIFFERENT INIT VALUES
+     *  COMPLETE
      *  Spawn() generates n game objects as species on game creation
      */
     private void Spawn()
@@ -37,7 +37,7 @@ public class UpdateSpecies : MonoBehaviour
         var rnd = new System.Random();
         int locX = 0;
         int locY = 0;
-        for (int i = 1; i < 11; i++)
+        for (int i = 1; i < 21; i++)
         {
             Species speciesScript = new Species("SHOULD NOT APPEAR: -2");
             List<Vector2Int> lctn = new List<Vector2Int>();
@@ -53,7 +53,14 @@ public class UpdateSpecies : MonoBehaviour
                 locY = rnd.Next(1, 99);
             }
             lctn.Add(new Vector2Int(locX, locY));
-            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, -1, 50, 50, 100, 1, 1, 1, 1, new Vector2Int(40, 100), 100, 0);
+
+            /*
+             *  (string speciesName, int speciesID, List<Vector2Int> location, List<int> genes, int[] herbivoreFoodSource, int carnivoreFoodSource,
+             *  int requiredCalories, int creatureSize, int litterSize, int reproductionRate, int mutationChance, int carnivorous, int offspringSize, int altitude,
+             *  int canFly, int dexterity, int maxPerTile, int peckingOrder, int offspringSurvivalChance, int canSwim)
+             */
+
+            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, -1, 100, 50, 1, 1, 10, 0, 10, 50, 0, 1, 200, 0, 10, 0);
             speciesDict.Add(i, speciesScript);
             //  addNode is now locked to true, we may want to change this later, time permitted
             speciesScript.evolve(true, 0);
@@ -130,7 +137,7 @@ public class UpdateSpecies : MonoBehaviour
         }
         playerLctn.Add(new Vector2Int(locX, locY));
         Species playerSpeciesScript = new Species("SHOULD NOT APPEAR: 0");
-        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, -1, 50, 50, 100, 1, 1, 1, 1, new Vector2Int(40, 100), 100, 0);
+        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, -1, 100, 50, 1, 1, 10, 0, 10, 50, 0, 1, 200, 0, 10, 0);
         speciesDict.Add(0, playerSpeciesScript);
         Global.mutationPoints = 12;
         Global.playerSpeciesGeneList = playerGns;
@@ -162,8 +169,7 @@ public class UpdateSpecies : MonoBehaviour
     }
 
     /*
-     *  NEEDS POPULATION MODIFIERS
-     *  NEEDS MUTATION MODIFIERS
+     *  NEEDS OFFSPRING
      *  Have the species in each tile reproduce
      */
     private void Reproduce()
@@ -200,9 +206,9 @@ public class UpdateSpecies : MonoBehaviour
                 }
                 int initialPop = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
                 population = initialPop;
-                population += population * sp.Value.getLitterSize();
+                population *= sp.Value.getReproductionRate() + sp.Value.getLitterSize();
                 /*
-                 *  NEEDS POPULATION MODIFIERS
+                 *  OFFSPRING THING
                  */
                 if (population > (initialPop * 10) & alerts[5])
                 {
@@ -219,10 +225,7 @@ public class UpdateSpecies : MonoBehaviour
                 }
             }
             System.Random rnd = new System.Random();
-            int mutVarTemp = 40;
-            /*
-             *  NEEDS MUTATION MODIFIERS
-             */
+            int mutVarTemp = 80 - sp.Value.getMutationChance();
             if (rnd.Next(1, 101) <= mutVarTemp)
             {
                 if (sp.Value.getSpeciesID() != 0)
@@ -288,7 +291,6 @@ public class UpdateSpecies : MonoBehaviour
     /*
      *  OCEAN IMPLEMENTATION NEEDED
      *  ALTITUDE IMPLEMENTATION NEEDED
-     *  TEMPERATURE IMPLEMENTATION NEEDED
      *  Have the species in a given tile migrate to adjacent tile
      */
     private void Overpopulate(Species migratingSpecies, Vector2Int tileLocation)

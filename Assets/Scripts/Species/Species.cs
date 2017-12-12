@@ -10,16 +10,21 @@ public class Species : MonoBehaviour
     private List<int> genes;  // what genes this species has.  Assuming genes can be simplified to their numerical value
     private int[] herbivoreFoodSource; // i == 0 berries, i == 1 nuts, i == 2 grass, i == 3 leaves, value of 0 at any index (default) means speceis cannot eat food type at given index
     private int carnivoreFoodSource; // integer between 1 and 500 that limits what size prey you can eat, -1 (default) means species cannot eat meat
-    private int amntCalories; // amount of food to survive
+    private int requiredCalories; // amount of food to survive
     private int creatureSize; // 1 is tiny, 2 - 100 is small, 101 - 200 is medium, 201 - 300 is large, 301 - 400 is humongous
-    private int maxPerTile; // max number of individuals of a species in a given tile, -1 is unlimited
     private int litterSize; // population growth per reproduction
-    private int matingFrequency; // reproduction speed
-    private int mateAttachment; // mutation chance v offspring survivability
-    private int peckingOrder; // determines when the species eats in the eating algorithm
-    private Vector2Int temperatureTolerance;    //  x is min temperature, y is max
-    private int maxAltitude;    //  how high of a tile this species can enter
+    private int reproductionRate; // reproduction speed
+    private int mutationChance; // mutation chance v offspring survivability
+    private int carnivorous;    //  0 == can't eat meat
+    private int offspringSize;          // size of the offspring (calorie worth and which size class it belongs to)
+    private int altitude;    //  how high of a tile this species can enter
     private int canFly;    //  0 == no flight, 1 == flight
+    private int dexterity;  //  defensive trait
+    private int maxPerTile; // max number of individuals of a species in a given tile, -1 is unlimited
+    private int peckingOrder; // determines when the species eats in the eating algorithm
+    private int offspringSurvivalChance;    // the chance that any given offspring will survive to adulthood
+    private int canSwim;    // 0 == can't swim
+    //private Vector2Int temperatureTolerance;    //  x is min temperature, y is max
 
     /*
      *  COMPLETE
@@ -31,34 +36,38 @@ public class Species : MonoBehaviour
     }
 
     /*
-     *  NEEDS ALL MODIFIERS
+     *  DOMPLETE
      *  Initializer
      */
-    public void Init(string sN, int sID, List<Vector2Int> lctn, List<int> gns, int[] hFS, int cFS, int aC, int cS, int mPT, int lS, int mF, int mA, int pO, Vector2Int tT, int maxA, int canF)
+    public void Init(string speciesName, int speciesID, List<Vector2Int> location, List<int> genes, int[] herbivoreFoodSource, int carnivoreFoodSource,
+         int requiredCalories, int creatureSize, int litterSize, int reproductionRate, int mutationChance, int carnivorous, int offspringSize, int altitude,
+         int canFly, int dexterity, int maxPerTile, int peckingOrder, int offspringSurvivalChance, int canSwim)
     {
-        speciesName = sN;
-        speciesID = sID;
-        location = lctn;
-        genes = gns;
-        herbivoreFoodSource = hFS;
-        carnivoreFoodSource = cFS;
-        amntCalories = aC;
-        creatureSize = cS;
-        maxPerTile = mPT;
-        litterSize = lS;
-        matingFrequency = mF;
-        mateAttachment = mA;
-        peckingOrder = pO;
-        temperatureTolerance = tT;
-        maxAltitude = maxA;
-        canFly = canF;
-        /*
-         *  NEEDS ALL MODIFIERS
-         */
+        this.speciesName = speciesName;
+        this.speciesID = speciesID;
+        this.location = location;
+        this.genes = genes;
+        this.herbivoreFoodSource = herbivoreFoodSource;
+        this.carnivoreFoodSource = carnivoreFoodSource;
+        this.requiredCalories = requiredCalories;
+        this.creatureSize = creatureSize;
+        this.litterSize = litterSize;
+        this.reproductionRate = reproductionRate;
+        this.mutationChance = mutationChance;
+        this.carnivorous = carnivorous;
+        this.offspringSize = offspringSize;
+        this.altitude = altitude;
+        this.canFly = canFly;
+        this.dexterity = dexterity;
+        this.maxPerTile = maxPerTile;
+        this.peckingOrder = peckingOrder;
+        this.offspringSurvivalChance = offspringSurvivalChance;
+        this.canSwim = canSwim;
+        //this.temperatureTolerance = temperatureTolerance;
     }
 
     /*
-     *  NEEDS ALL MODIFIERS
+     *  COMPLETE
      *  Take boolean to determine if adding/subtracting node in evolutionary web, and takes index of that node to modify species instance accordingly with -1 being random node
      */
     public void evolve(bool addNode, int nodeIndex)
@@ -107,27 +116,31 @@ public class Species : MonoBehaviour
             herbivoreFoodSource[i] += op * node.getHerbivoreFoodSource()[i];
         }
         carnivoreFoodSource += op * node.getCarnivoreFoodSource();
-        amntCalories += op * node.getRequiredCalories();
+        requiredCalories += op * node.getRequiredCalories();
         creatureSize += op * node.getCreatureSize();
-        maxPerTile += op * node.getMaxPerTile();
         litterSize += op * node.getLitterSize();
-        matingFrequency += op * node.getMutationChance();
-        mateAttachment += op * node.getReproductionRate();
+        reproductionRate += op * node.getReproductionRate();
+        mutationChance += op * node.getMutationChance();
+        carnivorous += op * node.getCarnivorous();
+        offspringSize += op * node.getOffspringSize();
+        altitude += op * node.getAltitude();
+        canFly += op * node.getCanFly();
+        dexterity += op * node.getDexterity();
+        maxPerTile += op * node.getMaxPerTile();
         peckingOrder += op * node.getPeckingOrder();
-        /*
-         *  NEEDS ALL MODIFIERS
-         */
+        offspringSurvivalChance += op * node.getOffspringSurvivalChance();
+        canSwim += op * node.getCanSwim();
     }
 
     /*
-     *  NEEDS ALL MODIFIERS
+     *  COMPLETE
      *  Deep copy of species instance of passed species
      */
     public void clone(Species other, int id) // other will be evolved, clone will be parent species
     {
-        Init("Species: " + id, id, other.getLocation(), other.getGenes(), other.getHFS(), other.getCFS(), other.getAmntCalories(), 
-            other.getCreatureSize(), other.getMaxPerTile(), other.getLitterSize(), other.getMatingFrequency(), getMateAttachment(), other.getPeckingOrder(),
-            other.getTemperatureTolerance(), getMaxAltitude(), other.getCanFly());
+        Init("Species: " + id, id, other.getLocation(), other.getGenes(), other.getHFS(), other.getCFS(), other.getRequiredCalories(),
+         other.getCreatureSize(), other.getLitterSize(), other.getReproductionRate(), other.getMutationChance(), other.getCarnivorous(), other.getOffspringSize(), other.getAltitude(),
+         other.getCanFly(), other.getDexterity(), other.getMaxPerTile(), other.getPeckingOrder(), other.getOffspringSurvivalChance(), other.getCanSwim());
     }
 
     /*
@@ -158,46 +171,66 @@ public class Species : MonoBehaviour
     {
         return carnivoreFoodSource;
     }
-    public int getAmntCalories()
+    public int getRequiredCalories()
     {
-        return amntCalories;
+        return requiredCalories;
     }
     public int getCreatureSize()
     {
         return creatureSize;
     }
-    public int getMaxPerTile()
-    {
-        return maxPerTile;
-    }
     public int getLitterSize()
     {
         return litterSize;
     }
-    public int getMatingFrequency()
+    public int getReproductionRate()
     {
-        return matingFrequency;
+        return reproductionRate;
     }
-    public int getMateAttachment()
+    public int getMutationChance()
     {
-        return mateAttachment;
+        return mutationChance;
     }
-    public int getPeckingOrder()
+    public int getCarnivorous()
     {
-        return peckingOrder;
+        return carnivorous;
     }
-    public Vector2Int getTemperatureTolerance()
+    public int getOffspringSize()
     {
-        return temperatureTolerance;
+        return offspringSize;
     }
-    public int getMaxAltitude()
+    public int getAltitude()
     {
-        return maxAltitude;
+        return altitude;
     }
     public int getCanFly()
     {
         return canFly;
     }
+    public int getDexterity()
+    {
+        return dexterity;
+    }
+    public int getMaxPerTile()
+    {
+        return maxPerTile;
+    }
+    public int getPeckingOrder()
+    {
+        return peckingOrder;
+    }
+    public int getOffspringSurvivalChance()
+    {
+        return offspringSurvivalChance;
+    }
+    public int getCanSwim()
+    {
+        return canSwim;
+    }
+    //public Vector2Int getTemperatureTolerance()
+    //{
+    //    return temperatureTolerance;
+    //}
     public void addToLocation(Vector2Int additionalLocation)
     {
         location.Add(additionalLocation);
