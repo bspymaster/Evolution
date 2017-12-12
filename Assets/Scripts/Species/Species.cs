@@ -123,9 +123,9 @@ public class Species : MonoBehaviour
      *  NEEDS ALL MODIFIERS
      *  Deep copy of species instance of passed species
      */
-    public void clone(Species other) // other will be evolved, clone will be parent species
+    public void clone(Species other, int id) // other will be evolved, clone will be parent species
     {
-        Init(other.getSpeciesName(), other.getSpeciesID(), other.getLocation(), other.getGenes(), other.getHFS(), other.getCFS(), other.getAmntCalories(), 
+        Init("Species: " + id, id, other.getLocation(), other.getGenes(), other.getHFS(), other.getCFS(), other.getAmntCalories(), 
             other.getCreatureSize(), other.getMaxPerTile(), other.getLitterSize(), other.getMatingFrequency(), getMateAttachment(), other.getPeckingOrder(),
             other.getTemperatureTolerance(), getMaxAltitude(), other.getCanFly());
     }
