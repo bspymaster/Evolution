@@ -20,7 +20,7 @@ public class Node
     private int maxPerTile;             // max number of individuals of a species in a given tile, -1 is unlimited
     private int peckingOrder;           // determines when the species eats in the eating algorithm
     private int offspringSurvivalChance;// the chance that any given offspring will survive to adulthood
-    private int canSwim;                // 0 == can't swim (unable to corss water)
+    private int canSwim;                // 0 == can't swim (unable to cross water)
 
     public Node(string name)
     {
