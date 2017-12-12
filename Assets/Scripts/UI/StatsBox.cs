@@ -18,6 +18,7 @@ public class StatsBox : MonoBehaviour
     public string getText(int[] speciesArray)
     {
         Debug.Log("Entered getText");
+        Debug.Log("ID" + speciesArray[0]);
         string ID;
         string size;
         string meatSize;
@@ -61,7 +62,11 @@ public class StatsBox : MonoBehaviour
         {
             foods += "Leaves  ";
         }
-        foods += meatSize;
+        if (speciesArray[6] != -1)
+        {
+            foods += meatSize;
+        }
+            
 
         string sendText = "Species ID: " + ID + "   Size: " + size + "\n" + relation + "Food Consumption:\n" + foods + "\n\n";
         Debug.Log("Full Text" + sendText);

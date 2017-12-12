@@ -10795,12 +10795,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de2b00dd3840d74180b810f9484e503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panSpeed: 500
+  panSpeed: 1000
   panLimit: {x: 50, y: 50}
-  panMinY: -1000
-  panMaxY: 1200
-  panMinX: -900
-  panMaxX: 1000
+  panMinY: -1600
+  panMaxY: 1800
+  panMinX: -1800
+  panMaxX: 1800
   minY: 400
   maxY: 1200
 --- !u!1001 &803198390
