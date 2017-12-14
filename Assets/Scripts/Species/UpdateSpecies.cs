@@ -364,6 +364,11 @@ public class UpdateSpecies : MonoBehaviour
             {   //  fly over ocean tiles in a straight line until land (new area) or border (wasted migrate)
                 int x = rnd.Next(0, 2);
                 int y = rnd.Next(0, 2);
+                while (x == 0 & y == 0)
+                {   //  makes sure species actually flies somewhere
+                    x = rnd.Next(0, 2);
+                    y = rnd.Next(0, 2);
+                }
                 int c = 10;
                 while (!flag & c > 0)
                 {

@@ -36,7 +36,7 @@ public class Species : MonoBehaviour
     }
 
     /*
-     *  DOMPLETE
+     *  COMPLETE
      *  Initializer
      */
     public void Init(string speciesName, int speciesID, List<Vector2Int> location, List<int> genes, int[] herbivoreFoodSource, int carnivoreFoodSource,
