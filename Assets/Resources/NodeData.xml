@@ -100,7 +100,7 @@
   <node>
     <id>11</id>
     <name>Eat Small Animals</name>
-    <carnivoreFoodSource>100</carnivoreFoodSource>
+    <carnivoreFoodSource>49</carnivoreFoodSource>
     <childNodes>
       <child>12</child>
     </childNodes>
@@ -198,6 +198,7 @@
     <id>23</id>
     <name>Feathers</name>
     <requiredCalories>-10</requiredCalories>
+    <temperatureTolerance>-5,0</temperatureTolerance>
     <childNodes>
     	<child>24</child>
     </childNodes>
@@ -237,6 +238,7 @@
     <name>Flapping Ability</name>
     <altitude>500</altitude>
     <requiredCalories>50</requiredCalories>
+    <temperatureTolerance>10,0</temperatureTolerance>
     <canFly>1</canFly>
     <childNodes>
       <child>29</child>
@@ -247,6 +249,7 @@
     <name>Flapping Ability</name>
     <altitude>300</altitude>
     <requiredCalories>50</requiredCalories>
+    <temperatureTolerance>10,0</temperatureTolerance>
     <canFly>1</canFly>
     <childNodes></childNodes>
   </node>
@@ -388,6 +391,7 @@
     <name>Hair/Fur</name>
     <requiredCalories>-10</requiredCalories>
     <altitude>100</altitude>
+    <temperatureTolerance>-15,-10</temperatureTolerance>
     <childNodes>
       <child>45</child>
     </childNodes>
@@ -420,6 +424,7 @@
     <id>47</id>
     <name>Thicker Hide</name>
     <requiredCalories>-10</requiredCalories>
+    <temperatureTolerance>-5,0</temperatureTolerance>
     <altitude>100</altitude>
     <dexterity>-5</dexterity>
     <childNodes>
@@ -507,6 +512,7 @@
     <name>Larger Feet</name>
     <dexterity>10</dexterity>
     <requiredCalories>-5</requiredCalories>
+    <temperatureTolerance>-5,0</temperatureTolerance>
     <childNodes>
       <child>59</child>
     </childNodes>
@@ -571,6 +577,7 @@
     <id>66</id>
     <name>Tool Usage</name>
     <dexterity>5</dexterity>
+    <temperatureTolerance>-10,5</temperatureTolerance>
     <childNodes>
       <child>67</child>
     </childNodes>
@@ -599,6 +606,7 @@
     <name>Ectothermic</name>
     <requiredCalories>-75</requiredCalories>
     <reproductionRate>5</reproductionRate>
+    <temperatureTolerance>20,20</temperatureTolerance>
     <childNodes>
       <child>71</child>
       <child>75</child>
@@ -619,6 +627,7 @@
     <id>72</id>
     <name>Water Reliance</name>
     <requiredCalories>-25</requiredCalories>
+    <temperatureTolerance>10,10</temperatureTolerance>
     <childNodes></childNodes>
   </node>
   <node>
@@ -663,6 +672,7 @@
     <name>Shells</name>
     <litterSize>10</litterSize>
     <reproductionRate>-10</reproductionRate>
+    <temperatureTolerance>-5,0</temperatureTolerance>
     <dexterity>-50</dexterity>
     <childNodes>
       <child>83</child>

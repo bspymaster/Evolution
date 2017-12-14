@@ -158,6 +158,19 @@ public class buildWeb : MonoBehaviour
                     nodes[i].setCanSwim(int.Parse(nodeData["canSwim"].InnerText));
                 }
                 catch (System.NullReferenceException) { }
+                try
+                {
+                    string[] stringArray = nodeData["temperatureTolerance"].InnerText.Split(',');
+                    int[] intArray = new int[2];
+                    int value;
+                    for (value = 0; value < 2; value++)
+                    {
+                        intArray[value] = int.Parse(stringArray[value]);
+                    }
+                    Vector2Int data = new Vector2Int(intArray[0],intArray[1]);
+                    nodes[i].setTemperatureTolerance(data);
+                }
+                catch (System.NullReferenceException) { }
             }
         }
 
