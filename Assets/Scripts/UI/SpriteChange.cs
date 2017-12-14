@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SpriteChange : MonoBehaviour {
 
     public int nodeIndex;
+    public bool Active = false;
     public Button button;
     public Sprite Unadded;
     public Sprite Added;
@@ -34,31 +35,38 @@ public class SpriteChange : MonoBehaviour {
 
     public void getTheChildren()
     {
-        nodeChildren = GameObject.Find("Web Builder")
+        if (Global.mutationPoints > 0)
+        {
+            nodeChildren = GameObject.Find("Web Builder")
             .GetComponent<buildWeb>()
             .getWeb()
             .getChildren(nodeIndex);
 
-        foreach (int child in nodeChildren)
-        {
-            Global.UnlockedGenes.Add(child);
+            foreach (int child in nodeChildren)
+            {
+                Global.UnlockedGenes.Add(child);
+            }
+            Global.mutationPoints--;
         }
+        
     }
 
 
     public void toggle2()
     {
-        if(button.image.sprite == Unadded)
+        if (Global.mutationPoints > 0)
         {
-            button.image.sprite = Added;
+            if (Active == false)
+            {
+                
+                button.image.sprite = Added;
+                Global.newGenes.Add(nodeIndex);
+                Active = true;
+            }
         }
-        else if(button.image.sprite == Added)
-        {
-            button.image.sprite = Unadded;
-        }     
     }
 
-    
+
     private void Update()
     {
         if (Global.UnlockedGenes.Contains(nodeIndex) & button.image.sprite != Added)

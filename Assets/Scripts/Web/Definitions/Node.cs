@@ -15,11 +15,12 @@ public class Node
     private int carnivorous;            // 0 == can't eat meat
     private int offspringSize;          // size of the offspring (calorie worth and which size class it belongs to)
     private int altitude;               // the height that your creature can go up to (or how high you can fly, for aviaries)
-    private int canFly;                 // 0 == can't fly at all
+    private int canFly;                 // 0 == can't fly at all (unable to cross water)
     private int dexterity;              // defensive trait
     private int maxPerTile;             // max number of individuals of a species in a given tile, -1 is unlimited
     private int peckingOrder;           // determines when the species eats in the eating algorithm
     private int offspringSurvivalChance;// the chance that any given offspring will survive to adulthood
+    private int canSwim;                // 0 == can't swim (unable to cross water)
 
     public Node(string name)
     {
@@ -34,6 +35,7 @@ public class Node
         mutationChance = 0;
         peckingOrder = 0;
         offspringSurvivalChance = 0;
+        canSwim = 0;
 
     }
 
@@ -174,5 +176,14 @@ public class Node
     public void setOffspringSurvivalChance(int change)
     {
         offspringSurvivalChance = change;
+    }
+
+    public int getCanSwim()
+    {
+        return canSwim;
+    }
+    public void setCanSwim(int change)
+    {
+        canSwim = change;
     }
 }

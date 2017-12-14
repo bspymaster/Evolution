@@ -13,6 +13,9 @@ public class StatsBox : TileData
     public Text enviroPrefab;
     public GameObject noClickPrefab;
     public GameObject exitButtonPrefab;
+    public GameObject player;
+    public GameObject competitive;
+    public GameObject cohabitable;
 
 
     public void OnMouseDown()

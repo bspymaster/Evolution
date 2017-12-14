@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpdateSpecies : MonoBehaviour {
+public class UpdateSpecies : MonoBehaviour
+{
 
-    public GameObject speciesObject;
     private int mapSize;
-    private Dictionary<GameObject, List<Vector2Int>> speciesDict;   //  Species Object as key, location as value
+    private Dictionary<int, Species> speciesDict;   //  speciesID as key, Species as value
+    private bool[] alerts;
+    private int nextId;
 
     /*
     *  COMPLETE
@@ -14,64 +16,45 @@ public class UpdateSpecies : MonoBehaviour {
     */
     public void GenerateSpecies()
     {
-        print("GenerateSpecies()");
-        speciesDict = new Dictionary<GameObject, List<Vector2Int>>();
+        //print("GenerateSpecies()");
+        nextId = 11;
+        GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("It Begins - Start evolving!", "I'll trade a magic trick for a vase!"));
+        speciesDict = new Dictionary<int, Species>();
         mapSize = GameObject.Find("TileList").GetComponent<TileListData>().getMapSize() - 1;
-        Spawn(10);
+        alerts = new bool[10] { true, true, true, true, true, true, true, true, true, true };
+        Spawn();
         InvokeRepeating("Interact", 10f, 20f);
         InvokeRepeating("Reproduce", 5f, 20f);
-    }
-
-    /*
-     *  COMPLETE
-     *  Use this to get speciesObject dimension
-     */
-    public float getDimension()
-    {
-        return speciesObject.transform.lossyScale.y;
-    }
-
-    /*
-     *  COMPLETE
-     *  Use this to get the player species
-     */
-    public Species getPlayerSpecies()
-    {
-        foreach (KeyValuePair<GameObject, List<Vector2Int>> sp in speciesDict)
-        {
-            if (sp.Key.GetComponent<Species>().getSpeciesID() == 0)
-            {
-                return sp.Key.GetComponent<Species>();
-            }
-        }
-        return new Species("SHOULD NOT APPEAR");
     }
 
     /*
      *  NEEDS DIFFERENT INIT VALUES
      *  Spawn() generates n game objects as species on game creation
      */
-    private void Spawn(int n)
+    private void Spawn()
     {
-        print("Spawn()");
+        //print("Spawn()");
         var rnd = new System.Random();
         int locX = 0;
         int locY = 0;
-        Species speciesScript = speciesObject.GetComponent<Species>();
-        List<Vector2Int> lctn = new List<Vector2Int>();
-        List<int> gns = new List<int>();
-        for (int i = 1; i < n + 1; i++)
+        for (int i = 1; i < 11; i++)
         {
-            lctn = new List<Vector2Int>();
-            gns = new List<int>();
+            Species speciesScript = new Species("SHOULD NOT APPEAR: -2");
+            List<Vector2Int> lctn = new List<Vector2Int>();
+            List<int> gns = new List<int>();
             locX = rnd.Next(1, 99);
             locY = rnd.Next(1, 99);
+            while (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTileType() == "Ocean" ||
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() < 40 ||
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() > 100 ||
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getAltitude() > 40)
+            {   //  checks if tile is in the ocean, too high, too cold, or too hot
+                locX = rnd.Next(1, 99);
+                locY = rnd.Next(1, 99);
+            }
             lctn.Add(new Vector2Int(locX, locY));
-            GameObject newSpeciesObject = Instantiate(speciesObject, new Vector2(-10, -10), Quaternion.identity);
-            speciesScript = newSpeciesObject.GetComponent<Species>();
-            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
-            speciesDict.Add(newSpeciesObject, lctn);
-            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(lctn[0]).GetComponent<TileData>().setLocalSpecies(speciesScript, 10);
+            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, -1, 50, 50, 1, 1, 10, 0, 5, 50, 0, 1, 100, 0, 10, 0);
+            speciesDict.Add(i, speciesScript);
             //  addNode is now locked to true, we may want to change this later, time permitted
             speciesScript.evolve(true, 0);
             speciesScript.evolve(true, 95);
@@ -133,26 +116,28 @@ public class UpdateSpecies : MonoBehaviour {
                 speciesScript.evolve(true, -1);
             }
         }
-        locX = rnd.Next(1, 99);
-        locY = rnd.Next(1, 99);
-        lctn.Add(new Vector2Int(locX, locY));
-        GameObject newPlayerSpeciesObject = Instantiate(speciesObject, new Vector2(-10, -10), Quaternion.identity);
-        speciesScript = newPlayerSpeciesObject.GetComponent<Species>();
-        speciesScript.Init("Player Species", 0, lctn, gns, new int[4], 1, 1, 1, 1, 1, 1, 1, 1);
-        speciesDict.Add(newPlayerSpeciesObject, lctn);
-        GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(lctn[0]).GetComponent<TileData>().setLocalSpecies(speciesScript, 10);
-        //  addNode is now locked to true, we may want to change this later, time permitted
-        speciesScript.evolve(true, 0);
-        Global.mutationPoints = 11;
-        Global.playerSpeciesGeneList = gns;
-        foreach (KeyValuePair<GameObject, List<Vector2Int>> species in speciesDict)
-        {
-            for (int j = 0; j < species.Value.Count; j++)
-            {
-                print("Species: " + species.Key.GetComponent<Species>().getSpeciesID() + ", location: " + species.Value[j]);
-            }
+        List<Vector2Int> playerLctn = new List<Vector2Int>();
+        List<int> playerGns = new List<int>();
+        locX = rnd.Next(44, 56);
+        locY = rnd.Next(44, 56);
+        while (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTileType() == "Ocean" ||
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() < 40 ||
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() > 100 ||
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getAltitude() > 40)
+        {   //  checks if tile is in the ocean, too high, too cold, or too hot
+            locX = rnd.Next(33, 67);
+            locY = rnd.Next(33, 67);
         }
-        print("Species Count: " + speciesDict.Count);
+        playerLctn.Add(new Vector2Int(locX, locY));
+        Species playerSpeciesScript = new Species("SHOULD NOT APPEAR: 0");
+        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, -1, 50, 50, 1, 1, 10, 0, 5, 50, 0, 1, 100, 0, 10, 0);
+        speciesDict.Add(0, playerSpeciesScript);
+        Global.mutationPoints = 12;
+        Global.playerSpeciesGeneList = playerGns;
+        foreach (KeyValuePair<int, Species> sp in speciesDict)
+        {
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[0]).GetComponent<TileData>().setLocalSpecies(sp.Value, 100, speciesDict[0]);
+        }
     }
 
     /*
@@ -161,9 +146,19 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Interact()
     {
-        print("Interact()");
+        //print("Interact()");
+        if (speciesDict.Count > 100 & alerts[9])
+        {
+            GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Pretty Crowded 'Round Here", "There are over 100 species!"));
+            alerts[9] = false;
+        }
+        int aliveBefore = speciesDict.Count;
         HerbivoreMove();
         CarnivoreMove();
+        if (speciesDict.Count < aliveBefore)
+        {
+            GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Another One Bites The Dust", "A potential competitor has gone extinct somewhere in the world!"));
+        }
     }
 
     /*
@@ -173,16 +168,23 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void Reproduce()
     {
-        print("Reproduce()");
+        //print("Reproduce()");
         if (Global.change)
         {
-            Species playerSpecies = speciesObject.GetComponent<Species>();
-            foreach (KeyValuePair<GameObject, List<Vector2Int>> species in speciesDict)
+            //print("change");
+            Species playerSpecies = speciesDict[0];
+            Species childSpecies = new Species("SHOULD NOT APPEAR: -3");
+            childSpecies.clone(playerSpecies, nextId);
+            speciesDict.Add(nextId, childSpecies);
+            nextId++;
+            for (int i = 0; i < speciesDict[childSpecies.getSpeciesID()].getLocation().Count; i++)
             {
-                if (species.Key.GetComponent<Species>().getSpeciesID() == 0)
-                {
-                    playerSpecies = species.Key.GetComponent<Species>();
-                }
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(speciesDict[childSpecies.getSpeciesID()].getLocation()[i]).GetComponent<TileData>().setLocalSpecies(speciesDict[childSpecies.getSpeciesID()], 30, speciesDict[0]);
+            }
+            if (playerSpecies.getGenes().Count > 0 & alerts[0])
+            {
+                GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("First Mutation!", "Congratulations, your species has evolved! But beware, your old self still roams"));
+                alerts[0] = false;
             }
             for (int i = 0; i < Global.newGenes.Count; i++)
             {
@@ -192,65 +194,109 @@ public class UpdateSpecies : MonoBehaviour {
             Global.change = false;
         }
         int population = 0;
-        foreach (KeyValuePair<GameObject, List<Vector2Int>> species in speciesDict)
+        bool mutation = false;
+        foreach (KeyValuePair<int, Species> sp in speciesDict)
         {
-            for (int i = 0; i < species.Value.Count; i++)
+            int originalLocationCount = sp.Value.getLocation().Count;
+            for (int i = 0; i < originalLocationCount; i++)
             {
-                print("Species: " + species.Key.GetComponent<Species>().getSpeciesID() + ", location: " + species.Value[i]);
-                population = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(species.Value[i]).GetComponent<TileData>().getSpeciesPopulation(species.Key.GetComponent<Species>().getSpeciesID());
-                print("population at given tile: " + population);
-                population += population * species.Key.GetComponent<Species>().getLitterSize();
+                if (speciesDict.Count == 1 & sp.Value.getSpeciesID() == 0 & alerts[1])
+                {
+                    GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Veni, Vidi, Vici", "You've won! You have led all other potential competition to extinction. Congratulations?"));
+                    alerts[1] = false;
+                }
+                int initialPop = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
+                population = initialPop;
+                population += population * sp.Value.getLitterSize();
                 /*
                  *  NEEDS POPULATION MODIFIERS
                  */
-                if (population > species.Key.GetComponent<Species>().getMaxPerTile())
+                if (population > (initialPop * 10) & alerts[5])
                 {
-                    Overpopulate(species.Key, species.Value[i]);
+                    GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("You Good For Another Round?", "Increase the population in a single tile tenfold"));
+                    alerts[5] = false;
+                }
+                if (population > sp.Value.getMaxPerTile())
+                {
+                    Overpopulate(sp.Value, sp.Value.getLocation()[i]);
                 }
                 else
                 {
-                    GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(species.Value[i]).GetComponent<TileData>().setSpeciesPopulation(species.Key.GetComponent<Species>(), population);
+                    GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, population);
                 }
             }
+            System.Random rnd = new System.Random();
+            int mutVarTemp = 50;
             /*
              *  NEEDS MUTATION MODIFIERS
              */
-            System.Random rnd = new System.Random();
-            int mutVarTemp = 100;
             if (rnd.Next(1, 101) <= mutVarTemp)
             {
-                Mutate(species.Key.GetComponent<Species>(), (species.Key.GetComponent<Species>().getSpeciesID() == 0));
+                if (sp.Value.getSpeciesID() != 0)
+                {
+                    mutation = true;
+                }
+                Mutate(sp.Value, (sp.Key == 0));
             }
         }
-    }
-
-    /*
-     *  ACHIEVEMENTS NEEDED
-     *  Parent Species will be copied into new speciesObject (mutatingSpecies) that will evolve once
-     */
-    private void Mutate(Species parentSpecies, bool isPlayer)
-    {
-        print("Mutate()");
-        Species mutatingSpecies = new Species("Species: " + speciesDict.Count + 1);
-        mutatingSpecies.clone(parentSpecies);
-        if (isPlayer)
+        if (mutation)
         {
-            Global.mutationPoints += 1;
-            Global.playerSpeciesGeneList = parentSpecies.getGenes();
-        }
-        else
-        {
-            parentSpecies.evolve(true, -1);
+            GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("It's Alive!", "Another competitor emerges from the chaos"));
+            mutation = false;
         }
     }
 
     /*
      *  COMPLETE
+     *  Parent Species will be copied into new speciesObject (mutatingSpecies) that will evolve once
+     */
+    private void Mutate(Species parentSpecies, bool isPlayer)
+    {
+        //print("Mutate()");
+        if (isPlayer)
+        {
+            if (parentSpecies.getGenes().Count == GameObject.Find("Web Builder").GetComponent<buildWeb>().getNumNodes() & alerts[2])
+            {
+                GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Perfect Organism", "'You still don't understand what you're dealing with, do you?' Obtain all genes"));
+                alerts[2] = false;
+                return;
+            }
+            Global.mutationPoints += 1;
+            if (Global.mutationPoints > 19 & alerts[3])
+            {
+                GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Horder", "Have 20+ mutation points and still survive without using them"));
+                alerts[3] = false;
+            }
+            Global.playerSpeciesGeneList = parentSpecies.getGenes();
+        }
+        else
+        {
+            Species childSpecies = new Species("SHOULD NOT APPEAR: -4");
+            childSpecies.clone(parentSpecies, nextId);
+            speciesDict.Add(nextId, childSpecies);
+            nextId++;
+            for (int i = 0; i < speciesDict[childSpecies.getSpeciesID()].getLocation().Count; i++)
+            {
+                GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(speciesDict[childSpecies.getSpeciesID()].getLocation()[i]).GetComponent<TileData>().setLocalSpecies(speciesDict[childSpecies.getSpeciesID()], 30, speciesDict[0]);
+            }
+            parentSpecies.evolve(true, -1);
+        }
+        if (parentSpecies.getGenes().Count * 2 > GameObject.Find("Web Builder").GetComponent<buildWeb>().getNumNodes() & alerts[8])
+        {
+            GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Clever Girl", "Obtain 50% of all genes"));
+            alerts[8] = false;
+        }
+    }
+
+    /*
+     *  OCEAN IMPLEMENTATION NEEDED
+     *  ALTITUDE IMPLEMENTATION NEEDED
+     *  TEMPERATURE IMPLEMENTATION NEEDED
      *  Have the species in a given tile migrate to adjacent tile
      */
-    private void Overpopulate(GameObject migratingSpecies, Vector2Int tileLocation)
+    private void Overpopulate(Species migratingSpecies, Vector2Int tileLocation)
     {
-        print("Overpopulate()");
+        //print("Overpopulate()");
         var rnd = new System.Random();
         int receivingTile = rnd.Next(0, 6); //  0 is left tile, 1 is right tile, 2 is top-left tile, 3 is top-right tile, 4 is bottom-left tile, 5 is bottom-right tile
         if (receivingTile == 0)
@@ -302,7 +348,8 @@ public class UpdateSpecies : MonoBehaviour {
             }
             Migrate(target, migratingSpecies, tileLocation);
         }
-        else {
+        else
+        {
             Vector2Int target = new Vector2Int(tileLocation.x + 1, tileLocation.y - 1);
             if (target.y < 0)
             {
@@ -317,16 +364,15 @@ public class UpdateSpecies : MonoBehaviour {
     }
 
     /*
-     *  ACHIEVEMENTS NEEDED
+     *  COMPLETE
      *  Migrates the population for OverPopulation()
      */
-    private void Migrate(Vector2Int recievingTile, GameObject migratingSpecies, Vector2Int givingTile)
+    private void Migrate(Vector2Int recievingTile, Species migratingSpecies, Vector2Int givingTile)
     {
-        print("Migrate()");
+        //print("Migrate()");
         TileData rTile = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(recievingTile).GetComponent<TileData>();
         TileData gTile = GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(givingTile).GetComponent<TileData>();
-        Species sp = migratingSpecies.GetComponent<Species>();
-        int pop = gTile.getSpeciesPopulation(sp.getSpeciesID());
+        int pop = gTile.getSpeciesPopulation(migratingSpecies.getSpeciesID());
         int movingPopulation = (int)(0.3 * pop);
         if (movingPopulation == 0)
         {
@@ -338,23 +384,33 @@ public class UpdateSpecies : MonoBehaviour {
             stayingPopulation = 1;
         }
         bool speciesIsThere = false;
-        for (int i = 0; i < rTile.getLocalSpecies().Count; i++)
+        foreach (KeyValuePair<int, int> localS in rTile.getLocalSpecies())
         {
-            if (rTile.getLocalSpecies()[i] == sp.getSpeciesID())
+            if (localS.Key == migratingSpecies.getSpeciesID())
             {
                 speciesIsThere = true;
             }
         }
         if (speciesIsThere)
         {
-            rTile.setSpeciesPopulation(sp, rTile.getSpeciesPopulation(sp.getSpeciesID()) + movingPopulation);
+            rTile.setSpeciesPopulation(migratingSpecies.getSpeciesID(), rTile.getSpeciesPopulation(migratingSpecies.getSpeciesID()) + movingPopulation);
         }
         else
         {
-            rTile.setLocalSpecies(sp, movingPopulation);
+            rTile.setLocalSpecies(migratingSpecies, movingPopulation, speciesDict[0]);
+            migratingSpecies.addToLocation(recievingTile);
         }
-        gTile.setSpeciesPopulation(sp, stayingPopulation);
-        migratingSpecies.GetComponent<Species>().addToLocation(recievingTile);
+        gTile.setSpeciesPopulation(migratingSpecies.getSpeciesID(), stayingPopulation);
+        if (speciesDict[0].getLocation().Count > 99 & alerts[4])
+        {
+            GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("A Whole New World", "Have members of your species in 100+ tiles"));
+            alerts[4] = false;
+        }
+        if (speciesDict[0].getLocation().Count > 5000 & alerts[6])
+        {
+            GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Type 1 Civilization", "Exist in over half of the world"));
+            alerts[6] = false;
+        }
     }
 
     /*
@@ -363,7 +419,7 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void HerbivoreMove()
     {
-        print("HerbivoreMove()");
+        //print("HerbivoreMove()");
         //  int[] validTiles = 'tiles who have herbivores in them'
         //  for each valid tile, get herbivore food sources (tile gets)
         //  for each species in valid tile, species.getHFS()
@@ -377,6 +433,18 @@ public class UpdateSpecies : MonoBehaviour {
          *      }
          *  }
          */
+        if (alerts[7])
+        {
+            if (speciesDict[0].getLocation().Count == 0)
+            {
+                GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Game Over, Man; Game Over!", "And because the hungry hungry baby ate too many people, it exploded"));
+                alerts[7] = false;
+                speciesDict.Remove(0);
+                /*
+                 *  END GAME?
+                 */
+            }
+        }
     }
 
     /*
@@ -385,7 +453,7 @@ public class UpdateSpecies : MonoBehaviour {
      */
     private void CarnivoreMove()
     {
-        print("CarnivoreMove()");
+        //print("CarnivoreMove()");
         //  int[] validTiles = 'tiles who have carnivores in them'
         //  for each valid tile, get carnivore food sources (tile gets)
         //  for each species in valid tile, species.getCFS()
@@ -400,5 +468,17 @@ public class UpdateSpecies : MonoBehaviour {
          *      }
          *  }
          */
+        if (alerts[7])
+        {   //  seperated these checks, as if player species dies in the other move method, checking its location would cause an error
+            if (speciesDict[0].getLocation().Count == 0)
+            {
+                GameObject.Find("EventSystem").GetComponent<AlertSystem>().addAlert(new Alert("Game Over, Man; Game Over!", "And because the hungry hungry baby ate too many people, it exploded"));
+                alerts[7] = false;
+                speciesDict.Remove(0);
+                /*
+                 *  END GAME?
+                 */
+            }
+        }
     }
 }

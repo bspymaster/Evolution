@@ -153,6 +153,11 @@ public class buildWeb : MonoBehaviour
                     nodes[i].setPeckingOrder(int.Parse(nodeData["offspringSurvivalChance"].InnerText));
                 }
                 catch (System.NullReferenceException) { }
+                try
+                {
+                    nodes[i].setCanSwim(int.Parse(nodeData["canSwim"].InnerText));
+                }
+                catch (System.NullReferenceException) { }
             }
         }
 

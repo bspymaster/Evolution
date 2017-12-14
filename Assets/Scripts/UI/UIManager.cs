@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject GeneWebButtonPrefab;
     public GameObject ExitGameButtonPrefab;
     public GameObject MutationPointsBackPrefab;
+    public GameObject AlertPrefab;
     public Text MutationPointsTextPrefab;
 
     public void BuildUI()
@@ -30,6 +31,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        
         if (Global.PreWorld == true)
         {
 
@@ -49,6 +51,8 @@ public class UIManager : MonoBehaviour
             WorldMakerPrefab.SetActive(false);
         }
     }
+
+    
 
     public void KillManager()
     {

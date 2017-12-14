@@ -47,12 +47,16 @@ public class GeneWebManager : MonoBehaviour {
 
     public void notifyChange()
     {
-        Global.change = true;
+        if(Global.mutationPoints > 0)
+        {
+            Global.change = true;
+        }
+        
     }
 
     public void disableCanvas()
     {
-        GameObject.FindGameObjectWithTag("WebCanvas").transform.position = new Vector2(0, -500);
+        GameObject.FindGameObjectWithTag("WebCanvas").transform.position = new Vector2(0, -5000);
     }
 }
 

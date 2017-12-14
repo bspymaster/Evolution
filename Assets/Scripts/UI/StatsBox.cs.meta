@@ -1,11 +1,23 @@
 fileFormatVersion: 2
 guid: 1e282970fa16cc74788b324c7a5a8a81
-timeCreated: 1507861545
+timeCreated: 1512940097
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {fileID: 1646766388523528, guid: a829a3143247a54449a7512cda647142, type: 2}
+  - competitive: {fileID: 1640749520503698, guid: d725736fb0af00340ab5e6a9477a84ae,
+      type: 2}
+  - cohabitable: {fileID: 1052649456419452, guid: cadd5f9fdde4ab54f93f2ef1f8e928e1,
+      type: 2}
+  - windowManagerPrefab: {instanceID: 0}
+  - infoPanelPrefab: {instanceID: 0}
+  - berryFoodPrefab: {instanceID: 0}
+  - biomePrefab: {instanceID: 0}
+  - enviroPrefab: {instanceID: 0}
+  - noClickPrefab: {instanceID: 0}
+  - exitButtonPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
