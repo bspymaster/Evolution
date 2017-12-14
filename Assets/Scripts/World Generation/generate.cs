@@ -67,41 +67,41 @@ public class generate : MonoBehaviour
                 GameObject tileInstance = Instantiate(BaseWorldTile, new Vector2(/*offset **/ (float)(width - 2.5)* offset.x, (height - 2) *offset.y), Quaternion.identity);
                 TileData instanceData = tileInstance.GetComponent<TileData>();
                 instanceData.setTileType(tileType[rand]);
-
+                //food is based on 0-200 is scarce 200-400 is below average 400-600 is average 600-800 is above average 800-1000 is plentiful
                 if (rand == 0)  // Ocean
                 {
-                    numAmbientMeat = 100;
+                    numAmbientMeat = Random.Range(200,400);
                 }
                 else if (rand == 1)  // Desert
                 {
-                    numBerries = 10;
-                    numGrass = 50;
-                    numLeaves = 10;
-                    numAmbientMeat = 200;
+                    numBerries = Random.Range(0,100);
+                    numGrass = Random.Range(0,50);
+                    numLeaves = Random.Range(0,25);
+                    numAmbientMeat = Random.Range(200,400);
                 }
                 else if (rand == 2)  // Plains
                 {
-                    numBerries = 50;
-                    numNuts = 50;
-                    numGrass = 1000;
-                    numLeaves = 100;
-                    numAmbientMeat = 150;
+                    numBerries = Random.Range(300,500);
+                    numNuts = Random.Range(100,200);
+                    numGrass = Random.Range(800,1000);
+                    numLeaves = Random.Range(200,400);
+                    numAmbientMeat = Random.Range(400,600);
                 }
                 else if (rand == 3)  // Forest
                 {
-                    numBerries = 1000;
-                    numNuts = 1000;
-                    numGrass = 500;
-                    numLeaves = 2000;
-                    numAmbientMeat = 500;
+                    numBerries = Random.Range(800,1000);
+                    numNuts = Random.Range(900,1000);
+                    numGrass = Random.Range(500,1000);
+                    numLeaves = Random.Range(800,1000);
+                    numAmbientMeat = Random.Range(400,600);
                 }
                 else if (rand == 4)  // Tundra
                 {
-                    numBerries = 50;
-                    numNuts = 150;
-                    numGrass = 50;
-                    numLeaves = 10;
-                    numAmbientMeat = 200;
+                    numBerries = Random.Range(200,400);
+                    numNuts = Random.Range(300,500);
+                    numGrass = Random.Range(0,200);
+                    numLeaves = Random.Range(200,300);
+                    numAmbientMeat = Random.Range(400,600);
                 }
                 
                 instanceData.setNumBerries(numBerries);
