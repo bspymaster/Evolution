@@ -675,7 +675,7 @@ public class UpdateSpecies : MonoBehaviour
                 {   //  tally deaths
                     if (sp.Value.getCFS() > 300)
                     {
-                        GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) - (deaths[0]/ GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies().Count));
+                        GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) - (deaths[0] / GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies().Count));
                         if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
                         {
                             //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
