@@ -60,7 +60,7 @@ public class UpdateSpecies : MonoBehaviour
              *  int canFly, int dexterity, int maxPerTile, int peckingOrder, int offspringSurvivalChance, int canSwim)
              */
 
-            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, -1, 100, 50, 1, 1, 10, 0, 10, 50, 0, 1, 200, 0, 10, 0);
+            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, -1, 100, 50, 1, 1, 10, 0, 10, 50, 0, 1, 200, 0, 10, 0, new Vector2Int(32, 70));
             speciesDict.Add(i, speciesScript);
             //  addNode is now locked to true, we may want to change this later, time permitted
             speciesScript.evolve(true, 0);
@@ -130,14 +130,16 @@ public class UpdateSpecies : MonoBehaviour
         while (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTileType() == "Ocean" ||
             GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() < 40 ||
             GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() > 100 ||
-            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getAltitude() > 40)
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getAltitude() > 40 ||
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() > 70 ||
+            GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(new Vector2Int(locX, locY)).GetComponent<TileData>().getTemperature() < 32)
         {   //  checks if tile is in the ocean, too high, too cold, or too hot
             locX = rnd.Next(33, 67);
             locY = rnd.Next(33, 67);
         }
         playerLctn.Add(new Vector2Int(locX, locY));
         Species playerSpeciesScript = new Species("SHOULD NOT APPEAR: 0");
-        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, -1, 100, 50, 1, 1, 10, 0, 10, 50, 0, 1, 200, 0, 10, 0);
+        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, -1, 100, 50, 1, 1, 10, 0, 10, 50, 0, 1, 200, 0, 10, 0, new Vector2Int(32, 70));
         speciesDict.Add(0, playerSpeciesScript);
         Global.mutationPoints = 12;
         Global.playerSpeciesGeneList = playerGns;
@@ -406,6 +408,11 @@ public class UpdateSpecies : MonoBehaviour
         else if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(target).GetComponent<TileData>().getAltitude() < migratingSpecies.getAltitude())
         {   //  check altitude obstacle
             flag = true;
+        }
+        else if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(target).GetComponent<TileData>().getTemperature() < migratingSpecies.getTemperatureTolerance().y
+            & GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(target).GetComponent<TileData>().getTemperature() > migratingSpecies.getTemperatureTolerance().x)
+        {   //  check temperature obstacle
+
         }
         if (flag)
         {   //  if tile isn't appropriate, wasted migrate
