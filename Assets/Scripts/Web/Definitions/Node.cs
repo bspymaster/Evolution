@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class Node
 {
-    private string name;                // The name of the node
-    private int[] herbivoreFoodSource;  // i == 0 berries, i == 1 nuts, i == 2 grass, i == 3 leaves, 0 (default) means speceis cannot eat food type at given index
-    private int carnivoreFoodSource;    // integer between 1 and 500 (subject to change) that limits what size prey you can eat
-    private int requiredCalories;       // amount of food to survive
-    private int creatureSize;           // 1 is tiny, 2 - 100 is small, 101 - 200 is medium, 201 - 300 is large, 301 - 400 is humongous
-    private int litterSize;             // population growth per reproduction
-    private int reproductionRate;       // Mating frequency
-    private int mutationChance;         // mate attachment (0-100% chance)
-    private int carnivorous;            // 0 == can't eat meat
-    private int offspringSize;          // size of the offspring (calorie worth and which size class it belongs to)
-    private int altitude;               // the height that your creature can go up to (or how high you can fly, for aviaries)
-    private int canFly;                 // 0 == can't fly at all (unable to cross water)
-    private int dexterity;              // defensive trait
-    private int maxPerTile;             // max number of individuals of a species in a given tile, -1 is unlimited
-    private int peckingOrder;           // determines when the species eats in the eating algorithm
-    private int offspringSurvivalChance;// the chance that any given offspring will survive to adulthood
-    private int canSwim;                // 0 == can't swim (unable to cross water)
+    private string name;                    // The name of the node
+    private int[] herbivoreFoodSource;      // i == 0 berries, i == 1 nuts, i == 2 grass, i == 3 leaves, 0 (default) means speceis cannot eat food type at given index
+    private int carnivoreFoodSource;        // integer between 1 and 500 (subject to change) that limits what size prey you can eat
+    private int requiredCalories;           // amount of food to survive
+    private int creatureSize;               // 1 is tiny, 2 - 100 is small, 101 - 200 is medium, 201 - 300 is large, 301 - 400 is humongous
+    private int litterSize;                 // population growth per reproduction
+    private int reproductionRate;           // Mating frequency
+    private int mutationChance;             // mate attachment (0-100% chance)
+    private int carnivorous;                // 0 == can't eat meat
+    private int offspringSize;              // size of the offspring (calorie worth and which size class it belongs to)
+    private int altitude;                   // the height that your creature can go up to (or how high you can fly, for aviaries)
+    private int canFly;                     // 0 == can't fly at all (unable to cross water)
+    private int dexterity;                  // defensive trait
+    private int maxPerTile;                 // max number of individuals of a species in a given tile, -1 is unlimited
+    private int peckingOrder;               // determines when the species eats in the eating algorithm
+    private int offspringSurvivalChance;    // the chance that any given offspring will survive to adulthood
+    private int canSwim;                    // 0 == can't swim (unable to cross water)
+    private Vector2Int temperatureTolerance;// The min and max temperature modifiers a species can survive in
 
     public Node(string name)
     {
@@ -185,5 +186,14 @@ public class Node
     public void setCanSwim(int change)
     {
         canSwim = change;
+    }
+    
+    public Vector2Int getTemperatureTolerance()
+    {
+        return temperatureTolerance;
+    }
+    public void setTemperatureTolerance(Vector2Int change)
+    {
+        temperatureTolerance = change;
     }
 }

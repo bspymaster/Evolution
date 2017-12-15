@@ -24,7 +24,7 @@ public class Species : MonoBehaviour
     private int peckingOrder; // determines when the species eats in the eating algorithm
     private int offspringSurvivalChance;    // the chance that any given offspring will survive to adulthood
     private int canSwim;    // 0 == can't swim
-    //private Vector2Int temperatureTolerance;    //  x is min temperature, y is max
+    private Vector2Int temperatureTolerance;    //  x is min temperature, y is max
 
     /*
      *  COMPLETE
@@ -36,12 +36,12 @@ public class Species : MonoBehaviour
     }
 
     /*
-     *  DOMPLETE
+     *  COMPLETE
      *  Initializer
      */
     public void Init(string speciesName, int speciesID, List<Vector2Int> location, List<int> genes, int[] herbivoreFoodSource, int carnivoreFoodSource,
          int requiredCalories, int creatureSize, int litterSize, int reproductionRate, int mutationChance, int carnivorous, int offspringSize, int altitude,
-         int canFly, int dexterity, int maxPerTile, int peckingOrder, int offspringSurvivalChance, int canSwim)
+         int canFly, int dexterity, int maxPerTile, int peckingOrder, int offspringSurvivalChance, int canSwim, Vector2Int temperatureTolerance)
     {
         this.speciesName = speciesName;
         this.speciesID = speciesID;
@@ -63,7 +63,7 @@ public class Species : MonoBehaviour
         this.peckingOrder = peckingOrder;
         this.offspringSurvivalChance = offspringSurvivalChance;
         this.canSwim = canSwim;
-        //this.temperatureTolerance = temperatureTolerance;
+        this.temperatureTolerance = temperatureTolerance;
     }
 
     /*
@@ -140,7 +140,7 @@ public class Species : MonoBehaviour
     {
         Init("Species: " + id, id, other.getLocation(), other.getGenes(), other.getHFS(), other.getCFS(), other.getRequiredCalories(),
          other.getCreatureSize(), other.getLitterSize(), other.getReproductionRate(), other.getMutationChance(), other.getCarnivorous(), other.getOffspringSize(), other.getAltitude(),
-         other.getCanFly(), other.getDexterity(), other.getMaxPerTile(), other.getPeckingOrder(), other.getOffspringSurvivalChance(), other.getCanSwim());
+         other.getCanFly(), other.getDexterity(), other.getMaxPerTile(), other.getPeckingOrder(), other.getOffspringSurvivalChance(), other.getCanSwim(), other.getTemperatureTolerance());
     }
 
     /*
@@ -227,10 +227,10 @@ public class Species : MonoBehaviour
     {
         return canSwim;
     }
-    //public Vector2Int getTemperatureTolerance()
-    //{
-    //    return temperatureTolerance;
-    //}
+    public Vector2Int getTemperatureTolerance()
+    {
+        return temperatureTolerance;
+    }
     public void addToLocation(Vector2Int additionalLocation)
     {
         location.Add(additionalLocation);

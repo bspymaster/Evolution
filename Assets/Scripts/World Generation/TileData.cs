@@ -172,6 +172,24 @@ public class TileData:MonoBehaviour {
             }
         }
     }
+    public void killSpecies(int speciesKey)
+    {
+        localSpecies.Remove(speciesKey);
+        speciesPopulation.Remove(speciesKey);
+        if (speciesRelation[speciesKey] == 0)
+        {
+            disablePlayer();
+        }
+        else if (speciesRelation[speciesKey] == 1)
+        {
+            disableCohabitable();
+        }
+        else if (speciesRelation[speciesKey] == 2)
+        {
+            disableCompetitive();
+        }
+        speciesRelation.Remove(speciesKey);
+    }
 
     /*
      *  Returns a list of each local species' data as int[8]; 0 == ID, 1 == size, 2 == berries, 3 == nuts, 4 == grass, 5 == leaves, 6 == carnivoreFoodSize, 7 == relation
