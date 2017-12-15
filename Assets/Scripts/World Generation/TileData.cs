@@ -192,14 +192,14 @@ public class TileData:MonoBehaviour {
     }
 
     /*
-     *  Returns a list of each local species' data as int[9]; 0 == ID, 1 == size, 2 == berries, 3 == nuts, 4 == grass, 5 == leaves, 6 == carnivoreFoodSize, 7 == relation, 8 == population
+     *  Returns a list of each local species' data; 0 == ID, 1 == size, 2 == berries, 3 == nuts, 4 == grass, 5 == leaves, 6 == carnivoreFoodSize, 7 == carnivorous, 8 == relation, 9 == population
      */
     public List<int[]> getSpeciesData()
     {
         List<int[]> speciesData = new List<int[]>();
         foreach (KeyValuePair<int, Species> sp in localSpecies)
         {   //  iterates through all species in this tile
-            int[] data = new int[9];
+            int[] data = new int[10];
             data[0] = sp.Value.getSpeciesID();
             data[1] = sp.Value.getCreatureSize();
             data[2] = sp.Value.getHFS()[3]; //  berries
@@ -207,8 +207,9 @@ public class TileData:MonoBehaviour {
             data[4] = sp.Value.getHFS()[0]; //  grass
             data[5] = sp.Value.getHFS()[1]; //  leaves
             data[6] = sp.Value.getCFS();
-            data[7] = speciesRelation[sp.Value.getSpeciesID()];
-            data[8] = speciesPopulation[sp.Value.getSpeciesID()];
+            data[7] = sp.Value.getCarnivorous();
+            data[8] = speciesRelation[sp.Value.getSpeciesID()];
+            data[9] = speciesPopulation[sp.Value.getSpeciesID()];
             speciesData.Add(data);
         }
         return speciesData;

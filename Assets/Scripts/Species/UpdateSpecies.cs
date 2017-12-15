@@ -60,7 +60,7 @@ public class UpdateSpecies : MonoBehaviour
              *  int canFly, int dexterity, int maxPerTile, int peckingOrder, int offspringSurvivalChance, int canSwim)
              */
 
-            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, 0, 100, 50, 1, 1, 10, 0, 10, 50, 0, 1, 200, 0, 10, 0, new Vector2Int(32, 70));
+            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, 0, 100, 50, 1, 1, 10, 0, 10, 60, 0, 1, 200, 0, 10, 0, new Vector2Int(32, 70));
             speciesDict.Add(i, speciesScript);
             //  addNode is now locked to true, we may want to change this later, time permitted
             speciesScript.evolve(true, 0);
@@ -139,7 +139,7 @@ public class UpdateSpecies : MonoBehaviour
         }
         playerLctn.Add(new Vector2Int(locX, locY));
         Species playerSpeciesScript = new Species("SHOULD NOT APPEAR: 0");
-        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, 0, 100, 50, 1, 1, 10, 0, 10, 50, 0, 1, 200, 0, 10, 0, new Vector2Int(32, 70));
+        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, 0, 100, 50, 1, 1, 10, 0, 10, 60, 0, 1, 200, 0, 10, 0, new Vector2Int(32, 70));
         speciesDict.Add(0, playerSpeciesScript);
         Global.mutationPoints = 12;
         Global.playerSpeciesGeneList = playerGns;
