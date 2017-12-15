@@ -15,45 +15,26 @@ public class UIManager : MonoBehaviour
 
     public void BuildUI()
     {
-
         ExitGameButtonPrefab.SetActive(true);
-        /*
-        GameObject geneButton = Instantiate(GeneWebButtonPrefab) as GameObject;
-        geneButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-        GameObject exitButton = Instantiate(ExitGameButtonPrefab) as GameObject;
-        exitButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-        GameObject pointsBack = Instantiate(MutationPointsBackPrefab) as GameObject;
-        pointsBack.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-        Text pointsText = Instantiate(MutationPointsTextPrefab) as Text;
-        pointsText.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-        */
     }
 
+    // Initial Tile World scene UI
     void Start()
-    {
-        
+    {        
         if (Global.PreWorld == true)
         {
-
             GeneWebButtonPrefab.SetActive(false);
             ExitGameButtonPrefab.SetActive(false);
             MutationPointsBackPrefab.SetActive(false);
             MutationPointsTextPrefab.enabled = false;
-            //GameObject.FindGameObjectWithTag("Canvas").transform.position = new Vector2(0, 30);
-
-            //GameObject worldButton = Instantiate(WorldMakerPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-            //worldButton.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-
         }
         else
-        {
-            
+        {           
             WorldMakerPrefab.SetActive(false);
         }
     }
 
-    
-
+    // Destroys the tile info window
     public void KillManager()
     {
         Global.cameraLock = false;
@@ -62,15 +43,12 @@ public class UIManager : MonoBehaviour
         GameObject.Destroy(manager);
     }
 
+    //Removes the world generation button from the UI
     public void KillWorldMaker()
-    {
-        
+    {     
         Global.PreWorld = false;
         GameObject[] managers = GameObject.FindGameObjectsWithTag("WorldMaker");
         foreach (GameObject manager in managers)
         manager.SetActive(false);
     }
-
-    
-
 }
