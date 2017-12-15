@@ -26,7 +26,7 @@ public class StatsBox : MonoBehaviour
         string foods = "";
 
         //Gets species ID
-        if(speciesArray[7] == 0)
+        if(speciesArray[8] == 0)
         {
             ID = "Player";
         }
@@ -39,11 +39,11 @@ public class StatsBox : MonoBehaviour
         size = checkSize(speciesArray[1]);
         meatSize = checkSize(speciesArray[6]);
 
-        if (speciesArray[7] == 1)
+        if (speciesArray[8] == 1)
         {
             relation = "   Behaviour: Cohabitor";
         }
-        if (speciesArray[7] == 2)
+        if (speciesArray[8] == 2)
         {
             relation = "   Behaviour: Competitor";
         }
@@ -63,13 +63,13 @@ public class StatsBox : MonoBehaviour
         {
             foods += "Leaves   ";
         }
-        if (speciesArray[6] != -1)
+        if (speciesArray[7] == 1)
         {
             foods += (meatSize + " Meat");
         }
 
         // Sets the UI text
-        string sendText = "Species ID: " + ID + "   Size: " + size + relation + "\n" + "Food Consumption:\n" + foods + "\n\n";
+        string sendText = "Species ID: " + ID + "   Size: " + size + relation + "\n" + "Pop: " + speciesArray[9] + "Food Consumption:\n" + foods + "\n\n";
         return sendText;
     }
 
@@ -79,7 +79,7 @@ public class StatsBox : MonoBehaviour
         string size;
         if (num > 0 && num < 2)
         {
-            size = "Tiny";
+            size = "Ambient";
         }
         else if (num > 1 && num < 101)
         {
@@ -160,7 +160,7 @@ public class StatsBox : MonoBehaviour
 
             foreach(int[] sp in speciesData)
             {
-                if (sp[7] == 0)
+                if (sp[8] == 0)
                 {
                     string temp = getText(sp);
                     presentSpecies += temp;
@@ -171,7 +171,7 @@ public class StatsBox : MonoBehaviour
             {
                 foreach (int[] sp in speciesData)
                 {
-                    if (sp[7] == 2 && numSpecies > 0)
+                    if (sp[8] == 2 && numSpecies > 0)
                     {
                         string temp = getText(sp);
                         presentSpecies += temp;
@@ -183,7 +183,7 @@ public class StatsBox : MonoBehaviour
             {
                 foreach (int[] sp in speciesData)
                 {
-                    if (sp[7] == 1 && numSpecies > 0)
+                    if (sp[8] == 1 && numSpecies > 0)
                     {
                         string temp = getText(sp);
                         presentSpecies += temp;
