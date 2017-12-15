@@ -9,27 +9,9 @@ public class GeneName : MonoBehaviour {
     private int nodeIndex;
     public Text textPrefab;
 
-    // Adds or removes node when enabling or disabling a gene.
-    /*
-    public void sendGeneNum()
-    {
-        if(isOn == false)
-        {
-            GeneWebManager.AddNode(nodeIndex);
-            isOn = true;
-        }
-        else if(isOn == true)
-        {
-            GeneWebManager.RemoveNode(nodeIndex);
-            isOn = false;
-        }
-    }
-    */    
-    
-
-    // Use this for initialization
     void Start() {
 
+        // Gets node index from parent game object
         nodeIndex = this.transform.parent.GetComponent<SpriteChange>().getIndex();
         StartCoroutine(Example());
     }
@@ -38,13 +20,10 @@ public class GeneName : MonoBehaviour {
 
         yield return new WaitForSeconds(0);
 
-
+        // Checks Web for the node name to be displayed on each UI gene.
         textPrefab.text = GameObject.Find("Web Builder")
             .GetComponent<buildWeb>()
             .getWeb()
-
-
-
             .getNode(nodeIndex)
             .getName();    
         

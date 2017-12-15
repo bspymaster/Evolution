@@ -7,14 +7,8 @@ public class MutatePoints : MonoBehaviour {
 
     public Text textPrefab;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
+	// Renders the Mutation Points available on screen
 	void Update () {
-
         textPrefab.text = "Mutation Points: " + Global.mutationPoints;
     }
 }
