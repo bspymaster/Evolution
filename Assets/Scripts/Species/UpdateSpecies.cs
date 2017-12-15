@@ -476,23 +476,23 @@ public class UpdateSpecies : MonoBehaviour
      */
     private void HerbivoreMove()
     {
-        print("HerbivoreMove(), Player Species: " + speciesDict[0].getSpeciesID());
+        //print("HerbivoreMove()");
         List<Vector2Int> berriesTiles = new List<Vector2Int>();
         List<Vector2Int> nutsTiles = new List<Vector2Int>();
-        List<Vector2Int> grassTiles = new List<Vector2Int>();
         List<Vector2Int> leavesTiles = new List<Vector2Int>();
+        List<Vector2Int> grassTiles = new List<Vector2Int>();
         foreach (KeyValuePair<int, Species> sp in speciesDict)
         {
             for (int i = 0; i < sp.Value.getLocation().Count; i++)
             {
-                if (sp.Value.getHFS()[0] > 0)
+                if (sp.Value.getHFS()[3] > 0)
                 {   //  check if species eats berries
                     if (!berriesTiles.Contains(sp.Value.getLocation()[i]))
                     {   //  check if this tile is already in berries
                         berriesTiles.Add(sp.Value.getLocation()[i]);
                     }
                 }
-                else if (sp.Value.getHFS()[1] > 0)
+                else if (sp.Value.getHFS()[2] > 0)
                 {   //  check if species eats nuts
                     if (!nutsTiles.Contains(sp.Value.getLocation()[i]))
                     {   //  check if this tile is already in berries
@@ -500,19 +500,19 @@ public class UpdateSpecies : MonoBehaviour
                     }
 
                 }
-                else if (sp.Value.getHFS()[2] > 0)
-                {   //  check if species eats grass
-                    if (!grassTiles.Contains(sp.Value.getLocation()[i]))
-                    {   //  check if this tile is already in berries
-                        grassTiles.Add(sp.Value.getLocation()[i]);
-                    }
-
-                }
-                else if (sp.Value.getHFS()[3] > 0)
+                else if (sp.Value.getHFS()[1] > 0)
                 {   //  check if species eats leaves
                     if (!leavesTiles.Contains(sp.Value.getLocation()[i]))
                     {   //  check if this tile is already in berries
                         leavesTiles.Add(sp.Value.getLocation()[i]);
+                    }
+
+                }
+                else if (sp.Value.getHFS()[0] > 0)
+                {   //  check if species eats grass
+                    if (!grassTiles.Contains(sp.Value.getLocation()[i]))
+                    {   //  check if this tile is already in berries
+                        grassTiles.Add(sp.Value.getLocation()[i]);
                     }
 
                 }
