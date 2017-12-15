@@ -199,7 +199,7 @@ public class TileData:MonoBehaviour {
         List<int[]> speciesData = new List<int[]>();
         foreach (KeyValuePair<int, Species> sp in localSpecies)
         {   //  iterates through all species in this tile
-            int[] data = new int[8];
+            int[] data = new int[9];
             data[0] = sp.Value.getSpeciesID();
             data[1] = sp.Value.getCreatureSize();
             data[2] = sp.Value.getHFS()[3]; //  berries
