@@ -119,6 +119,10 @@ public class Species : MonoBehaviour
         carnivoreFoodSource += op * node.getCarnivoreFoodSource();
         requiredCalories += op * node.getRequiredCalories();
         creatureSize += op * node.getCreatureSize();
+        if (creatureSize < 1)
+        {
+            creatureSize = 1;
+        }
         litterSize += op * node.getLitterSize();
         reproductionRate += op * node.getReproductionRate();
         mutationChance += op * node.getMutationChance();
