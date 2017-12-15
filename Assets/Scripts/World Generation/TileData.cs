@@ -124,6 +124,10 @@ public class TileData:MonoBehaviour {
     }
     public void setSpeciesPopulation(int speciesKey, int population)
     {
+        if (population < 0)
+        {
+            population = 0;
+        }
         speciesPopulation[speciesKey] = population;
     }
     public void setTemperature(int temperature)

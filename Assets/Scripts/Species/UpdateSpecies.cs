@@ -485,36 +485,39 @@ public class UpdateSpecies : MonoBehaviour
         {
             for (int i = 0; i < sp.Value.getLocation().Count; i++)
             {
-                if (sp.Value.getHFS()[3] > 0)
-                {   //  check if species eats berries
-                    if (!berriesTiles.Contains(sp.Value.getLocation()[i]))
-                    {   //  check if this tile is already in berries
-                        berriesTiles.Add(sp.Value.getLocation()[i]);
+                if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Value.getSpeciesID()) > 0)
+                {
+                    if (sp.Value.getHFS()[3] > 0)
+                    {   //  check if species eats berries
+                        if (!berriesTiles.Contains(sp.Value.getLocation()[i]))
+                        {   //  check if this tile is already in berries
+                            berriesTiles.Add(sp.Value.getLocation()[i]);
+                        }
                     }
-                }
-                else if (sp.Value.getHFS()[2] > 0)
-                {   //  check if species eats nuts
-                    if (!nutsTiles.Contains(sp.Value.getLocation()[i]))
-                    {   //  check if this tile is already in berries
-                        nutsTiles.Add(sp.Value.getLocation()[i]);
-                    }
+                    else if (sp.Value.getHFS()[2] > 0)
+                    {   //  check if species eats nuts
+                        if (!nutsTiles.Contains(sp.Value.getLocation()[i]))
+                        {   //  check if this tile is already in berries
+                            nutsTiles.Add(sp.Value.getLocation()[i]);
+                        }
 
-                }
-                else if (sp.Value.getHFS()[1] > 0)
-                {   //  check if species eats leaves
-                    if (!leavesTiles.Contains(sp.Value.getLocation()[i]))
-                    {   //  check if this tile is already in berries
-                        leavesTiles.Add(sp.Value.getLocation()[i]);
                     }
+                    else if (sp.Value.getHFS()[1] > 0)
+                    {   //  check if species eats leaves
+                        if (!leavesTiles.Contains(sp.Value.getLocation()[i]))
+                        {   //  check if this tile is already in berries
+                            leavesTiles.Add(sp.Value.getLocation()[i]);
+                        }
 
-                }
-                else if (sp.Value.getHFS()[0] > 0)
-                {   //  check if species eats grass
-                    if (!grassTiles.Contains(sp.Value.getLocation()[i]))
-                    {   //  check if this tile is already in berries
-                        grassTiles.Add(sp.Value.getLocation()[i]);
                     }
+                    else if (sp.Value.getHFS()[0] > 0)
+                    {   //  check if species eats grass
+                        if (!grassTiles.Contains(sp.Value.getLocation()[i]))
+                        {   //  check if this tile is already in berries
+                            grassTiles.Add(sp.Value.getLocation()[i]);
+                        }
 
+                    }
                 }
             }
         }
@@ -525,10 +528,10 @@ public class UpdateSpecies : MonoBehaviour
             {
                 int caloriesNeeded = sp.Value.getRequiredCalories() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
                 GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((food - caloriesNeeded) / sp.Value.getCreatureSize()));
-                if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
-                {
-                    //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
-                }
+                //if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                //{
+                //    GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(berriesTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
+                //}
             }
         }
         for (int i = 0; i < nutsTiles.Count; i++)
@@ -538,10 +541,10 @@ public class UpdateSpecies : MonoBehaviour
             {
                 int caloriesNeeded = sp.Value.getRequiredCalories() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
                 GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((food - caloriesNeeded) / sp.Value.getCreatureSize()));
-                if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
-                {
+                //if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                //{
                     //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(nutsTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
-                }
+                //}
             }
         }
         for (int i = 0; i < grassTiles.Count; i++)
@@ -551,10 +554,10 @@ public class UpdateSpecies : MonoBehaviour
             {
                 int caloriesNeeded = sp.Value.getRequiredCalories() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
                 GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((food - caloriesNeeded) / sp.Value.getCreatureSize()));
-                if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
-                {
+                //if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                //{
                     //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(grassTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
-                }
+                //}
             }
         }
         for (int i = 0; i < leavesTiles.Count; i++)
@@ -564,10 +567,10 @@ public class UpdateSpecies : MonoBehaviour
             {
                 int caloriesNeeded = sp.Value.getRequiredCalories() * GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key);
                 GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) + ((food - caloriesNeeded) / sp.Value.getCreatureSize()));
-                if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
-                {
+                //if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                //{
                     //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(leavesTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
-                }
+                //}
             }
         }
         if (alerts[7])
@@ -595,7 +598,7 @@ public class UpdateSpecies : MonoBehaviour
             {   //  checks if species is a carnivore
                 for (int i = 0; i < sp.Value.getLocation().Count; i++)
                 {   //  gets the carnivore's tiles
-                    if (!carnivoreTiles.Contains(sp.Value.getLocation()[i]))
+                    if (!carnivoreTiles.Contains(sp.Value.getLocation()[i]) & GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(sp.Value.getLocation()[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Value.getSpeciesID()) > 0)
                     {   //  checks if the tile is already included
                         carnivoreTiles.Add(sp.Value.getLocation()[i]);
                     }
@@ -683,34 +686,34 @@ public class UpdateSpecies : MonoBehaviour
                     if (sp.Value.getCFS() > 300)
                     {
                         GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) - (deaths[0] / GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies().Count));
-                        if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
-                        {
+                        //if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                        //{
                             //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
-                        }
+                        //}
                     }
                     else if (sp.Value.getCFS() > 200)
                     {
                         GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) - (deaths[1] / GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies().Count));
-                        if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
-                        {
+                        //if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                        //{
                             //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
-                        }
+                        //}
                     }
                     else if (sp.Value.getCFS() > 100)
                     {
                         GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) - (deaths[2] / GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies().Count));
-                        if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
-                        {
+                        //if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                        //{
                             //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
-                        }
+                        //}
                     }
                     else if (sp.Value.getCFS() > 1)
                     {
                         GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().setSpeciesPopulation(sp.Key, GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) - (deaths[3] / GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getLocalSpecies().Count));
-                        if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
-                        {
+                        //if (GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().getSpeciesPopulation(sp.Key) < 1)
+                        //{
                             //GameObject.Find("TileList").GetComponent<TileListData>().getTileAtLocation(carnivoreTiles[i]).GetComponent<TileData>().killSpecies(sp.Key);
-                        }
+                        //}
                     }
                 }
             }
