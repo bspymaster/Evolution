@@ -16,15 +16,15 @@ public class StatsBox : MonoBehaviour
     public GameObject exitButtonPrefab;
     bool foundPlayer = false;
 
+    // Decodes the text and values for each tile's species data
     public string getText(int[] speciesArray)
     {
-        Debug.Log("Entered getText");
-        Debug.Log("Original ID " + speciesArray[0]);
         string ID;
         string size;
         string meatSize;
         string relation = "";
         string foods = "";
+
         //Gets species ID
         if(speciesArray[7] == 0)
         {
@@ -34,7 +34,7 @@ public class StatsBox : MonoBehaviour
         {
             ID = speciesArray[0].ToString();
         }
-        Debug.Log("New ID " + ID);
+
         //Gets species size
         size = checkSize(speciesArray[1]);
         meatSize = checkSize(speciesArray[6]);
@@ -47,7 +47,6 @@ public class StatsBox : MonoBehaviour
         {
             relation = "   Behaviour: Competitor";
         }
-
         if(speciesArray[2] == 1)
         {
             foods += "Berries   ";
@@ -69,15 +68,14 @@ public class StatsBox : MonoBehaviour
             foods += (meatSize + " Meat");
         }
 
-
+        // Sets the UI text
         string sendText = "Species ID: " + ID + "   Size: " + size + relation + "\n" + "Food Consumption:\n" + foods + "\n\n";
-        Debug.Log("Full Text" + sendText);
         return sendText;
     }
 
+    // Decodes creature sizes
     public string checkSize(int num)
     {
-        Debug.Log("Entered checkSize");
         string size;
         if (num > 0 && num < 2)
         {
@@ -153,23 +151,20 @@ public class StatsBox : MonoBehaviour
             biomeTitle.text = biomeType;
             enviro.text = enviroType;
 
-
+            //Checks the list of species in a tile, and displays them based on Player -> Competitive -> Cohabitable
             List<int[]> speciesData = this.GetComponent<TileData>().getSpeciesData();
-            print("List Received");
             int numSpecies = 3;
-            bool noHostile = false;
+            //bool noHostile = false;
 
             string presentSpecies = "";
 
             foreach(int[] sp in speciesData)
             {
-                Debug.Log("Entered Player search");
                 if (sp[7] == 0)
                 {
                     string temp = getText(sp);
                     presentSpecies += temp;
                     numSpecies--;
-                    Debug.Log("Found Player");
                 }
             }
             if(numSpecies > 0)
@@ -196,42 +191,10 @@ public class StatsBox : MonoBehaviour
                     }
                 }
             }
-            /*
-            while (numSpecies > 0)
-            {
-                if(noHostile == false)
-                {
-                    foreach (int[] sp in speciesData)
-                    {
-                        Debug.Log("Entered Hostile search");
-                        if (sp[7] == 2)
-                        {
-                            presentSpecies += getText(sp);
-                            Debug.Log("Found Hostile");
-                            speciesData.Remove(sp);
-                            numSpecies--;
-                        }
-                        return;
-                    }
-                    noHostile = true;
-                }
-                foreach (int[] sp in speciesData)
-                {
-                    Debug.Log("Entered Cohabit search");
-                    if (sp[7] == 1)
-                    {
-                        presentSpecies += getText(sp);
-                        Debug.Log("Found Cohabit");
-                        speciesData.Remove(sp);
-                        numSpecies--;
-                    }
-                    return;
-                }
-            }
-            */
+
+            // Sets the UI text
             Text animals = Instantiate(animalPrefab, new Vector3(175, -40, -5), Quaternion.identity) as Text;
             animals.transform.SetParent(GameObject.FindGameObjectWithTag("WindowManager").transform, false);
-
             animals.text = presentSpecies;
         }
     }

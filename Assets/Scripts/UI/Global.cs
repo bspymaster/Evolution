@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Global : MonoBehaviour {
 
+    // Global variables which are used in multiple scenes
     public static bool cameraLock = false;
     public static bool PreWorld = true;
     public static bool PreWeb = true;
@@ -14,6 +15,7 @@ public class Global : MonoBehaviour {
     public static bool change = false;
     public static List<int> UnlockedGenes = new List<int>();
 
+    // Exits the game when being run as an executable
     public void killWorld()
     {
         Application.Quit();

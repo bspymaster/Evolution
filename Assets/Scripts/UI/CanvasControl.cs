@@ -7,6 +7,7 @@ public class CanvasControl : MonoBehaviour {
     public void Start()
     {
         
+        // Prevents game object from being destroyed when the scene is changed.
         DontDestroyOnLoad(this);
         if(FindObjectsOfType(GetType()).Length > 1)
         {

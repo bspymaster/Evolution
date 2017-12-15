@@ -13,11 +13,10 @@ public class SpriteChange : MonoBehaviour {
     public Sprite Locked;
     public List<int> nodeChildren = new List<int>();
 
-
+    // Sets default gene node appearance
     private void Start()
     {
-        button.image.sprite = Locked;
-        
+        button.image.sprite = Locked;     
     }
 
     //Returns the node's index number
@@ -32,7 +31,7 @@ public class SpriteChange : MonoBehaviour {
         nodeIndex = ind;
     }
 
-
+    // Checks the children of a node and unlocks them on the UI Gene Web
     public void getTheChildren()
     {
         if (Global.mutationPoints > 0)
@@ -51,7 +50,7 @@ public class SpriteChange : MonoBehaviour {
         
     }
 
-
+    //Activates the node when the gene is selected on the web
     public void toggle2()
     {
         if (Global.mutationPoints > 0)
@@ -66,7 +65,7 @@ public class SpriteChange : MonoBehaviour {
         }
     }
 
-
+    //Checks which nodes can now be selected on the web
     private void Update()
     {
         if (Global.UnlockedGenes.Contains(nodeIndex) & button.image.sprite != Added)

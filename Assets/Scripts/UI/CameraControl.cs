@@ -16,10 +16,12 @@ public class CameraControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        // Checks if camera can be freely moved.
         if(Global.cameraLock == false)
         {
             Vector3 pos = transform.position;
 
+            // Gets input to pan camera in four directions
             if (Input.GetKey("w"))
             {
                 pos.y += panSpeed * Time.deltaTime;
@@ -37,6 +39,7 @@ public class CameraControl : MonoBehaviour {
                 pos.x += panSpeed * Time.deltaTime;
             }
 
+            // Zooms camera in and out
             pos.x = Mathf.Clamp(pos.x, panMinX, panMaxX);
             pos.y = Mathf.Clamp(pos.y, panMinY, panMaxY);
 
@@ -51,6 +54,7 @@ public class CameraControl : MonoBehaviour {
 
             Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, minY, maxY);
 
+            // Sets the new position per update
             transform.position = pos;
         }
 
