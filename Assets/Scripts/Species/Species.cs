@@ -109,6 +109,7 @@ public class Species : MonoBehaviour
         {   //  species has all possible nodes
             return;
         }
+        this.genes.Add(nodeIndex);
         Node node = GameObject.Find("Web Builder").GetComponent<buildWeb>().getWeb().getNode(nodeIndex);
         // Added a node
         for (int i = 0; i < herbivoreFoodSource.Length; i++)
@@ -130,6 +131,8 @@ public class Species : MonoBehaviour
         peckingOrder += op * node.getPeckingOrder();
         offspringSurvivalChance += op * node.getOffspringSurvivalChance();
         canSwim += op * node.getCanSwim();
+        temperatureTolerance.x += op * node.getTemperatureTolerance().x;
+        temperatureTolerance.y += op * node.getTemperatureTolerance().y;
     }
 
     /*

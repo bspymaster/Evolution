@@ -60,7 +60,7 @@ public class UpdateSpecies : MonoBehaviour
              *  int canFly, int dexterity, int maxPerTile, int peckingOrder, int offspringSurvivalChance, int canSwim)
              */
 
-            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, -1, 100, 50, 1, 1, 10, 0, 10, 50, 0, 1, 200, 0, 10, 0, new Vector2Int(32, 70));
+            speciesScript.Init("Species: " + i.ToString(), i, lctn, gns, new int[4] { 0, 0, 0, 0 }, 0, 100, 50, 1, 1, 10, 0, 10, 60, 0, 1, 200, 0, 10, 0, new Vector2Int(32, 70));
             speciesDict.Add(i, speciesScript);
             //  addNode is now locked to true, we may want to change this later, time permitted
             speciesScript.evolve(true, 0);
@@ -139,7 +139,7 @@ public class UpdateSpecies : MonoBehaviour
         }
         playerLctn.Add(new Vector2Int(locX, locY));
         Species playerSpeciesScript = new Species("SHOULD NOT APPEAR: 0");
-        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, -1, 100, 50, 1, 1, 10, 0, 10, 50, 0, 1, 200, 0, 10, 0, new Vector2Int(32, 70));
+        playerSpeciesScript.Init("Player Species", 0, playerLctn, playerGns, new int[4] { 0, 0, 0, 0 }, 0, 100, 50, 1, 1, 10, 0, 10, 60, 0, 1, 200, 0, 10, 0, new Vector2Int(32, 70));
         speciesDict.Add(0, playerSpeciesScript);
         Global.mutationPoints = 12;
         Global.playerSpeciesGeneList = playerGns;
@@ -476,23 +476,23 @@ public class UpdateSpecies : MonoBehaviour
      */
     private void HerbivoreMove()
     {
-        print("HerbivoreMove(), Player Species: " + speciesDict[0].getSpeciesID());
+        //print("HerbivoreMove()");
         List<Vector2Int> berriesTiles = new List<Vector2Int>();
         List<Vector2Int> nutsTiles = new List<Vector2Int>();
-        List<Vector2Int> grassTiles = new List<Vector2Int>();
         List<Vector2Int> leavesTiles = new List<Vector2Int>();
+        List<Vector2Int> grassTiles = new List<Vector2Int>();
         foreach (KeyValuePair<int, Species> sp in speciesDict)
         {
             for (int i = 0; i < sp.Value.getLocation().Count; i++)
             {
-                if (sp.Value.getHFS()[0] > 0)
+                if (sp.Value.getHFS()[3] > 0)
                 {   //  check if species eats berries
                     if (!berriesTiles.Contains(sp.Value.getLocation()[i]))
                     {   //  check if this tile is already in berries
                         berriesTiles.Add(sp.Value.getLocation()[i]);
                     }
                 }
-                else if (sp.Value.getHFS()[1] > 0)
+                else if (sp.Value.getHFS()[2] > 0)
                 {   //  check if species eats nuts
                     if (!nutsTiles.Contains(sp.Value.getLocation()[i]))
                     {   //  check if this tile is already in berries
@@ -500,19 +500,19 @@ public class UpdateSpecies : MonoBehaviour
                     }
 
                 }
-                else if (sp.Value.getHFS()[2] > 0)
-                {   //  check if species eats grass
-                    if (!grassTiles.Contains(sp.Value.getLocation()[i]))
-                    {   //  check if this tile is already in berries
-                        grassTiles.Add(sp.Value.getLocation()[i]);
-                    }
-
-                }
-                else if (sp.Value.getHFS()[3] > 0)
+                else if (sp.Value.getHFS()[1] > 0)
                 {   //  check if species eats leaves
                     if (!leavesTiles.Contains(sp.Value.getLocation()[i]))
                     {   //  check if this tile is already in berries
                         leavesTiles.Add(sp.Value.getLocation()[i]);
+                    }
+
+                }
+                else if (sp.Value.getHFS()[0] > 0)
+                {   //  check if species eats grass
+                    if (!grassTiles.Contains(sp.Value.getLocation()[i]))
+                    {   //  check if this tile is already in berries
+                        grassTiles.Add(sp.Value.getLocation()[i]);
                     }
 
                 }
