@@ -27,3 +27,5 @@ Saint Louis University Computer Science capstone project featuring the game of E
 
 ## Known Issues
 - When not compiled to an executable, the world generation takes a very long time to initially load (after clicking "Let There Be Light"), due to constraints on the Unity editor.
+- There's an occasional bug where, when playing the game, a species population may fluctuate uncharacteristically.
+- The gene web has not been extensively tested at this point, and while the nodes in the web have been carefully designed and much thought has gone into how each node affects a species and its competitors, it is entirely possible that some nodes may be unbalanced in comparison to others.
