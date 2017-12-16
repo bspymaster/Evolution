@@ -1617,6 +1617,11 @@ Prefab:
       propertyPath: m_Name
       value: Mutate Text
       objectReference: {fileID: 0}
+    - target: {fileID: 114762838945280414, guid: e0da359d29e147b409c88f9d1565c84c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0da359d29e147b409c88f9d1565c84c, type: 2}
   m_IsPrefabParent: 0

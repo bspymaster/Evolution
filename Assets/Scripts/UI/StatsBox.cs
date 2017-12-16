@@ -69,7 +69,7 @@ public class StatsBox : MonoBehaviour
         }
 
         // Sets the UI text
-        string sendText = "Species ID: " + ID + "   Size: " + size + relation + "\n" + "Pop: " + speciesArray[9] + "Food Consumption:\n" + foods + "\n\n";
+        string sendText = "Species ID: " + ID + "   Size: " + size + relation + "\n" + "Food Consumption:\n" + foods + "\n\n";
         return sendText;
     }
 
